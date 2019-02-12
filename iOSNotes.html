@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>iOSNotes</title>
+
+
+<style type="text/css">
+body {
+  font-family: Helvetica, arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: white;
+  padding: 30px; }
+
+body > *:first-child {
+  margin-top: 0 !important; }
+body > *:last-child {
+  margin-bottom: 0 !important; }
+
+a {
+  color: #4183C4; }
+a.absent {
+  color: #cc0000; }
+a.anchor {
+  display: block;
+  padding-left: 30px;
+  margin-left: -30px;
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0; }
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 20px 0 10px;
+  padding: 0;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+  cursor: text;
+  position: relative; }
+
+h1:hover a.anchor, h2:hover a.anchor, h3:hover a.anchor, h4:hover a.anchor, h5:hover a.anchor, h6:hover a.anchor {
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA09pVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoMTMuMCAyMDEyMDMwNS5tLjQxNSAyMDEyLzAzLzA1OjIxOjAwOjAwKSAgKE1hY2ludG9zaCkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OUM2NjlDQjI4ODBGMTFFMTg1ODlEODNERDJBRjUwQTQiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OUM2NjlDQjM4ODBGMTFFMTg1ODlEODNERDJBRjUwQTQiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo5QzY2OUNCMDg4MEYxMUUxODU4OUQ4M0REMkFGNTBBNCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo5QzY2OUNCMTg4MEYxMUUxODU4OUQ4M0REMkFGNTBBNCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PsQhXeAAAABfSURBVHjaYvz//z8DJYCRUgMYQAbAMBQIAvEqkBQWXI6sHqwHiwG70TTBxGaiWwjCTGgOUgJiF1J8wMRAIUA34B4Q76HUBelAfJYSA0CuMIEaRP8wGIkGMA54bgQIMACAmkXJi0hKJQAAAABJRU5ErkJggg==) no-repeat 10px center;
+  text-decoration: none; }
+
+h1 tt, h1 code {
+  font-size: inherit; }
+
+h2 tt, h2 code {
+  font-size: inherit; }
+
+h3 tt, h3 code {
+  font-size: inherit; }
+
+h4 tt, h4 code {
+  font-size: inherit; }
+
+h5 tt, h5 code {
+  font-size: inherit; }
+
+h6 tt, h6 code {
+  font-size: inherit; }
+
+h1 {
+  font-size: 28px;
+  color: black; }
+
+h2 {
+  font-size: 24px;
+  border-bottom: 1px solid #cccccc;
+  color: black; }
+
+h3 {
+  font-size: 18px; }
+
+h4 {
+  font-size: 16px; }
+
+h5 {
+  font-size: 14px; }
+
+h6 {
+  color: #777777;
+  font-size: 14px; }
+
+p, blockquote, ul, ol, dl, li, table, pre {
+  margin: 15px 0; }
+
+hr {
+  background: transparent url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAECAYAAACtBE5DAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBNYWNpbnRvc2giIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OENDRjNBN0E2NTZBMTFFMEI3QjRBODM4NzJDMjlGNDgiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OENDRjNBN0I2NTZBMTFFMEI3QjRBODM4NzJDMjlGNDgiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo4Q0NGM0E3ODY1NkExMUUwQjdCNEE4Mzg3MkMyOUY0OCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo4Q0NGM0E3OTY1NkExMUUwQjdCNEE4Mzg3MkMyOUY0OCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PqqezsUAAAAfSURBVHjaYmRABcYwBiM2QSA4y4hNEKYDQxAEAAIMAHNGAzhkPOlYAAAAAElFTkSuQmCC) repeat-x 0 0;
+  border: 0 none;
+  color: #cccccc;
+  height: 4px;
+  padding: 0;
+}
+
+body > h2:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+body > h1:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+  body > h1:first-child + h2 {
+    margin-top: 0;
+    padding-top: 0; }
+body > h3:first-child, body > h4:first-child, body > h5:first-child, body > h6:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0; }
+
+h1 p, h2 p, h3 p, h4 p, h5 p, h6 p {
+  margin-top: 0; }
+
+li p.first {
+  display: inline-block; }
+li {
+  margin: 0; }
+ul, ol {
+  padding-left: 30px; }
+
+ul :first-child, ol :first-child {
+  margin-top: 0; }
+
+dl {
+  padding: 0; }
+  dl dt {
+    font-size: 14px;
+    font-weight: bold;
+    font-style: italic;
+    padding: 0;
+    margin: 15px 0 5px; }
+    dl dt:first-child {
+      padding: 0; }
+    dl dt > :first-child {
+      margin-top: 0; }
+    dl dt > :last-child {
+      margin-bottom: 0; }
+  dl dd {
+    margin: 0 0 15px;
+    padding: 0 15px; }
+    dl dd > :first-child {
+      margin-top: 0; }
+    dl dd > :last-child {
+      margin-bottom: 0; }
+
+blockquote {
+  border-left: 4px solid #dddddd;
+  padding: 0 15px;
+  color: #777777; }
+  blockquote > :first-child {
+    margin-top: 0; }
+  blockquote > :last-child {
+    margin-bottom: 0; }
+
+table {
+  padding: 0;border-collapse: collapse; }
+  table tr {
+    border-top: 1px solid #cccccc;
+    background-color: white;
+    margin: 0;
+    padding: 0; }
+    table tr:nth-child(2n) {
+      background-color: #f8f8f8; }
+    table tr th {
+      font-weight: bold;
+      border: 1px solid #cccccc;
+      margin: 0;
+      padding: 6px 13px; }
+    table tr td {
+      border: 1px solid #cccccc;
+      margin: 0;
+      padding: 6px 13px; }
+    table tr th :first-child, table tr td :first-child {
+      margin-top: 0; }
+    table tr th :last-child, table tr td :last-child {
+      margin-bottom: 0; }
+
+img {
+  max-width: 100%; }
+
+span.frame {
+  display: block;
+  overflow: hidden; }
+  span.frame > span {
+    border: 1px solid #dddddd;
+    display: block;
+    float: left;
+    overflow: hidden;
+    margin: 13px 0 0;
+    padding: 7px;
+    width: auto; }
+  span.frame span img {
+    display: block;
+    float: left; }
+  span.frame span span {
+    clear: both;
+    color: #333333;
+    display: block;
+    padding: 5px 0 0; }
+span.align-center {
+  display: block;
+  overflow: hidden;
+  clear: both; }
+  span.align-center > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px auto 0;
+    text-align: center; }
+  span.align-center span img {
+    margin: 0 auto;
+    text-align: center; }
+span.align-right {
+  display: block;
+  overflow: hidden;
+  clear: both; }
+  span.align-right > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px 0 0;
+    text-align: right; }
+  span.align-right span img {
+    margin: 0;
+    text-align: right; }
+span.float-left {
+  display: block;
+  margin-right: 13px;
+  overflow: hidden;
+  float: left; }
+  span.float-left span {
+    margin: 13px 0 0; }
+span.float-right {
+  display: block;
+  margin-left: 13px;
+  overflow: hidden;
+  float: right; }
+  span.float-right > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px auto 0;
+    text-align: right; }
+
+code, tt {
+  margin: 0 2px;
+  padding: 0 5px;
+  white-space: nowrap;
+  border: 1px solid #eaeaea;
+  background-color: #f8f8f8;
+  border-radius: 3px; }
+
+pre code {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  border: none;
+  background: transparent; }
+
+.highlight pre {
+  background-color: #f8f8f8;
+  border: 1px solid #cccccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px; }
+
+pre {
+  background-color: #f8f8f8;
+  border: 1px solid #cccccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px; }
+  pre code, pre tt {
+    background-color: transparent;
+    border: none; }
+
+sup {
+    font-size: 0.83em;
+    vertical-align: super;
+    line-height: 0;
+}
+
+kbd {
+  display: inline-block;
+  padding: 3px 5px;
+  font-size: 11px;
+  line-height: 10px;
+  color: #555;
+  vertical-align: middle;
+  background-color: #fcfcfc;
+  border: solid 1px #ccc;
+  border-bottom-color: #bbb;
+  border-radius: 3px;
+  box-shadow: inset 0 -1px 0 #bbb
+}
+
+* {
+	-webkit-print-color-adjust: exact;
+}
+@media screen and (min-width: 914px) {
+    body {
+        width: 854px;
+        margin:0 auto;
+    }
+}
+@media print {
+	table, pre {
+		page-break-inside: avoid;
+	}
+	pre {
+		word-wrap: break-word;
+	}
+}
+</style>
+
+
+</head>
+
+<body>
+
+<h3 id="toc_0">1、按钮透明度为0时不响应点击事件</h3>
+
+<p>个人推测，当<code>UIButton</code>透明度为0时，默认调用<code>Hidden</code>方法，所以不响应点击事件。</p>
+
+<div><pre><code class="language-none">//设置按钮`Type`可避免该问题
+_heartbtn = [UIButton buttonWithType: UIButtonTypeCustom];
+
+ [self.view addSubview:_heartbtn];</code></pre></div>
+
+<h3 id="toc_1">2、Git相关</h3>
+
+<table>
+<thead>
+<tr>
+<th style="text-align: center">命令字</th>
+<th style="text-align: center">相关操作</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td style="text-align: center"><code>git init</code></td>
+<td style="text-align: center">初始化Git</td>
+</tr>
+<tr>
+<td style="text-align: center"><code>git clone URL</code></td>
+<td style="text-align: center">下载远端仓库代码</td>
+</tr>
+<tr>
+<td style="text-align: center"><code>git add .</code></td>
+<td style="text-align: center">把代码中的所有变化都提交到缓存区域,不包括删除的文件</td>
+</tr>
+<tr>
+<td style="text-align: center"><code>git add -u</code></td>
+<td style="text-align: center">把代码中的所有变化都提交到缓存区域,不包括新增的文件</td>
+</tr>
+<tr>
+<td style="text-align: center"><code>git add -A</code></td>
+<td style="text-align: center">A时ALL的缩写，上面两个的集合</td>
+</tr>
+<tr>
+<td style="text-align: center"><code>git commit -a -m &quot;做了哪些修改&quot;</code></td>
+<td style="text-align: center">将代码提交到本地仓库，此时并没有提交到远端仓库</td>
+</tr>
+<tr>
+<td style="text-align: center"><code>git fetch origin master</code></td>
+<td style="text-align: center">获取远端分支代码</td>
+</tr>
+<tr>
+<td style="text-align: center"><code>git merge origin master</code></td>
+<td style="text-align: center">合并代码</td>
+</tr>
+<tr>
+<td style="text-align: center"><code>git pull origin master</code></td>
+<td style="text-align: center">上面两步操作的集合</td>
+</tr>
+<tr>
+<td style="text-align: center"><code>git status</code></td>
+<td style="text-align: center">查看缓存区的状态</td>
+</tr>
+<tr>
+<td style="text-align: center"><code>git log</code></td>
+<td style="text-align: center">查看提交日志</td>
+</tr>
+<tr>
+<td style="text-align: center"><code>git push origin master</code></td>
+<td style="text-align: center">把代码推到远端分支上</td>
+</tr>
+<tr>
+<td style="text-align: center"><code>git push origin master close #BUGID</code></td>
+<td style="text-align: center">把代码推到远端分支上,同时关闭相关BUG</td>
+</tr>
+<tr>
+<td style="text-align: center"><code>git branch</code></td>
+<td style="text-align: center">查看分支</td>
+</tr>
+<tr>
+<td style="text-align: center"><code>git branch -r</code></td>
+<td style="text-align: center">查看远程版本库分支列表</td>
+</tr>
+<tr>
+<td style="text-align: center"><code>git branch -a</code></td>
+<td style="text-align: center">查看所有分支列表，包括本地和远程</td>
+</tr>
+<tr>
+<td style="text-align: center"><code>git checkout -b TEST</code></td>
+<td style="text-align: center">新建<code>TEST</code>分支并切换到<code>TEST</code>分枝上，是<code>git branch TEST</code>和<code>git checkout TEST</code>的合并</td>
+</tr>
+<tr>
+<td style="text-align: center"><code>git remote add origin https://github.com/dengfeng520/OADemo.git</code></td>
+<td style="text-align: center"></td>
+</tr>
+<tr>
+<td style="text-align: center"><code>git branch -D fenzhi</code></td>
+<td style="text-align: center">删除本地分支</td>
+</tr>
+<tr>
+<td style="text-align: center"><code>git branch -r -D origin/fenzhi</code></td>
+<td style="text-align: center">删除本地分支的远程分支</td>
+</tr>
+<tr>
+<td style="text-align: center"><code>git push origin -d fenzhi</code></td>
+<td style="text-align: center">删除服务器上的分支</td>
+</tr>
+<tr>
+<td style="text-align: center">git log --grep=&quot;&quot;</td>
+<td style="text-align: center">查找已经提交的commit</td>
+</tr>
+</tbody>
+</table>
+
+<h3 id="toc_2">3、设置圆角</h3>
+
+<div><pre><code class="language-none">// MARK: - 设置顶部两个圆角
+-(void)SettingSharaviewRound:(float)Round selfview:(UIView *)selfview
+{
+    UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:selfview.bounds byRoundingCorners:UIRectCornerTopLeft | UIRectCornerTopRight cornerRadii:CGSizeMake(Round, Round)];
+    CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
+    maskLayer.frame = selfview.bounds;
+    maskLayer.path = maskPath.CGPath;
+    selfview.layer.mask = maskLayer;
+}</code></pre></div>
+
+<p>通常如果使用<code>Masonry</code>添加约束会导致用以上代码设置不起作用，解决方案是在设置圆角之前调用父<code>view</code>的<code>layoutIfNeeded</code>方法即可。</p>
+
+<div><pre><code class="language-none"> [superView layoutIfNeeded];
+</code></pre></div>
+
+<h3 id="toc_3">4、通过Blocks来关联UIButton的点击事件</h3>
+
+<p>在开发中通常使用的按钮点击：</p>
+
+<div><pre><code class="language-none">    UIButton *chatBtn = [[UIButton alloc]initWithFrame:CGRectMake(100, 100, 100, 44)];
+    [self.view addSubview:chatBtn];
+        [settingbtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            //距离顶部
+            make.top.equalTo(weakSelf.mas_top).with.offset(20.f);
+            //距离右边
+            make.right.equalTo(weakSelf.mas_right).with.offset(-15.f);
+            //设置大小
+            make.size.mas_equalTo(CGSizeMake(50, 50));
+        }];
+    [chatBtn addTarget:self action:@selector(TouchChatBtn:) forControlEvents:UIControlEventTouchUpInside];
+</code></pre></div>
+
+<div><pre><code class="language-none">-(void)TouchChatBtn:(UIButton *)sender
+{
+  printf(&quot;\n================\n&quot;);
+}</code></pre></div>
+
+<blockquote>
+<p>通过代码关联</p>
+</blockquote>
+
+<div><pre><code class="language-none">#import &lt;objc/runtime.h&gt;
+
+  void (^addTargetBlock)(void) = ^(void){
+        
+        printf(&quot;\n================\n&quot;);
+    };
+    objc_setAssociatedObject(chatBtn, &amp;clickChatBtnType, addTargetBlock, OBJC_ASSOCIATION_COPY_NONATOMIC);
+    
+    </code></pre></div>
+
+<div><pre><code class="language-none">-(void)TouchChatBtn:(UIButton *)sender
+{
+    void(^addTargetBlock)(void) = objc_getAssociatedObject(sender, &amp;clickChatBtnType);
+    if(addTargetBlock)
+    {
+        addTargetBlock();
+    }
+}</code></pre></div>
+
+<p>参考：<a href="http://www.cocoachina.com/ios/20180518/23429.html">iOS开发·runtime原理与实践: 关联对象篇</a></p>
+
+<p><a href="https://book.douban.com/subject/25829244/">Effective Objective-C 2.0 第10条:在既有类中使用关联对象存放自定义数据</a></p>
+
+<h3 id="toc_4">5、方法标记</h3>
+
+<div><pre><code class="language-none">// FIXME: - update</code></pre></div>
+
+<div><pre><code class="language-none">// ???: - update</code></pre></div>
+
+<div><pre><code class="language-none">// !!!: - update</code></pre></div>
+
+<div><pre><code class="language-none">// MARK: - update</code></pre></div>
+
+<div><pre><code class="language-none">// TODO: - update</code></pre></div>
+
+<h3 id="toc_5">6、先pop当前UIViewController,再push到下一个UIViewController</h3>
+
+<div><pre><code class="language-none">
+  LTBaseViewController *InputNewPasswordView = [[NSClassFromString(@&quot;InputNewPasswordViewController&quot;) alloc]init];
+
+            // 获取当前路由的控制器数组
+            NSMutableArray *vcArray = [NSMutableArray arrayWithArray:self.navigationController.viewControllers];
+            // 获取档期控制器在路由的位置
+            int index = (int)[vcArray indexOfObject:self];
+            // 移除当前路由器
+            [vcArray removeObjectAtIndex:index];
+            // 添加新控制器
+            [vcArray addObject: InputNewPasswordView];
+
+            SEL aSelector = NSSelectorFromString(@&quot;setReset_code:&quot;);
+            if ([InputNewPasswordView respondsToSelector:aSelector]) {
+                IMP aIMP = [InputNewPasswordView methodForSelector:aSelector];
+                void (*setter)(id, SEL, NSString*) = (void(*)(id, SEL, NSString*))aIMP;
+                setter(InputNewPasswordView, aSelector,@&quot;1008611&quot;);
+            }
+
+            [self.navigationController setViewControllers:vcArray animated:YES];</code></pre></div>
+
+<h3 id="toc_6">7、Lottie动画</h3>
+
+<p><a href="http://airbnb.io/lottie/ios.html#getting-started-on-ios-or-macos">Lottie动画</a></p>
+
+<blockquote>
+<p>1、作为开发者，不能直接编辑或者控制，只能用生成好的JSON文件</p>
+
+<p>2、内存问题，我在APP中使用了Lottie动画之后，CPU使用率和内存瞬间上升，尤其是全屏的动画之后，目前没有找到相关优化方案；</p>
+</blockquote>
+
+<div><pre><code class="language-none">     _LoaingAnimation = [LOTAnimationView animationNamed:@&quot;MatchWaitingLoading&quot;];
+        _LoaingAnimation.frame = CGRectMake(ScreenW / 2 - (73 / 2), ScreenH - 93, 73, 73);
+        [self.view addSubview:_LoaingAnimation];
+        _LoaingAnimation.loopAnimation = true;
+        [weakSelf.LoaingAnimation playWithCompletion:^(BOOL animationFinished) {
+                        
+                    }];   </code></pre></div>
+
+<div><pre><code class="language-none"> [_LoaingAnimation removeFromSuperview];
+        _LoaingAnimation = nil;</code></pre></div>
+
+<blockquote>
+<p>控制播放帧数</p>
+</blockquote>
+
+<div><pre><code class="language-none">[_LoaingAnimation playFromFrame:15 toFrame:0 withCompletion:^(BOOL animationFinished) {
+        
+    }];</code></pre></div>
+
+<blockquote>
+<p>停止播放保持最后帧数</p>
+</blockquote>
+
+<div><pre><code class="language-none"> [_LoaingAnimation pause];</code></pre></div>
+
+<blockquote>
+<p>停止播放 恢复初始帧数</p>
+</blockquote>
+
+<div><pre><code class="language-none">[_LoaingAnimation stop];</code></pre></div>
+
+<blockquote>
+<p>强制跳转至某一帧</p>
+</blockquote>
+
+<p>例如：我在播放一段动画时，需要突然阻断并且需要逆向执行，此时可强制跳转到最后一帧，然后再逆向播放。</p>
+
+<div><pre><code class="language-none"> [_exploreAnimation setProgressWithFrame:[NSNumber numberWithInteger:46]];
+</code></pre></div>
+
+<h3 id="toc_7">8、Socket and Protocol Buffers</h3>
+
+<blockquote>
+<p>Protocol Buffers</p>
+</blockquote>
+
+<p><a href="https://developers.google.com/protocol-buffers/docs/downloads">Download Protocol Buffers</a></p>
+
+<h4 id="toc_8">1、安装:</h4>
+
+<div><pre><code class="language-none"> cd protobuf-3.3.0
+ ./configure
+sudo make
+sudo make install</code></pre></div>
+
+<h4 id="toc_9">2、创建.proto文件</h4>
+
+<p>打开Xcode ，选择新建<code>Empty</code>文件，根据和后台的约定的参数，</p>
+
+<div><pre><code class="language-none">syntax = &quot;proto3&quot;;
+
+message ResponseExplore {
+    string  nickname = 1;
+    int32   sex = 2;
+    int32   astrology = 3;
+    int32   birthday = 4;
+    string  avatar = 5;
+    int32   distance = 6;
+    string  room_token = 7;
+    int32   end_time = 8;
+    bool    like = 9;
+    bool    opposite_like = 10;
+}</code></pre></div>
+
+<h4 id="toc_10">3、生成Model文件:</h4>
+
+<div><pre><code class="language-none"> protoc --proto_path=./Protobuf  --objc_out=./Protobuf   ChatIM.proto</code></pre></div>
+
+<p>同理，生成Android用的Model文件可使用命令:
+ <code>
+ protoc --proto_path=./Protobuf  --objc_out=./Protobuf   ChatIM.proto
+</code></p>
+
+<h4 id="toc_11">4、使用</h4>
+
+<div><pre><code class="language-none">  pod &#39;Protobuf&#39;</code></pre></div>
+
+<blockquote>
+<p>Socket</p>
+</blockquote>
+
+<h4 id="toc_12">1、导入:</h4>
+
+<div><pre><code class="language-none">pod CocoaAsyncSocket</code></pre></div>
+
+<h4 id="toc_13">2、创建Socket并连接:</h4>
+
+<div><pre><code class="language-none"> if (_socket == nil) {
+            _socket = [[GCDAsyncSocket alloc]initWithDelegate:self delegateQueue:dispatch_get_main_queue()];
+            NSError *error = nil;
+            if (![_socket connectToHost:SOCKET_HOST onPort:SOCKET_PORT withTimeout:3 error:&amp;error]) {
+                NSLog(@&quot;连接错误 %@&quot;, error);
+            }
+        }</code></pre></div>
+
+<h4 id="toc_14">2、主动断开Socket连接:</h4>
+
+<div><pre><code class="language-none">[_socket disconnect];</code></pre></div>
+
+<h3 id="toc_15">9、无动画pop再push，替换当前控制器</h3>
+
+<div><pre><code class="language-none"> // 新建将要push的控制器
+                CompleteViewController *newVC = [[CompleteViewController alloc] init];
+                
+                // 获取当前路由的控制器数组
+                NSMutableArray *vcArray = [NSMutableArray arrayWithArray:self.navigationController.viewControllers];
+
+                // 获取档期控制器在路由的位置
+                int index = (int)[vcArray indexOfObject:self];
+                
+                // 移除当前路由器
+                [vcArray removeObjectAtIndex:index];
+                
+                // 添加新控制器
+                [vcArray addObject: newVC];
+
+                // 重新设置当前导航控制器的路由数组
+                [self.navigationController setViewControllers:vcArray animated:YES];</code></pre></div>
+
+<h3 id="toc_16">10、Push的同时释放之前的内存</h3>
+
+<div><pre><code class="language-none"> //获取要跳转的界面
+        UIViewController *LoginView = [[NSClassFromString(@&quot;ViewController&quot;) alloc]init];
+        // 获取navigationcontroller的栈
+        NSMutableArray *navStack = [thisView.navigationController.childViewControllers mutableCopy];
+        // 修改栈
+        [navStack replaceObjectAtIndex:0 withObject:LoginView];
+        // 重新设置navigation的栈
+        [thisView.navigationController setViewControllers:navStack animated:YES];
+        // 出栈并跳转至目标控制器(控制器和当前控制器之间的对象将全部释放)
+        [thisView.navigationController popToViewController:LoginView animated:true];</code></pre></div>
+
+<h3 id="toc_17">11、APP内购相关问题</h3>
+
+<h3 id="toc_18">12、按钮超出父控件后无法响应点击的解决方法</h3>
+
+<h3 id="toc_19">13、如何将UIView覆盖到状态栏之上</h3>
+
+<p>如果直接添加到window上，会和电池状态栏重叠，解决方法是修改Window的UIWindowLevel属性，</p>
+
+<p><a href="https://www.jianshu.com/p/23114e107ef1">参考</a></p>
+
+<h3 id="toc_20">14、通过Runtimeh+分类的方式实现UITextView的placeHolder占位文字</h3>
+
+<div><pre><code class="language-none">#import &lt;objc/runtime.h&gt;
+
+@implementation UITextView (Category)
+
+-(void)getplaceholder:(NSString *)placeholderString fontsize:(float)fontsize
+{
+    UILabel *placeholder = [[UILabel alloc] init];
+    placeholder.text = placeholderString;
+    placeholder.numberOfLines = 0;
+    placeholder.textColor = [UIColor lightGrayColor];
+    [placeholder sizeToFit];
+    [self addSubview:placeholder];
+    
+    self.font = [UIFont systemFontOfSize:fontsize];
+    placeholder.font = [UIFont systemFontOfSize:fontsize];
+    
+    [self setValue:placeholder forKey:@&quot;_placeholderLabel&quot;];
+}
+
+@end</code></pre></div>
+
+<h3 id="toc_21">14、RAC</h3>
+
+<blockquote>
+<p>1、创建信号量</p>
+</blockquote>
+
+<div><pre><code class="language-none">    RACSignal * signal = [RACSignal createSignal:^RACDisposable * _Nullable(id&lt;RACSubscriber&gt;  _Nonnull subscriber) {
+    NSLog(@&quot;创建信号量&quot;);
+        
+        //3、发布信息
+        [subscriber sendNext:@&quot;I&#39;m send next data&quot;];
+        
+        self.subscriber = subscriber;
+        
+        NSLog(@&quot;那我啥时候运行&quot;);
+        
+        return [RACDisposable disposableWithBlock:^{
+            NSLog(@&quot;disposable&quot;);
+        }];
+    }];
+</code></pre></div>
+
+<blockquote>
+<p>2、订阅信号量</p>
+</blockquote>
+
+<div><pre><code class="language-none"> //2、订阅信号量
+ RACDisposable *disposable = [signal subscribeNext:^(id  _Nullable x) {
+        NSLog(@&quot;%@&quot;,x);
+    }];    </code></pre></div>
+
+<blockquote>
+<p>3、发布信息</p>
+
+<p>4、主动取消订阅</p>
+</blockquote>
+
+<div><pre><code class="language-none"> //主动触发取消订阅
+ [disposable dispose];   </code></pre></div>
+
+<h3 id="toc_22">15、导入PCH文件之后报错unknown type name &#39;NSString&#39;</h3>
+
+<h5 id="toc_23">解决方法：在PCH文件中引用<code>Foundation</code></h5>
+
+<div><pre><code class="language-none">#ifdef __OBJC__
+
+#import &lt;Foundation/Foundation.h&gt;
+
+#endif</code></pre></div>
+
+<h3 id="toc_24">16、Masonry</h3>
+
+<blockquote>
+<p>距离上下左右边距</p>
+</blockquote>
+
+<div><pre><code class="language-none">[self.blueView mas_makeConstraints:^(MASConstraintMaker *make) {
+
+        make.edges.equalTo(self.view).with.insets(UIEdgeInsetsMake(10, 10, 10, 10));
+}];</code></pre></div>
+
+<blockquote>
+<p>大于等于和小于等于某个值的约束</p>
+</blockquote>
+
+<div><pre><code class="language-none">[self.textLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+    make.center.equalTo(self.view);
+    // 设置宽度小于等于200
+    make.width.lessThanOrEqualTo(@200);
+    // 设置高度大于等于10
+    make.height.greaterThanOrEqualTo(@(10));
+}];</code></pre></div>
+
+<blockquote>
+<p>设置比例约束</p>
+</blockquote>
+
+<div><pre><code class="language-none">[self.redView mas_makeConstraints:^(MASConstraintMaker *make) {
+    make.center.equalTo(self.view);
+    make.height.mas_equalTo(30);
+    make.width.equalTo(self.view).multipliedBy(0.2);
+}];</code></pre></div>
+
+<blockquote>
+<p>设置底部距离 适配X</p>
+</blockquote>
+
+<div><pre><code class="language-none">[self.redView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.mas_equalTo(0);
+            make.height.mas_equalTo(50);
+            make.bottom.mas_equalTo(self.view.mas_bottomMargin);
+        }];</code></pre></div>
+
+<p>pod导入Masonry使用mas_topMargin闪退问题</p>
+
+<p>如果报错，   在<code>pod</code>中修改<code>Masonry</code>最低支持版本即可，</p>
+
+<p><a href="https://github.com/SnapKit/Masonry/issues/461">参考 Masonry v1.1.0 crash with UIView margins #461</a></p>
+
+<p><a href="https://stackoverflow.com/questions/37160688/set-deployment-target-for-cocoapodss-pod/37289688#37289688">参考Stack Overflow Set deployment target for CocoaPods&#39;s pod</a></p>
+
+<h3 id="toc_25">17.Application Loader stuck at “Authenticating with the iTunes store” when uploading an iOS app</h3>
+
+<p><a href="https://stackoverflow.com/questions/22443425/application-loader-stuck-at-authenticating-with-the-itunes-store-when-uploadin">Stack overflow</a></p>
+
+<h3 id="toc_26">18、设计</h3>
+
+<p><a href="https://book.douban.com/subject/25829244/">Effective Objective-C 2.0 第24条:将累的实现代码分散到便于管理的数个分类之中</a></p>
+
+<p><a href="https://developer.apple.com/library/archive/documentation/General/Conceptual/CocoaEncyclopedia/Model-View-Controller/Model-View-Controller.html#//apple_ref/doc/uid/TP40010810-CH14">Apple Developer Model-View-Controller</a></p>
+
+<p><a href="https://www.jianshu.com/p/02d6397436dc">iOS的MVC框架之控制层的构建</a></p>
+
+<h3 id="toc_27">19、Tomcat</h3>
+
+<p><a href="https://tomcat.apache.org/download-90.cgi">Tomcat Download</a></p>
+
+<h5 id="toc_28">1、Tomcat路径:</h5>
+
+<div><pre><code class="language-none">cd ~/Library/ApacheTomcat/bin</code></pre></div>
+
+<h5 id="toc_29">2、启动Tomcat:</h5>
+
+<div><pre><code class="language-none">./startup.sh</code></pre></div>
+
+<h5 id="toc_30">3、如果报错，说明没有权限：</h5>
+
+<p><code>-bash: ./startup.sh: Permission denied</code></p>
+
+<div><pre><code class="language-none">chmod u+x *.sh</code></pre></div>
+
+<h5 id="toc_31">4、验证是否开启成功：</h5>
+
+<p> 电脑端：</p>
+
+<p><a href="http://localhost:8080">http://localhost:8080</a></p>
+
+<p>手机端:电脑IP+端口号</p>
+
+<p>查看本机IP:</p>
+
+<div><pre><code class="language-none">ifconfig</code></pre></div>
+
+<h5 id="toc_32">5、关闭Tomcat</h5>
+
+<div><pre><code class="language-none">./shutdown.sh</code></pre></div>
+
+<h5 id="toc_33">6、查看版本号</h5>
+
+<div><pre><code class="language-none">sh catalina.sh version</code></pre></div>
+
+<h5 id="toc_34">7、查看Tomcat相关文件夹</h5>
+
+<div><pre><code class="language-none">cd ~/Library/ApacheTomcat/bin
+
+cd ..
+
+ls</code></pre></div>
+
+<hr>
+
+<blockquote>
+<p>1、bin:存放tomcat命令</p>
+
+<p>2、conf:存放tomcat配置信息,里面的server.xml文件是核心的配置文件</p>
+
+<p>3、lib:支持tomcat软件运行的jar包和技术支持包(如servlet和jsp)</p>
+
+<p>4、logs:运行时的日志信息</p>
+
+<p>5、temp:临时目录</p>
+
+<p>6、webapps:共享资源文件和web应用目录</p>
+
+<p>7、work:tomcat的运行目录.jsp运行时产生的临时文件就存放在这里</p>
+</blockquote>
+
+<h3 id="toc_35">20、Category、Extension、Protocol区别</h3>
+
+<h3 id="toc_36">21、assign、strong、retain、weak、copy区别</h3>
+
+<h3 id="toc_37">22、removeFromSuperview</h3>
+
+<h3 id="toc_38">23、iOS 11之后系统没有导航栏时 WKWebView下移问题</h3>
+
+<div><pre><code class="language-none">     [(UIScrollView *)[[_webview subviews] objectAtIndex:0] setBounces:NO];
+    _webview.scrollView.bounces = NO;
+    _webview.scrollView.showsHorizontalScrollIndicator = NO;
+    [_webview sizeToFit];
+     if(isiPhoneXDevice){
+        _webview.scrollView.contentInset = UIEdgeInsetsMake(-44,0,-44,0);
+    }else{
+        _webview.scrollView.contentInset = UIEdgeInsetsMake(-20,0,0,0);
+    }</code></pre></div>
+
+<h3 id="toc_39">24、KVC字典转Model</h3>
+
+<div><pre><code class="language-none">[Model setValuesForKeysWithDictionary:dic];
+</code></pre></div>
+
+<h3 id="toc_40">25、SDWebimage做了什么</h3>
+
+<div><pre><code class="language-none">[cell.bookImg sd_setImageWithURL:imgURL placeholderImage:[UIImage imageNamed:@&quot;Placeholder&quot;] options:1 progress:^(NSInteger receivedSize, NSInteger expectedSize, NSURL * _Nullable targetURL) {
+
+} completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+
+}]; </code></pre></div>
+
+<h3 id="toc_41">26、线程安全</h3>
+
+<p><strong>串行队列，同步任务</strong>
+有顺序的执行，并且不会开启新线程，就在当前线程执行；FMDB,它为什么要设计成串行队列，同步任务，为了保证数据的安全
+<strong>串行队列，异步任务</strong>
+有顺序的执行,并且在开辟的新的线程中执行,并且只开一条线程!!!耗时操作,并且有严格先后顺序
+<strong>并发队列，同步任务</strong>
+没有开启新线程，同时按照顺序执行，几乎不用；
+<strong>并发队列，异步任务</strong>
+特点回开启N条线程，没有顺序， 运用场景: 多图下载；</p>
+
+<p>同一时间内多个线程同时访问同一个资源时，会引发数据错乱和数据安全问题。如同一时间内，多个线程同时修改数据库中的同一张表的数据。
+解决方法：互斥锁(同步锁)</p>
+
+<div><pre><code class="language-none"> @synchronized (self) {
+ 
+ }</code></pre></div>
+
+<h3 id="toc_42">27、Blocks笔记</h3>
+
+<p>Blcoks的本质就是结构体，</p>
+
+<div><pre><code class="language-none">
+-(void(^)(void))whereTest{
+    return ^{
+        NSLog(@&quot;----------------------天王盖地虎&quot;);
+    };
+}
+
+-(void(^)(NSString *))testBlock{
+    
+    void(^block)(NSString *textChar) = ^(NSString *textChar){
+        
+        NSLog(@&quot;----------------------%@&quot;,textChar);
+        
+    };
+    return block;
+}
+</code></pre></div>
+
+<h3 id="toc_43">28、循环动画</h3>
+
+<div><pre><code class="language-none">///
+@property (strong, nonatomic) UIView *testView;
+//-------------------------------
+_testView = [[UIView alloc]initWithFrame:CGRectMake(0, 60, 20, 20)];
+[self.view addSubview:_testView];
+_testView.backgroundColor = [UIColor redColor];</code></pre></div>
+
+<p>1、创建动画的方式 有2种:</p>
+
+<div><pre><code class="language-none">// MARK: - 创建动画
+-(void)firstCreateAnimation{
+    //-------------------------------
+    __weak typeof (self) weakSelf = self;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        //-------------------------------
+        [UIView animateWithDuration:1 delay:1 options:UIViewAnimationOptionAutoreverse|UIViewAnimationOptionRepeat animations:^{
+            weakSelf.testView.frame = CGRectMake(40, 120, weakSelf.testView.frame.size.width, weakSelf.testView.frame.size.height);
+        } completion:^(BOOL finished){
+            
+        }];
+    });
+}
+
+-(void)SecondCreateAnimation{
+    //-------------------------------
+    __weak typeof (self) weakSelf = self;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        //-------------------------------
+        CABasicAnimation *shakeLeft = [CABasicAnimation animationWithKeyPath:@&quot;transform.translation.y&quot;];
+        shakeLeft.removedOnCompletion = NO;
+        shakeLeft.duration = 0.5;
+        shakeLeft.autoreverses = YES;
+        shakeLeft.repeatCount = MAXFLOAT;
+        shakeLeft.fromValue = [NSNumber numberWithFloat:0];
+        shakeLeft.toValue = [NSNumber numberWithFloat:+60];
+        [weakSelf.testView.layer addAnimation:shakeLeft forKey:@&quot;pointLeft&quot;];
+    });
+}
+
+
+// MARK: - 暂停动画
+-(void)pauseAnimation{
+    CFTimeInterval pauseTime = [_testView.layer convertTime:CACurrentMediaTime() fromLayer:nil];
+    _testView.layer.timeOffset = pauseTime;
+    _testView.layer.speed = 0;
+}
+
+// MARK: - 继续动画
+-(void)proceedAnimation{
+    CFTimeInterval pauseTime = _testView.layer.timeOffset;
+    CFTimeInterval timeSincePause = CACurrentMediaTime() - pauseTime;
+    _testView.layer.timeOffset = 0;
+    _testView.layer.beginTime = timeSincePause;
+    _testView.layer.speed = 1;
+}
+
+// MARK: - 移除动画
+-(void)removeAnimation{
+    [_testView.layer removeAllAnimations];
+}
+</code></pre></div>
+
+
+
+
+</body>
+
+</html>
