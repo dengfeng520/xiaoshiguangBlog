@@ -328,7 +328,14 @@ kbd {
 
 <body>
 
-<h3 id="toc_0">1、按钮透明度为0时不响应点击事件</h3>
+<h1><center>iOS Notes</center></h1>
+
+<h6 align='right'>小时光</h6>
+<h6  align='right'>西安乐推网络科技有限公司</h6> 
+
+<h2 id="toc_0"></h2>
+
+<h3 id="toc_1">1、按钮透明度为0时不响应点击事件</h3>
 
 <p>个人推测，当<code>UIButton</code>透明度为0时，默认调用<code>Hidden</code>方法，所以不响应点击事件。</p>
 
@@ -337,7 +344,7 @@ _heartbtn = [UIButton buttonWithType: UIButtonTypeCustom];
 
  [self.view addSubview:_heartbtn];</code></pre></div>
 
-<h3 id="toc_1">2、Git相关</h3>
+<h3 id="toc_2">2、Git相关</h3>
 
 <table>
 <thead>
@@ -439,7 +446,7 @@ _heartbtn = [UIButton buttonWithType: UIButtonTypeCustom];
 </tbody>
 </table>
 
-<h3 id="toc_2">3、设置圆角</h3>
+<h3 id="toc_3">3、设置圆角</h3>
 
 <div><pre><code class="language-none">// MARK: - 设置顶部两个圆角
 -(void)SettingSharaviewRound:(float)Round selfview:(UIView *)selfview
@@ -456,7 +463,7 @@ _heartbtn = [UIButton buttonWithType: UIButtonTypeCustom];
 <div><pre><code class="language-none"> [superView layoutIfNeeded];
 </code></pre></div>
 
-<h3 id="toc_3">4、通过Blocks来关联UIButton的点击事件</h3>
+<h3 id="toc_4">4、通过Blocks来关联UIButton的点击事件</h3>
 
 <p>在开发中通常使用的按钮点击：</p>
 
@@ -505,7 +512,7 @@ _heartbtn = [UIButton buttonWithType: UIButtonTypeCustom];
 
 <p><a href="https://book.douban.com/subject/25829244/">Effective Objective-C 2.0 第10条:在既有类中使用关联对象存放自定义数据</a></p>
 
-<h3 id="toc_4">5、方法标记</h3>
+<h3 id="toc_5">5、方法标记</h3>
 
 <div><pre><code class="language-none">// FIXME: - update</code></pre></div>
 
@@ -517,7 +524,7 @@ _heartbtn = [UIButton buttonWithType: UIButtonTypeCustom];
 
 <div><pre><code class="language-none">// TODO: - update</code></pre></div>
 
-<h3 id="toc_5">6、先pop当前UIViewController,再push到下一个UIViewController</h3>
+<h3 id="toc_6">6、先pop当前UIViewController,再push到下一个UIViewController</h3>
 
 <div><pre><code class="language-none">
   LTBaseViewController *InputNewPasswordView = [[NSClassFromString(@&quot;InputNewPasswordViewController&quot;) alloc]init];
@@ -540,7 +547,7 @@ _heartbtn = [UIButton buttonWithType: UIButtonTypeCustom];
 
             [self.navigationController setViewControllers:vcArray animated:YES];</code></pre></div>
 
-<h3 id="toc_6">7、Lottie动画</h3>
+<h3 id="toc_7">7、Lottie动画</h3>
 
 <p><a href="http://airbnb.io/lottie/ios.html#getting-started-on-ios-or-macos">Lottie动画</a></p>
 
@@ -590,7 +597,7 @@ _heartbtn = [UIButton buttonWithType: UIButtonTypeCustom];
 <div><pre><code class="language-none"> [_exploreAnimation setProgressWithFrame:[NSNumber numberWithInteger:46]];
 </code></pre></div>
 
-<h3 id="toc_7">8、Socket and Protocol Buffers</h3>
+<h3 id="toc_8">8、Socket and Protocol Buffers</h3>
 
 <blockquote>
 <p>Protocol Buffers</p>
@@ -598,14 +605,14 @@ _heartbtn = [UIButton buttonWithType: UIButtonTypeCustom];
 
 <p><a href="https://developers.google.com/protocol-buffers/docs/downloads">Download Protocol Buffers</a></p>
 
-<h4 id="toc_8">1、安装:</h4>
+<h4 id="toc_9">1、安装:</h4>
 
 <div><pre><code class="language-none"> cd protobuf-3.3.0
  ./configure
 sudo make
 sudo make install</code></pre></div>
 
-<h4 id="toc_9">2、创建.proto文件</h4>
+<h4 id="toc_10">2、创建.proto文件</h4>
 
 <p>打开Xcode ，选择新建<code>Empty</code>文件，根据和后台的约定的参数，</p>
 
@@ -624,7 +631,7 @@ message ResponseExplore {
     bool    opposite_like = 10;
 }</code></pre></div>
 
-<h4 id="toc_10">3、生成Model文件:</h4>
+<h4 id="toc_11">3、生成Model文件:</h4>
 
 <div><pre><code class="language-none"> protoc --proto_path=./Protobuf  --objc_out=./Protobuf   ChatIM.proto</code></pre></div>
 
@@ -633,7 +640,7 @@ message ResponseExplore {
  protoc --proto_path=./Protobuf  --objc_out=./Protobuf   ChatIM.proto
 </code></p>
 
-<h4 id="toc_11">4、使用</h4>
+<h4 id="toc_12">4、使用</h4>
 
 <div><pre><code class="language-none">  pod &#39;Protobuf&#39;</code></pre></div>
 
@@ -641,11 +648,11 @@ message ResponseExplore {
 <p>Socket</p>
 </blockquote>
 
-<h4 id="toc_12">1、导入:</h4>
+<h4 id="toc_13">1、导入:</h4>
 
 <div><pre><code class="language-none">pod CocoaAsyncSocket</code></pre></div>
 
-<h4 id="toc_13">2、创建Socket并连接:</h4>
+<h4 id="toc_14">2、创建Socket并连接:</h4>
 
 <div><pre><code class="language-none"> if (_socket == nil) {
             _socket = [[GCDAsyncSocket alloc]initWithDelegate:self delegateQueue:dispatch_get_main_queue()];
@@ -655,11 +662,11 @@ message ResponseExplore {
             }
         }</code></pre></div>
 
-<h4 id="toc_14">2、主动断开Socket连接:</h4>
+<h4 id="toc_15">2、主动断开Socket连接:</h4>
 
 <div><pre><code class="language-none">[_socket disconnect];</code></pre></div>
 
-<h3 id="toc_15">9、无动画pop再push，替换当前控制器</h3>
+<h3 id="toc_16">9、无动画pop再push，替换当前控制器</h3>
 
 <div><pre><code class="language-none"> // 新建将要push的控制器
                 CompleteViewController *newVC = [[CompleteViewController alloc] init];
@@ -679,7 +686,7 @@ message ResponseExplore {
                 // 重新设置当前导航控制器的路由数组
                 [self.navigationController setViewControllers:vcArray animated:YES];</code></pre></div>
 
-<h3 id="toc_16">10、Push的同时释放之前的内存</h3>
+<h3 id="toc_17">10、Push的同时释放之前的内存</h3>
 
 <div><pre><code class="language-none"> //获取要跳转的界面
         UIViewController *LoginView = [[NSClassFromString(@&quot;ViewController&quot;) alloc]init];
@@ -692,17 +699,17 @@ message ResponseExplore {
         // 出栈并跳转至目标控制器(控制器和当前控制器之间的对象将全部释放)
         [thisView.navigationController popToViewController:LoginView animated:true];</code></pre></div>
 
-<h3 id="toc_17">11、APP内购相关问题</h3>
+<h3 id="toc_18">11、APP内购相关问题</h3>
 
-<h3 id="toc_18">12、按钮超出父控件后无法响应点击的解决方法</h3>
+<h3 id="toc_19">12、按钮超出父控件后无法响应点击的解决方法</h3>
 
-<h3 id="toc_19">13、如何将UIView覆盖到状态栏之上</h3>
+<h3 id="toc_20">13、如何将UIView覆盖到状态栏之上</h3>
 
 <p>如果直接添加到window上，会和电池状态栏重叠，解决方法是修改Window的UIWindowLevel属性，</p>
 
 <p><a href="https://www.jianshu.com/p/23114e107ef1">参考</a></p>
 
-<h3 id="toc_20">14、通过Runtimeh+分类的方式实现UITextView的placeHolder占位文字</h3>
+<h3 id="toc_21">14、通过Runtimeh+分类的方式实现UITextView的placeHolder占位文字</h3>
 
 <div><pre><code class="language-none">#import &lt;objc/runtime.h&gt;
 
@@ -725,7 +732,7 @@ message ResponseExplore {
 
 @end</code></pre></div>
 
-<h3 id="toc_21">14、RAC</h3>
+<h3 id="toc_22">14、RAC</h3>
 
 <blockquote>
 <p>1、创建信号量</p>
@@ -765,9 +772,9 @@ message ResponseExplore {
 <div><pre><code class="language-none"> //主动触发取消订阅
  [disposable dispose];   </code></pre></div>
 
-<h3 id="toc_22">15、导入PCH文件之后报错unknown type name &#39;NSString&#39;</h3>
+<h3 id="toc_23">15、导入PCH文件之后报错unknown type name &#39;NSString&#39;</h3>
 
-<h5 id="toc_23">解决方法：在PCH文件中引用<code>Foundation</code></h5>
+<h5 id="toc_24">解决方法：在PCH文件中引用<code>Foundation</code></h5>
 
 <div><pre><code class="language-none">#ifdef __OBJC__
 
@@ -775,7 +782,7 @@ message ResponseExplore {
 
 #endif</code></pre></div>
 
-<h3 id="toc_24">16、Masonry</h3>
+<h3 id="toc_25">16、Masonry</h3>
 
 <blockquote>
 <p>距离上下左右边距</p>
@@ -826,11 +833,11 @@ message ResponseExplore {
 
 <p><a href="https://stackoverflow.com/questions/37160688/set-deployment-target-for-cocoapodss-pod/37289688#37289688">参考Stack Overflow Set deployment target for CocoaPods&#39;s pod</a></p>
 
-<h3 id="toc_25">17.Application Loader stuck at “Authenticating with the iTunes store” when uploading an iOS app</h3>
+<h3 id="toc_26">17.Application Loader stuck at “Authenticating with the iTunes store” when uploading an iOS app</h3>
 
 <p><a href="https://stackoverflow.com/questions/22443425/application-loader-stuck-at-authenticating-with-the-itunes-store-when-uploadin">Stack overflow</a></p>
 
-<h3 id="toc_26">18、设计</h3>
+<h3 id="toc_27">18、设计</h3>
 
 <p><a href="https://book.douban.com/subject/25829244/">Effective Objective-C 2.0 第24条:将累的实现代码分散到便于管理的数个分类之中</a></p>
 
@@ -838,25 +845,25 @@ message ResponseExplore {
 
 <p><a href="https://www.jianshu.com/p/02d6397436dc">iOS的MVC框架之控制层的构建</a></p>
 
-<h3 id="toc_27">19、Tomcat</h3>
+<h3 id="toc_28">19、Tomcat</h3>
 
 <p><a href="https://tomcat.apache.org/download-90.cgi">Tomcat Download</a></p>
 
-<h5 id="toc_28">1、Tomcat路径:</h5>
+<h5 id="toc_29">1、Tomcat路径:</h5>
 
 <div><pre><code class="language-none">cd ~/Library/ApacheTomcat/bin</code></pre></div>
 
-<h5 id="toc_29">2、启动Tomcat:</h5>
+<h5 id="toc_30">2、启动Tomcat:</h5>
 
 <div><pre><code class="language-none">./startup.sh</code></pre></div>
 
-<h5 id="toc_30">3、如果报错，说明没有权限：</h5>
+<h5 id="toc_31">3、如果报错，说明没有权限：</h5>
 
 <p><code>-bash: ./startup.sh: Permission denied</code></p>
 
 <div><pre><code class="language-none">chmod u+x *.sh</code></pre></div>
 
-<h5 id="toc_31">4、验证是否开启成功：</h5>
+<h5 id="toc_32">4、验证是否开启成功：</h5>
 
 <p> 电脑端：</p>
 
@@ -868,15 +875,15 @@ message ResponseExplore {
 
 <div><pre><code class="language-none">ifconfig</code></pre></div>
 
-<h5 id="toc_32">5、关闭Tomcat</h5>
+<h5 id="toc_33">5、关闭Tomcat</h5>
 
 <div><pre><code class="language-none">./shutdown.sh</code></pre></div>
 
-<h5 id="toc_33">6、查看版本号</h5>
+<h5 id="toc_34">6、查看版本号</h5>
 
 <div><pre><code class="language-none">sh catalina.sh version</code></pre></div>
 
-<h5 id="toc_34">7、查看Tomcat相关文件夹</h5>
+<h5 id="toc_35">7、查看Tomcat相关文件夹</h5>
 
 <div><pre><code class="language-none">cd ~/Library/ApacheTomcat/bin
 
@@ -902,13 +909,13 @@ ls</code></pre></div>
 <p>7、work:tomcat的运行目录.jsp运行时产生的临时文件就存放在这里</p>
 </blockquote>
 
-<h3 id="toc_35">20、Category、Extension、Protocol区别</h3>
+<h3 id="toc_36">20、Category、Extension、Protocol区别</h3>
 
-<h3 id="toc_36">21、assign、strong、retain、weak、copy区别</h3>
+<h3 id="toc_37">21、assign、strong、retain、weak、copy区别</h3>
 
-<h3 id="toc_37">22、removeFromSuperview</h3>
+<h3 id="toc_38">22、removeFromSuperview</h3>
 
-<h3 id="toc_38">23、iOS 11之后系统没有导航栏时 WKWebView下移问题</h3>
+<h3 id="toc_39">23、iOS 11之后系统没有导航栏时 WKWebView下移问题</h3>
 
 <div><pre><code class="language-none">     [(UIScrollView *)[[_webview subviews] objectAtIndex:0] setBounces:NO];
     _webview.scrollView.bounces = NO;
@@ -920,12 +927,12 @@ ls</code></pre></div>
         _webview.scrollView.contentInset = UIEdgeInsetsMake(-20,0,0,0);
     }</code></pre></div>
 
-<h3 id="toc_39">24、KVC字典转Model</h3>
+<h3 id="toc_40">24、KVC字典转Model</h3>
 
 <div><pre><code class="language-none">[Model setValuesForKeysWithDictionary:dic];
 </code></pre></div>
 
-<h3 id="toc_40">25、SDWebimage做了什么</h3>
+<h3 id="toc_41">25、SDWebimage做了什么</h3>
 
 <div><pre><code class="language-none">[cell.bookImg sd_setImageWithURL:imgURL placeholderImage:[UIImage imageNamed:@&quot;Placeholder&quot;] options:1 progress:^(NSInteger receivedSize, NSInteger expectedSize, NSURL * _Nullable targetURL) {
 
@@ -933,7 +940,7 @@ ls</code></pre></div>
 
 }]; </code></pre></div>
 
-<h3 id="toc_41">26、线程安全</h3>
+<h3 id="toc_42">26、线程安全</h3>
 
 <p><strong>串行队列，同步任务</strong>
 有顺序的执行，并且不会开启新线程，就在当前线程执行；FMDB,它为什么要设计成串行队列，同步任务，为了保证数据的安全
@@ -951,7 +958,7 @@ ls</code></pre></div>
  
  }</code></pre></div>
 
-<h3 id="toc_42">27、Blocks笔记</h3>
+<h3 id="toc_43">27、Blocks笔记</h3>
 
 <p>Blcoks的本质就是结构体，</p>
 
@@ -973,7 +980,7 @@ ls</code></pre></div>
 }
 </code></pre></div>
 
-<h3 id="toc_43">28、循环动画</h3>
+<h3 id="toc_44">28、循环动画</h3>
 
 <div><pre><code class="language-none">///
 @property (strong, nonatomic) UIView *testView;
@@ -1037,6 +1044,12 @@ _testView.backgroundColor = [UIColor redColor];</code></pre></div>
     [_testView.layer removeAllAnimations];
 }
 </code></pre></div>
+
+<p>运行效果：</p>
+
+<p><img src="https://github.com/dengfeng520/iOSNotes/blob/master/loopAnimation.gif?raw=true" alt="loopAnimation"></p>
+
+<h2 id="toc_45"></h2>
 
 
 
