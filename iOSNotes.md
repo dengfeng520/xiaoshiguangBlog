@@ -247,6 +247,7 @@ message ResponseExplore {
  protoc --proto_path=./Protobuf  --objc_out=./Protobuf   ChatIM.proto
  ```
  同理，生成Android用的Model文件可使用命令:
+ 
  ```
  protoc --proto_path=./Protobuf  --objc_out=./Protobuf   ChatIM.proto
  ```
