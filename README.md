@@ -577,14 +577,58 @@ ls
 ```
 ###26、线程安全
 
+**同步（sync）：**
+
+一个接着一个，前一个没有执行完，后面不能执行，不开线程。
+
+**异步（async）：**
+
+开启多个新线程，任务同一时间可以一起执行。异步是多线程的代名词。
+
+**队列：**
+
+装载线程任务的队形结构。(系统以先进先出的方式调度队列中的任务执行)。在GCD中有两种队列：串行队列和并发队列。
+
+**串行队列：**
+
+只开启一个线程，串行执行多个任务
+
+示例代码:
+
+```
+// 串行队列
+dispatch_queue_t queue = dispatch_queue_create("test", DISPATCH_QUEUE_SERIAL);
+
+```
+
+**并发队列：**
+
+线程可以同时一起进行执行。实际上是CPU在多条线程之间快速的切换。（并发功能只有在异步（dispatch_async）函数下才有效）
+
+```
+
+// 并发队列
+dispatch_queue_t queue1 = dispatch_queue_create("test", DISPATCH_QUEUE_CONCURRENT);
+
+```
+
 **串行队列，同步任务**
+
 有顺序的执行，并且不会开启新线程，就在当前线程执行；FMDB,它为什么要设计成串行队列，同步任务，为了保证数据的安全
+
 **串行队列，异步任务**
+
 有顺序的执行,并且在开辟的新的线程中执行,并且只开一条线程!!!耗时操作,并且有严格先后顺序
+
 **并发队列，同步任务**
+
 没有开启新线程，同时按照顺序执行，几乎不用；
+
 **并发队列，异步任务**
+
 特点回开启N条线程，没有顺序， 运用场景: 多图下载；
+
+--
 
 同一时间内多个线程同时访问同一个资源时，会引发数据错乱和数据安全问题。如同一时间内，多个线程同时修改数据库中的同一张表的数据。
 解决方法：互斥锁(同步锁)
@@ -594,6 +638,7 @@ ls
  
  }
 ```
+
 
 ###27、Blocks笔记
 
@@ -690,5 +735,114 @@ _testView.backgroundColor = [UIColor redColor];
 运行效果：
 
 ![loopAnimation](https://github.com/dengfeng520/iOSNotes/blob/master/loopAnimation.gif?raw=true)
+
+####29、屏幕截屏相关
+
+**方法一:**
+
+```
+UIView *view2 = [self.view snapshotViewAfterScreenUpdates:YES];
+```
+
+**方法二:**
+
+```
+-(void)saveImg:(UIButton *)sender{
+    
+    UIImage *photo = [self save];
+    //保存到相册
+    UIImageWriteToSavedPhotosAlbum(photo, self, @selector(imageSavedToPhotosAlbum:didFinishSavingWithError:contextInfo:), nil);
+}
+
+// MARK: - 保存图片的回调
+- (void)imageSavedToPhotosAlbum:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
+{
+    NSString *message = @"";
+    if (!error) {
+        
+        message = @"成功保存到相册";
+        
+    }else{
+        message = [error description];
+    }
+    NSLog(@"message is %@",message);
+}
+
+
+- (UIImage *)save
+{
+    //开启图片上下文
+    UIGraphicsBeginImageContextWithOptions(self.loadImg.bounds.size, NO, 0);
+    //获取上下文
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    //截屏
+    [self.loadImg.layer renderInContext:context];
+    //获取图片
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    //关闭图片上下文
+    UIGraphicsEndImageContext();
+    
+    return [self fixOrientation:image rotation:UIImageOrientationUp];
+}
+
+
+- (UIImage *)fixOrientation:(UIImage *)image rotation:(UIImageOrientation)orientation
+{
+    long double rotate = 0.0;
+    CGRect rect;
+    float translateX = 0;
+    float translateY = 0;
+    float scaleX = 1.0;
+    float scaleY = 1.0;
+    
+    switch (orientation) {
+        case UIImageOrientationLeft:
+            rotate = M_PI_2;
+            rect = CGRectMake(0, 0, image.size.height, image.size.width);
+            translateX = 0;
+            translateY = -rect.size.width;
+            scaleY = rect.size.width/rect.size.height;
+            scaleX = rect.size.height/rect.size.width;
+            break;
+        case UIImageOrientationRight:
+            rotate = 33 * M_PI_2;
+            rect = CGRectMake(0, 0, image.size.height, image.size.width);
+            translateX = -rect.size.height;
+            translateY = 0;
+            scaleY = rect.size.width/rect.size.height;
+            scaleX = rect.size.height/rect.size.width;
+            break;
+        case UIImageOrientationDown:
+            rotate = M_PI;
+            rect = CGRectMake(0, 0, image.size.width, image.size.height);
+            translateX = -rect.size.width;
+            translateY = -rect.size.height;
+            break;
+        default:
+            rotate = 0.0;
+            rect = CGRectMake(0, 0, image.size.width, image.size.height);
+            translateX = 0;
+            translateY = 0;
+            break;
+    }
+    
+    UIGraphicsBeginImageContext(rect.size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    //做CTM变换
+    CGContextTranslateCTM(context, 0.0, rect.size.height);
+    CGContextScaleCTM(context, 1.0, -1.0);
+    CGContextRotateCTM(context, rotate);
+    CGContextTranslateCTM(context, translateX, translateY);
+    
+    CGContextScaleCTM(context, scaleX, scaleY);
+    //绘制图片
+    CGContextDrawImage(context, CGRectMake(0, 0, rect.size.width, rect.size.height), image.CGImage);
+    
+    UIImage *newPic = UIGraphicsGetImageFromCurrentImageContext();
+    
+    return newPic;
+}
+```
+
 
 ---
