@@ -6,7 +6,8 @@
 <h6 align='right'>小时光</h6>
 <h6  align='right'>西安乐推网络科技有限公司</h6> 
 
----
+
+--
 ###1、按钮透明度为0时不响应点击事件
 
 个人推测，当`UIButton`透明度为0时，默认调用`Hidden`方法，所以不响应点击事件。
@@ -250,6 +251,7 @@ message ResponseExplore {
  protoc --proto_path=./Protobuf  --objc_out=./Protobuf   ChatIM.proto
  ```
  同理，生成Android用的Model文件可使用命令:
+ 
  ```
  protoc --proto_path=./Protobuf  --objc_out=./Protobuf   ChatIM.proto
  ```
@@ -575,7 +577,7 @@ ls
 
 }]; 
 ```
-###26、线程安全
+###26、多线程相关
 
 **同步（sync）：**
 
@@ -638,6 +640,7 @@ dispatch_queue_t queue1 = dispatch_queue_create("test", DISPATCH_QUEUE_CONCU
  
  }
 ```
+
 
 
 ###27、Blocks笔记
@@ -843,6 +846,98 @@ UIView *view2 = [self.view snapshotViewAfterScreenUpdates:YES];
     return newPic;
 }
 ```
+####30、CALayer
+
+ **1、添加一个CALayer**
+
+```
+ //---------------------------- 添加蓝色的CALayer
+ _blueLayer = [CALayer layer];
+ _blueLayer.frame = CGRectMake(50, 50, 50, 50);
+ _blueLayer.backgroundColor = [UIColor blueColor].CGColor;
+ [_layerView.layer addSublayer:_blueLayer];
+    
+```
+**2、CALayer的contents属性**
+
+`contents`属性为`id`类型，理论上可以为任何类型，但是，入股给contents赋的不是CGImage，那么得到的图层将是空白的。
+
+```
+ UIImage *image = [UIImage imageNamed:@"showGrils"];
+ _blueLayer.contents = (__bridge id)image.CGImage;
+```
+```
+ _layerView.layer.contents = (__bridge id)image.CGImage;
+ //设置图片显示模式
+ _layerView.contentMode = UIViewContentModeScaleAspectFit;
+```
+
+**3、contentsScale属性**
+
+`contentsScale`属性定义了寄宿图的像素尺寸和视图大小的比例，默认情况下它是一个值为1.0的浮点数.可使用`contentsScale`属性来控制视图的缩放比例。
+
+```
+ _layerView.layer.contentsGravity = kCAGravityCenter;
+ _layerView.layer.contentsScale = image.scale;
+```
+**4、maskToBounds 属性**
+
+`UIView`有一个叫做`clipsToBounds `的属性可以用来决定是否显示超出边界的内容，`CALayer`对应的属性叫做`masksToBounds`，把它设置为`YES`.
+
+```
+ _layerView.layer.masksToBounds = true;
+```
+**5、图像绘制**
+
+```
+//----------------------------  Custom Drawing
+_blueLayer.delegate = self;
+[_blueLayer display];
+
+// MARK: - ======================================= Custom Drawing
+- (void)drawLayer:(CALayer *)layer inContext:(CGContextRef)ctx{
+    //draw a thick red circle
+    CGContextSetLineWidth(ctx, 5.0f);
+    CGContextSetStrokeColorWithColor(ctx, [UIColor redColor].CGColor);
+    CGContextStrokeEllipseInRect(ctx, layer.bounds);
+}
+```
+**6、布局**
+
+
+ `UIView`有三个比较重要的布局属性：`frame，bounds`和`center`，`CALayer`对应地叫做`frame`，`bounds`和`position`。为了能清楚区分，图层用了`position`，视图用了`center`，但是他们都代表同样的值。`frame`代表了图层的外部坐标（也就是在父图层上占据的空间），`bounds`是内部坐标（{0, 0}通常是图层的左上角），`center`和`position`都代表了相对于父图层`anchorPoint`所在的位置。`anchorPoint`的属性表示图层的中心点。
+ 
+ ![`frame，bounds`和`center`](https://zsisme.gitbooks.io/ios-/content/chapter3/3.1.jpeg)
+
+**7、组透明**
+
+`UIView`有一个叫做`alpha`的属性来确定视图的透明度。`CALayer`有一个等同的属性叫做`opacity`，这两个属性都是影响子层级的。如果给一个图层设置了`opacity`属性，那它的子图层都会受此影响。
+
+```
+ _testView.layer.opacity = 0.5f;
+
+```
+**8、仿射变换**
+
+```
+// 旋转90度
+_layerView.transform = CGAffineTransformMakeRotation(0.5);
+```
+效果图:
+
+![testdemo1](https://github.com/dengfeng520/iOSNotes/blob/master/testdemo1.png?raw=true)
+
+```
+// 组合仿射  组合的同时，偏移X、Y轴坐标
+CGAffineTransform viewTransform = CGAffineTransformConcat(CGAffineTransformMakeRotation(0.5),CGAffineTransformMakeTranslation(-10, -50));
+_layerView.transform = viewTransform;
+
+```
+效果图:
+
+![testdemo2](https://github.com/dengfeng520/iOSNotes/blob/master/testdemo2.png?raw=true)
+
+
 
 
 ---
