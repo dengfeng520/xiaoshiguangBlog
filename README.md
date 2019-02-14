@@ -921,7 +921,7 @@ _blueLayer.delegate = self;
 
 ```
 // 旋转90度
-_layerView.transform = CGAffineTransformMakeRotation(0.5);
+_layerView.transform = CGAffineTransformMakeRotation(M_PI_4);
 ```
 效果图:
 
@@ -929,7 +929,7 @@ _layerView.transform = CGAffineTransformMakeRotation(0.5);
 
 ```
 // 组合仿射  组合的同时，偏移X、Y轴坐标
-CGAffineTransform viewTransform = CGAffineTransformConcat(CGAffineTransformMakeRotation(0.5),CGAffineTransformMakeTranslation(-10, -50));
+CGAffineTransform viewTransform = CGAffineTransformConcat(CGAffineTransformMakeRotation(M_PI_4),CGAffineTransformMakeTranslation(-10, -50));
 _layerView.transform = viewTransform;
 
 ```
