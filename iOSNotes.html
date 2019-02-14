@@ -328,6 +328,8 @@ kbd {
 
 <body>
 
+<p><a href="https://dengfeng520.github.io/iOSNotes/iOSNotes.html"><center>iOS Notes</center></a></p>
+
 <h1><center>iOS Notes</center></h1>
 
 <h6 align='right'>小时光</h6>
@@ -1192,7 +1194,85 @@ _testView.backgroundColor = [UIColor redColor];</code></pre></div>
     return newPic;
 }</code></pre></div>
 
-<h2 id="toc_47"></h2>
+<h4 id="toc_47">30、CALayer</h4>
+
+<p><strong>1、添加一个CALayer</strong></p>
+
+<div><pre><code class="language-none"> //---------------------------- 添加蓝色的CALayer
+ _blueLayer = [CALayer layer];
+ _blueLayer.frame = CGRectMake(50, 50, 50, 50);
+ _blueLayer.backgroundColor = [UIColor blueColor].CGColor;
+ [_layerView.layer addSublayer:_blueLayer];
+    </code></pre></div>
+
+<p><strong>2、CALayer的contents属性</strong></p>
+
+<p><code>contents</code>属性为<code>id</code>类型，理论上可以为任何类型，但是，入股给contents赋的不是CGImage，那么得到的图层将是空白的。</p>
+
+<div><pre><code class="language-none"> UIImage *image = [UIImage imageNamed:@&quot;showGrils&quot;];
+ _blueLayer.contents = (__bridge id)image.CGImage;</code></pre></div>
+
+<div><pre><code class="language-none"> _layerView.layer.contents = (__bridge id)image.CGImage;
+ //设置图片显示模式
+ _layerView.contentMode = UIViewContentModeScaleAspectFit;</code></pre></div>
+
+<p><strong>3、contentsScale属性</strong></p>
+
+<p><code>contentsScale</code>属性定义了寄宿图的像素尺寸和视图大小的比例，默认情况下它是一个值为1.0的浮点数.可使用<code>contentsScale</code>属性来控制视图的缩放比例。</p>
+
+<div><pre><code class="language-none"> _layerView.layer.contentsGravity = kCAGravityCenter;
+ _layerView.layer.contentsScale = image.scale;</code></pre></div>
+
+<p><strong>4、maskToBounds 属性</strong></p>
+
+<p><code>UIView</code>有一个叫做<code>clipsToBounds</code>的属性可以用来决定是否显示超出边界的内容，<code>CALayer</code>对应的属性叫做<code>masksToBounds</code>，把它设置为<code>YES</code>.</p>
+
+<div><pre><code class="language-none"> _layerView.layer.masksToBounds = true;</code></pre></div>
+
+<p><strong>5、图像绘制</strong></p>
+
+<div><pre><code class="language-none">//----------------------------  Custom Drawing
+_blueLayer.delegate = self;
+[_blueLayer display];
+
+// MARK: - ======================================= Custom Drawing
+- (void)drawLayer:(CALayer *)layer inContext:(CGContextRef)ctx{
+    //draw a thick red circle
+    CGContextSetLineWidth(ctx, 5.0f);
+    CGContextSetStrokeColorWithColor(ctx, [UIColor redColor].CGColor);
+    CGContextStrokeEllipseInRect(ctx, layer.bounds);
+}</code></pre></div>
+
+<p><strong>6、布局</strong></p>
+
+<p><code>UIView</code>有三个比较重要的布局属性：<code>frame，bounds</code>和<code>center</code>，<code>CALayer</code>对应地叫做<code>frame</code>，<code>bounds</code>和<code>position</code>。为了能清楚区分，图层用了<code>position</code>，视图用了<code>center</code>，但是他们都代表同样的值。<code>frame</code>代表了图层的外部坐标（也就是在父图层上占据的空间），<code>bounds</code>是内部坐标（{0, 0}通常是图层的左上角），<code>center</code>和<code>position</code>都代表了相对于父图层<code>anchorPoint</code>所在的位置。<code>anchorPoint</code>的属性表示图层的中心点。</p>
+
+<p><img src="https://zsisme.gitbooks.io/ios-/content/chapter3/3.1.jpeg" alt="`frame，bounds`和`center`"></p>
+
+<p><strong>7、组透明</strong></p>
+
+<p><code>UIView</code>有一个叫做<code>alpha</code>的属性来确定视图的透明度。<code>CALayer</code>有一个等同的属性叫做<code>opacity</code>，这两个属性都是影响子层级的。如果给一个图层设置了<code>opacity</code>属性，那它的子图层都会受此影响。</p>
+
+<div><pre><code class="language-none"> _testView.layer.opacity = 0.5f;
+</code></pre></div>
+
+<p><strong>8、仿射变换</strong></p>
+
+<div><pre><code class="language-none">// 旋转90度
+_layerView.transform = CGAffineTransformMakeRotation(0.5);</code></pre></div>
+
+<p>效果图:</p>
+
+<p><img src="https://github.com/dengfeng520/iOSNotes/blob/master/testdemo1.png?raw=true" alt="testdemo1"></p>
+
+<div><pre><code class="language-none">// 组合仿射  组合的同时，偏移X、Y轴坐标
+CGAffineTransform viewTransform = CGAffineTransformConcat(CGAffineTransformMakeRotation(0.5),CGAffineTransformMakeTranslation(-10, -50));
+_layerView.transform = viewTransform;
+</code></pre></div>
+
+<p>效果图:</p>
+
+<p><img src="https://github.com/dengfeng520/iOSNotes/blob/master/testdemo2.png?raw=true" alt="testdemo2"></p>
 
 
 
