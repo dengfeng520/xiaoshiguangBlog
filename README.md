@@ -928,6 +928,14 @@ _layerView.transform = CGAffineTransformMakeRotation(M_PI_4);
 ![testdemo1](https://github.com/dengfeng520/iOSNotes/blob/master/testdemo1.png?raw=true)
 
 ```
+// X轴偏移量 Y轴偏移量
+_layerView.transform = CGAffineTransformMakeScale(-100, -50);
+
+```
+效果图:
+![testdemo1](https://github.com/dengfeng520/iOSNotes/blob/master/testdemo2.png?raw=true)
+
+```
 // 组合仿射  组合的同时，偏移X、Y轴坐标
 CGAffineTransform viewTransform = CGAffineTransformConcat(CGAffineTransformMakeRotation(M_PI_4),CGAffineTransformMakeTranslation(-10, -50));
 _layerView.transform = viewTransform;
@@ -935,7 +943,7 @@ _layerView.transform = viewTransform;
 ```
 效果图:
 
-![testdemo2](https://github.com/dengfeng520/iOSNotes/blob/master/testdemo2.png?raw=true)
+![testdemo2](https://github.com/dengfeng520/iOSNotes/blob/master/testdemo3.png?raw=true)
 
 
 
