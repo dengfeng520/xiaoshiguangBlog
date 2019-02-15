@@ -1,4 +1,3 @@
-
 <a href="https://dengfeng520.github.io/iOSNotes/iOSNotes.html"><center>iOS Notes</center></a>
 
 <h1><center>iOS Notes</center></h1>
@@ -917,8 +916,9 @@ _blueLayer.delegate = self;
  _testView.layer.opacity = 0.5f;
 
 ```
-**8、仿射变换**
+**8、2D仿射变换**
 
+>旋转
 ```
 // 旋转90度
 _layerView.transform = CGAffineTransformMakeRotation(M_PI_4);
@@ -927,13 +927,28 @@ _layerView.transform = CGAffineTransformMakeRotation(M_PI_4);
 
 ![testdemo1](https://github.com/dengfeng520/iOSNotes/blob/master/testdemo1.png?raw=true)
 
+>轴偏移量 Y轴偏移量
+
 ```
 // X轴偏移量 Y轴偏移量
 _layerView.transform = CGAffineTransformMakeScale(-100, -50);
 
 ```
 效果图:
-![testdemo1](https://github.com/dengfeng520/iOSNotes/blob/master/testdemo2.png?raw=true)
+![testdemo2](https://github.com/dengfeng520/iOSNotes/blob/master/testdemo2.png?raw=true)
+
+>缩放处理 
+
+```
+//缩放处理 宽缩放比例 高缩放比例
+_layerView.transform = CGAffineTransformMakeScale(2.5,1.5);
+```
+
+效果图:
+
+![testdemo4](https://github.com/dengfeng520/iOSNotes/blob/master/testdemo4.png?raw=true)
+
+>组合仿射一:  组合的同时，偏移X、Y轴坐标
 
 ```
 // 组合仿射  组合的同时，偏移X、Y轴坐标
@@ -943,9 +958,66 @@ _layerView.transform = viewTransform;
 ```
 效果图:
 
-![testdemo2](https://github.com/dengfeng520/iOSNotes/blob/master/testdemo3.png?raw=true)
+![testdemo3](https://github.com/dengfeng520/iOSNotes/blob/master/testdemo3.png?raw=true)
 
+>组合仿射二:
 
+ ```
+ //---------------------------- CGAffineTransform
+    //create a new transform
+    CGAffineTransform transform = CGAffineTransformIdentity;
+    //scale by 50%
+    transform = CGAffineTransformScale(transform, 1.8, 1.35);
+    //rotate by 30 degrees
+    transform = CGAffineTransformRotate(transform, M_PI / 180.0 * 45.0);
+    //translate by 200 points
+    transform = CGAffineTransformTranslate(transform, 0, 0);
+    //apply transform to layer
+    _layerView.layer.affineTransform = transform;
+ ```
+ 效果图:
+ 
+ ![testdemo5](https://github.com/dengfeng520/iOSNotes/blob/master/testdemo5.png?raw=true)
+ 
+ **9、3D仿射变换**
+ 
+ ![iPhone上的X轴 Y轴 Z轴示意图](https://zsisme.gitbooks.io/ios-/content/chapter5/5.7.jpeg)
+ 
+ >3D 旋转
+ 
+ ```
+ // 绕Y轴旋转45度
+ CATransform3D transform = CATransform3DMakeRotation(M_PI_4, 0, 1, 0);
+ _layerView.layer.transform = transform;
+ ```
+ 效果图:
+  
+  ![testdemo6](https://github.com/dengfeng520/iOSNotes/blob/master/testdemo6.png?raw=true)
+  
+  >3D X轴 Y轴 Z轴缩放比例
+  
+  ```
+  //X轴 Y轴 Z轴 缩放比例
+  CATransform3D transform = CATransform3DMakeScale(1.8, 1.35, 1);
+  ```
+  
+  效果图:
+  
+   ![testdemo7](https://github.com/dengfeng520/iOSNotes/blob/master/testdemo7.png?raw=true)
 
+>3D 透视旋转
 
----
+```
+ //----------------------------
+ //create a new transform
+ CATransform3D transform = CATransform3DIdentity;
+ //apply perspective
+ transform.m34 = - 1.0 / 500.0;
+ //rotate by 45 degrees along the Y axis
+ transform = CATransform3DRotate(transform, M_PI_4, 0, 1, 0);
+ //apply to layer
+ _layerView.layer.transform = transform;
+```
+效果图:
+
+ ![testdemo8](https://github.com/dengfeng520/iOSNotes/blob/master/testdemo8.png?raw=true)
