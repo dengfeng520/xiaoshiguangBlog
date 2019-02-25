@@ -5,7 +5,7 @@
 
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>iOSNotes</title>
+<title>README</title>
 
 
 <style type="text/css">
@@ -1368,6 +1368,45 @@ _layerView.transform = viewTransform;
 <p>效果图:</p>
 
 <p><img src="https://github.com/dengfeng520/iOSNotes/blob/master/testdemo8.png?raw=true" alt="testdemo8"></p>
+
+<h4 id="toc_48">30、CMSampleBufferRef  ----&gt;  UIImage</h4>
+
+<div><pre><code class="language-none"> //MARK: -  CMSampleBufferRef  ----&gt;  UIImage
+- (UIImage *)imageConvert:(CMSampleBufferRef)sampleBuffer{
+    //制作 CVImageBufferRef
+    CVImageBufferRef buffer;
+    buffer = CMSampleBufferGetImageBuffer(sampleBuffer);
+    
+    CVPixelBufferLockBaseAddress(buffer, 0);
+    
+    //从 CVImageBufferRef 取得影像的细部信息
+    uint8_t *base;
+    size_t width, height, bytesPerRow;
+    base = CVPixelBufferGetBaseAddress(buffer);
+    width = CVPixelBufferGetWidth(buffer);
+    height = CVPixelBufferGetHeight(buffer);
+    bytesPerRow = CVPixelBufferGetBytesPerRow(buffer);
+    
+    //利用取得影像细部信息格式化 CGContextRef
+    CGColorSpaceRef colorSpace;
+    CGContextRef cgContext;
+    colorSpace = CGColorSpaceCreateDeviceRGB();
+    cgContext = CGBitmapContextCreate(base, width, height, 8, bytesPerRow, colorSpace, kCGBitmapByteOrder32Little | kCGImageAlphaPremultipliedFirst);
+    CGColorSpaceRelease(colorSpace);
+    
+    //透过 CGImageRef 将 CGContextRef 转换成 UIImage
+    CGImageRef cgImage;
+    UIImage *image;
+    cgImage = CGBitmapContextCreateImage(cgContext);
+    image = [UIImage imageWithCGImage:cgImage];
+    CGImageRelease(cgImage);
+    CGContextRelease(cgContext);
+    
+    CVPixelBufferUnlockBaseAddress(buffer, 0);
+    
+    return image;
+}
+```</code></pre></div>
 
 
 
