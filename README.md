@@ -34,7 +34,9 @@ _heartbtn = [UIButton buttonWithType: UIButtonTypeCustom];
 |```git merge origin master```|合并代码|
 |```git pull origin master```|上面两步操作的集合|
 |```git status```|查看缓存区的状态|
-|```git log```|查看提交日志|
+|```git log```|查看提交Log|
+|```git log -p -2```|显示最近两次提交Log|
+|```git log --stat```|查看每次提交的简略信息 修改了（新增或者删除）那些文件,修改文件的哪一行|
 |```git push origin master```|把代码推到远端分支上|
 |```git push origin master close #BUGID```|把代码推到远端分支上,同时关闭相关BUG|
 |```git branch```|查看分支|
@@ -43,8 +45,8 @@ _heartbtn = [UIButton buttonWithType: UIButtonTypeCustom];
 |```git checkout -b TEST```|新建`TEST`分支并切换到`TEST`分枝上，是`git branch TEST`和`git checkout TEST`的合并|
 |```git remote add origin https://github.com/dengfeng520/OADemo.git```||
 |```git branch -D fenzhi```|删除本地分支|
-|```git branch -r -D origin/fenzhi```|删除本地分支的远程分支|
-|```git push origin -d fenzhi```|删除服务器上的分支|
+|```git branch -r -D origin/TEST```|删除本地分支的远程分支|
+|```git push origin -d TEST```|删除服务器上的分支|
 |git log --grep=""|查找已经提交的commit|
 
 ###3、设置圆角
