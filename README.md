@@ -37,6 +37,7 @@ _heartbtn = [UIButton buttonWithType: UIButtonTypeCustom];
 |```git log```|查看提交Log|
 |```git log -p -2```|显示最近两次提交Log|
 |```git log --stat```|查看每次提交的简略信息 修改了（新增或者删除）那些文件,修改文件的哪一行|
+|```git reset HEAD README.md```|取消暂存,|
 |```git push origin master```|把代码推到远端分支上|
 |```git push origin master close #BUGID```|把代码推到远端分支上,同时关闭相关BUG|
 |```git branch```|查看分支|
