@@ -39,6 +39,9 @@ _heartbtn = [UIButton buttonWithType: UIButtonTypeCustom];
 |```git log --stat```|查看每次提交的简略信息 修改了（新增或者删除）那些文件,修改文件的哪一行|
 |```git reset HEAD README.md```|取消暂存, 在add之后执行，如果commit或者push之后执行无效|
 |``` git checkout -- README.md```|撤消之前所做的修改|
+|```git remote -v```|显示远程仓库及其URL|
+|```git remote show origin```|查看远端库信息|
+|```git remote rename A B```|把远端库|
 |```git push origin master```|把代码推到远端分支上|
 |```git push origin master close #BUGID```|把代码推到远端分支上,同时关闭相关BUG|
 |```git branch```|查看分支|
