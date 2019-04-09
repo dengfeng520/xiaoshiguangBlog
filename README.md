@@ -638,6 +638,10 @@ dispatch_queue_t queue1 = dispatch_queue_create("test", DISPATCH_QUEUE_CONCU
 
 --
 
+**线程和队列**
+一个线程可以有多个队列，主线程可有多个队列。
+
+
 同一时间内多个线程同时访问同一个资源时，会引发数据错乱和数据安全问题。如同一时间内，多个线程同时修改数据库中的同一张表的数据。
 解决方法：互斥锁(同步锁)
 
@@ -1033,7 +1037,6 @@ _layerView.transform = viewTransform;
 
  
 ```
- //MARK: -  CMSampleBufferRef  ---->  UIImage
 - (UIImage *)imageConvert:(CMSampleBufferRef)sampleBuffer{
     //制作 CVImageBufferRef
     CVImageBufferRef buffer;
@@ -1068,5 +1071,28 @@ _layerView.transform = viewTransform;
     
     return image;
  }
- 
+```
 
+ 
+####31、
+
+>1、类对象只能调用类方法
+>2、实例对象只能调用实例方法
+
+```
+-[TestClass testNameWithString:]: unrecognized selector sent to instance 0x600003a648e0
+```
+```
+
+```
+
+>3、实例方法里的`self`，是对象的首地址
+>4、类方法里的`self`,是`Class`
+
+
+对象模型:实例--->类--->元类 
+**查找一个方法是通过对象的isa,在isa对象的方法列表中查找指定对象**
+如果传入的
+
+>5、类方法在元类方法列表中
+>6、实例方法在对象	方法列表中
