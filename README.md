@@ -35,8 +35,10 @@ _heartbtn = [UIButton buttonWithType: UIButtonTypeCustom];
 |```git pull origin master```|上面两步操作的集合|
 |```git status```|查看缓存区的状态|
 |```git log```|查看提交Log|
+|```git remote add origin URL```|关联远端仓库|
 |```git log -p -2```|显示最近两次提交Log|
 |```git log --stat```|查看每次提交的简略信息 修改了（新增或者删除）那些文件,修改文件的哪一行|
+|```git log --graph --pretty=oneline --abbrev-commit```|查看loa详情|
 |```git reset HEAD README.md```|取消暂存, 在add之后执行，如果commit或者push之后执行无效|
 |``` git checkout -- README.md```|撤消之前所做的修改|
 |```git remote -v```|显示远程仓库及其URL|
@@ -53,6 +55,9 @@ _heartbtn = [UIButton buttonWithType: UIButtonTypeCustom];
 |```git branch -r -D origin/TEST```|删除本地分支的远程分支|
 |```git push origin -d TEST```|删除服务器上的分支|
 |git log --grep=""|查找已经提交的commit|
+|```git rebase --continue```|解决冲突后继续执行|
+|```git rebase --abort```|终止rebase|
+
 
 ###3、设置圆角
 
@@ -1096,3 +1101,13 @@ _layerView.transform = viewTransform;
 
 >5、类方法在元类方法列表中
 >6、实例方法在对象	方法列表中
+
+####32、通过代码更新约束
+
+```
+    NSLayoutConstraint *bottom = [self.toolbarView.bottomAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.bottomAnchor];
+    [bottom setActive:YES];
+    bottom.constant = -height;
+    [weakSelf.toolbarView setNeedsUpdateConstraints];
+
+```
