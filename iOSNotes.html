@@ -399,7 +399,43 @@ _heartbtn = [UIButton buttonWithType: UIButtonTypeCustom];
 </tr>
 <tr>
 <td style="text-align: center"><code>git log</code></td>
-<td style="text-align: center">查看提交日志</td>
+<td style="text-align: center">查看提交Log</td>
+</tr>
+<tr>
+<td style="text-align: center"><code>git remote add origin URL</code></td>
+<td style="text-align: center">关联远端仓库</td>
+</tr>
+<tr>
+<td style="text-align: center"><code>git log -p -2</code></td>
+<td style="text-align: center">显示最近两次提交Log</td>
+</tr>
+<tr>
+<td style="text-align: center"><code>git log --stat</code></td>
+<td style="text-align: center">查看每次提交的简略信息 修改了（新增或者删除）那些文件,修改文件的哪一行</td>
+</tr>
+<tr>
+<td style="text-align: center"><code>git log --graph --pretty=oneline --abbrev-commit</code></td>
+<td style="text-align: center">查看loa详情</td>
+</tr>
+<tr>
+<td style="text-align: center"><code>git reset HEAD README.md</code></td>
+<td style="text-align: center">取消暂存, 在add之后执行，如果commit或者push之后执行无效</td>
+</tr>
+<tr>
+<td style="text-align: center"><code>git checkout -- README.md</code></td>
+<td style="text-align: center">撤消之前所做的修改</td>
+</tr>
+<tr>
+<td style="text-align: center"><code>git remote -v</code></td>
+<td style="text-align: center">显示远程仓库及其URL</td>
+</tr>
+<tr>
+<td style="text-align: center"><code>git remote show origin</code></td>
+<td style="text-align: center">查看远端库信息</td>
+</tr>
+<tr>
+<td style="text-align: center"><code>git remote rename A B</code></td>
+<td style="text-align: center">把远端库</td>
 </tr>
 <tr>
 <td style="text-align: center"><code>git push origin master</code></td>
@@ -434,16 +470,64 @@ _heartbtn = [UIButton buttonWithType: UIButtonTypeCustom];
 <td style="text-align: center">删除本地分支</td>
 </tr>
 <tr>
-<td style="text-align: center"><code>git branch -r -D origin/fenzhi</code></td>
+<td style="text-align: center"><code>git branch -r -D origin/TEST</code></td>
 <td style="text-align: center">删除本地分支的远程分支</td>
 </tr>
 <tr>
-<td style="text-align: center"><code>git push origin -d fenzhi</code></td>
+<td style="text-align: center"><code>git push origin -d TEST</code></td>
 <td style="text-align: center">删除服务器上的分支</td>
 </tr>
 <tr>
-<td style="text-align: center">git log --grep=&quot;&quot;</td>
+<td style="text-align: center"><code>git log --grep=&quot;&quot;</code></td>
 <td style="text-align: center">查找已经提交的commit</td>
+</tr>
+<tr>
+<td style="text-align: center"><code>git rebase --continue</code></td>
+<td style="text-align: center">解决冲突后继续执行</td>
+</tr>
+<tr>
+<td style="text-align: center"><code>git rebase --abort</code></td>
+<td style="text-align: center">终止rebase</td>
+</tr>
+<tr>
+<td style="text-align: center"><code>git config --global pull.rebase true</code></td>
+<td style="text-align: center">设置git pull时默认—rebase</td>
+</tr>
+<tr>
+<td style="text-align: center"><code>git stash save “”</code></td>
+<td style="text-align: center">Git缓存到本地</td>
+</tr>
+<tr>
+<td style="text-align: center"><code>git checkout -b （本地分支）（远端分支）</code></td>
+<td style="text-align: center">拉取别人远端分支命令</td>
+</tr>
+<tr>
+<td style="text-align: center"><code>git log reflog</code></td>
+<td style="text-align: center"></td>
+</tr>
+<tr>
+<td style="text-align: center"><code>git reset  -—soft  commit_ID</code></td>
+<td style="text-align: center">代码回滚,所有commit的修改都会退回到git缓冲区</td>
+</tr>
+<tr>
+<td style="text-align: center"><code>git reset --hard  commit_ID</code></td>
+<td style="text-align: center">代码回滚,所有commit的修改直接丢弃</td>
+</tr>
+<tr>
+<td style="text-align: center"><code>git reset --hard HEAD^</code></td>
+<td style="text-align: center">回退到上个版本</td>
+</tr>
+<tr>
+<td style="text-align: center"><code>git reset --hard HEAD~3</code></td>
+<td style="text-align: center">回退到前3个版本</td>
+</tr>
+<tr>
+<td style="text-align: center"><code>（1）、git reflog (2)、git  reset -—soft  HEAD@{3}</code></td>
+<td style="text-align: center">取消当前Rebase</td>
+</tr>
+<tr>
+<td style="text-align: center"><code>（1）、git log (2)、git rebase -i commit_ID (3)、i (4)、pick改成squash</code></td>
+<td style="text-align: center">合并commit</td>
 </tr>
 </tbody>
 </table>
@@ -992,6 +1076,9 @@ dispatch_queue_t queue1 = dispatch_queue_create(&quot;test&quot;, DISPATCH_Q
 
 <h2 id="toc_43"></h2>
 
+<p><strong>线程和队列</strong>
+一个线程可以有多个队列，主线程可有多个队列。</p>
+
 <p>同一时间内多个线程同时访问同一个资源时，会引发数据错乱和数据安全问题。如同一时间内，多个线程同时修改数据库中的同一张表的数据。
 解决方法：互斥锁(同步锁)</p>
 
@@ -1371,8 +1458,7 @@ _layerView.transform = viewTransform;
 
 <h4 id="toc_48">30、CMSampleBufferRef  ----&gt;  UIImage</h4>
 
-<div><pre><code class="language-none"> //MARK: -  CMSampleBufferRef  ----&gt;  UIImage
-- (UIImage *)imageConvert:(CMSampleBufferRef)sampleBuffer{
+<div><pre><code class="language-none">- (UIImage *)imageConvert:(CMSampleBufferRef)sampleBuffer{
     //制作 CVImageBufferRef
     CVImageBufferRef buffer;
     buffer = CMSampleBufferGetImageBuffer(sampleBuffer);
@@ -1405,8 +1491,40 @@ _layerView.transform = viewTransform;
     CVPixelBufferUnlockBaseAddress(buffer, 0);
     
     return image;
-}
-```</code></pre></div>
+ }</code></pre></div>
+
+<h4 id="toc_49">31、</h4>
+
+<blockquote>
+<p>1、类对象只能调用类方法
+2、实例对象只能调用实例方法</p>
+</blockquote>
+
+<div><pre><code class="language-none">-[TestClass testNameWithString:]: unrecognized selector sent to instance 0x600003a648e0</code></pre></div>
+
+<div><pre><code class="language-none"></code></pre></div>
+
+<blockquote>
+<p>3、实例方法里的<code>self</code>，是对象的首地址
+4、类方法里的<code>self</code>,是<code>Class</code></p>
+</blockquote>
+
+<p>对象模型:实例---&gt;类---&gt;元类 
+<strong>查找一个方法是通过对象的isa,在isa对象的方法列表中查找指定对象</strong>
+如果传入的</p>
+
+<blockquote>
+<p>5、类方法在元类方法列表中
+6、实例方法在对象  方法列表中</p>
+</blockquote>
+
+<h4 id="toc_50">32、通过代码更新约束</h4>
+
+<div><pre><code class="language-none">    NSLayoutConstraint *bottom = [self.toolbarView.bottomAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.bottomAnchor];
+    [bottom setActive:YES];
+    bottom.constant = -height;
+    [weakSelf.toolbarView setNeedsUpdateConstraints];
+</code></pre></div>
 
 
 

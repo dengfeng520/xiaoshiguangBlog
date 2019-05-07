@@ -54,10 +54,19 @@ _heartbtn = [UIButton buttonWithType: UIButtonTypeCustom];
 |```git branch -D fenzhi```|删除本地分支|
 |```git branch -r -D origin/TEST```|删除本地分支的远程分支|
 |```git push origin -d TEST```|删除服务器上的分支|
-|git log --grep=""|查找已经提交的commit|
+|```git log --grep=""```|查找已经提交的commit|
 |```git rebase --continue```|解决冲突后继续执行|
 |```git rebase --abort```|终止rebase|
-
+|```git config --global pull.rebase true```|设置git pull时默认—rebase|
+|```git stash save “” ```|Git缓存到本地|
+|```git checkout -b （本地分支）（远端分支）```|拉取别人远端分支命令|
+|```git log reflog```||
+|```git reset  -—soft  commit_ID```|代码回滚,所有commit的修改都会退回到git缓冲区|
+|``` git reset --hard  commit_ID ```|代码回滚,所有commit的修改直接丢弃|
+|```git reset --hard HEAD^```|回退到上个版本|
+|```git reset --hard HEAD~3```|回退到前3个版本|
+|```（1）、git reflog (2)、git  reset -—soft  HEAD@{3}```|取消当前Rebase|
+|```（1）、git log (2)、git rebase -i commit_ID (3)、i (4)、pick改成squash```|合并commit|
 
 ###3、设置圆角
 
