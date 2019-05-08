@@ -5,22 +5,9 @@
 <h6 align='right'>小时光</h6>
 <h6  align='right'>西安乐推网络科技有限公司</h6> 
 
-
 --
-###1、按钮透明度为0时不响应点击事件
 
-个人推测，当`UIButton`透明度为0时，默认调用`Hidden`方法，所以不响应点击事件。
-
-```
-//设置按钮`Type`可避免该问题
-_heartbtn = [UIButton buttonWithType: UIButtonTypeCustom];
-
- [self.view addSubview:_heartbtn];
-```
-
-
-
-###2、Git相关
+###1、Git相关
   
 | 命令字  |  相关操作   | 
 | :-------------:|:-------------:| 
@@ -67,6 +54,18 @@ _heartbtn = [UIButton buttonWithType: UIButtonTypeCustom];
 |```git reset --hard HEAD~3```|回退到前3个版本|
 |```（1）、git reflog (2)、git  reset -—soft  HEAD@{3}```|取消当前Rebase|
 |```（1）、git log (2)、git rebase -i commit_ID (3)、i (4)、pick改成squash```|合并commit|
+
+
+###2、按钮透明度为0时不响应点击事件
+
+个人推测，当`UIButton`透明度为0时，默认调用`Hidden`方法，所以不响应点击事件。
+
+```
+//设置按钮`Type`可避免该问题
+_heartbtn = [UIButton buttonWithType: UIButtonTypeCustom];
+
+ [self.view addSubview:_heartbtn];
+```
 
 ###3、设置圆角
 

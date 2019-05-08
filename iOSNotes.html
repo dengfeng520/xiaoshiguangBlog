@@ -337,16 +337,7 @@ kbd {
 
 <h2 id="toc_0"></h2>
 
-<h3 id="toc_1">1、按钮透明度为0时不响应点击事件</h3>
-
-<p>个人推测，当<code>UIButton</code>透明度为0时，默认调用<code>Hidden</code>方法，所以不响应点击事件。</p>
-
-<div><pre><code class="language-none">//设置按钮`Type`可避免该问题
-_heartbtn = [UIButton buttonWithType: UIButtonTypeCustom];
-
- [self.view addSubview:_heartbtn];</code></pre></div>
-
-<h3 id="toc_2">2、Git相关</h3>
+<h3 id="toc_1">1、Git相关</h3>
 
 <table>
 <thead>
@@ -531,6 +522,15 @@ _heartbtn = [UIButton buttonWithType: UIButtonTypeCustom];
 </tr>
 </tbody>
 </table>
+
+<h3 id="toc_2">2、按钮透明度为0时不响应点击事件</h3>
+
+<p>个人推测，当<code>UIButton</code>透明度为0时，默认调用<code>Hidden</code>方法，所以不响应点击事件。</p>
+
+<div><pre><code class="language-none">//设置按钮`Type`可避免该问题
+_heartbtn = [UIButton buttonWithType: UIButtonTypeCustom];
+
+ [self.view addSubview:_heartbtn];</code></pre></div>
 
 <h3 id="toc_3">3、设置圆角</h3>
 
