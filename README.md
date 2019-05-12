@@ -1116,6 +1116,8 @@ _layerView.transform = viewTransform;
     NSLayoutConstraint *bottom = [self.toolbarView.bottomAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.bottomAnchor];
     [bottom setActive:YES];
     bottom.constant = -height;
+    // 立即更新
+    [weakSelf.toolbarView updateConstraintsIfNeeded];
     [weakSelf.toolbarView setNeedsUpdateConstraints];
 
 ```
