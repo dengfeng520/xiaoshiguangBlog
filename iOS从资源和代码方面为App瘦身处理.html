@@ -336,20 +336,72 @@ kbd {
 <h2 id="toc_0"></h2>
 
 <p>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;对<code>App</code>包瘦身处理是为了减少包的大小，节约用户下载<code>App</code>流量。在<code>App Store</code>下载<code>App</code>，如果超过了150MB就必须在Wi-Fi环境下载或更新，这样如果`<code>超过了150M，可能就会间接失去了大部分用户。如果我们的</code>App<code>要兼容iOS7和iOS 8,[苹果官方规定:主二进制text段的大小不能超过60M](https://help.apple.com/app-store-connect/#/dev611e0a21f)，如果超过这个标准，就没办法向</code>App Strore<code>提交审核。
-&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;下面这张表格列举了当前国内外的部分常用</code>App<code>的包大小。
-|  APP | 版本|大小   | 
-| :----:|:----:|:----:|
-|支付宝|10.1.60|167.5M|
-|淘宝|8.6.10|207.6M|
-|微信|7.0.3|230M|
-|滴滴|5.2.45|202.4M|
-|抖音|5.7.0|170.2M|
-|新浪微博|9.3.1|191.5M|
-|网易云音乐|6.1.0|147.7M|
-|Facebook|216.0|256.5M|
-|Twitter|7.47|110.9M|
-|Instagram|88.0|90.2M|
-&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;通过上面的表格可以看出目前包少于150M的只有</code>网易云音乐<code>,</code>Instagram<code>,</code>Twitter <code>。那么作为开发者可以通过哪些方法对自己的</code>App`包大小做优化处理呢？</p>
+&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;下面这张表格列举了当前国内外的部分常用</code>App`的包大小。</p>
+
+<table>
+<thead>
+<tr>
+<th style="text-align: center">APP</th>
+<th style="text-align: center">版本</th>
+<th style="text-align: center">大小</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td style="text-align: center">支付宝</td>
+<td style="text-align: center">10.1.60</td>
+<td style="text-align: center">167.5M</td>
+</tr>
+<tr>
+<td style="text-align: center">淘宝</td>
+<td style="text-align: center">8.6.10</td>
+<td style="text-align: center">207.6M</td>
+</tr>
+<tr>
+<td style="text-align: center">微信</td>
+<td style="text-align: center">7.0.3</td>
+<td style="text-align: center">230M</td>
+</tr>
+<tr>
+<td style="text-align: center">滴滴</td>
+<td style="text-align: center">5.2.45</td>
+<td style="text-align: center">202.4M</td>
+</tr>
+<tr>
+<td style="text-align: center">抖音</td>
+<td style="text-align: center">5.7.0</td>
+<td style="text-align: center">170.2M</td>
+</tr>
+<tr>
+<td style="text-align: center">新浪微博</td>
+<td style="text-align: center">9.3.1</td>
+<td style="text-align: center">191.5M</td>
+</tr>
+<tr>
+<td style="text-align: center">网易云音乐</td>
+<td style="text-align: center">6.1.0</td>
+<td style="text-align: center">147.7M</td>
+</tr>
+<tr>
+<td style="text-align: center">Facebook</td>
+<td style="text-align: center">216.0</td>
+<td style="text-align: center">256.5M</td>
+</tr>
+<tr>
+<td style="text-align: center">Twitter</td>
+<td style="text-align: center">7.47</td>
+<td style="text-align: center">110.9M</td>
+</tr>
+<tr>
+<td style="text-align: center">Instagram</td>
+<td style="text-align: center">88.0</td>
+<td style="text-align: center">90.2M</td>
+</tr>
+</tbody>
+</table>
+
+<p>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;通过上面的表格可以看出目前包少于150M的只有<code>网易云音乐</code>,<code>Instagram</code>,<code>Twitter</code>。那么作为开发者可以通过哪些方法对自己的<code>App</code>包大小做优化处理呢？</p>
 
 <blockquote>
 <p>1、苹果提供的 App Thinning</p>

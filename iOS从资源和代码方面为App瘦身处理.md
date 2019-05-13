@@ -8,6 +8,7 @@
 --
 &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;对`App`包瘦身处理是为了减少包的大小，节约用户下载`App`流量。在`App Store`下载`App`，如果超过了150MB就必须在Wi-Fi环境下载或更新，这样如果``超过了150M，可能就会间接失去了大部分用户。如果我们的`App`要兼容iOS7和iOS 8,[苹果官方规定:主二进制text段的大小不能超过60M](https://help.apple.com/app-store-connect/#/dev611e0a21f)，如果超过这个标准，就没办法向`App Strore`提交审核。
 &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;下面这张表格列举了当前国内外的部分常用`App`的包大小。
+
 |  APP | 版本|大小   | 
 | :----:|:----:|:----:|
 |支付宝|10.1.60|167.5M|
@@ -20,6 +21,7 @@
 |Facebook|216.0|256.5M|
 |Twitter|7.47|110.9M|
 |Instagram|88.0|90.2M|
+
 &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;通过上面的表格可以看出目前包少于150M的只有`网易云音乐`,`Instagram`,`Twitter `。那么作为开发者可以通过哪些方法对自己的`App`包大小做优化处理呢？
 >1、苹果提供的 App Thinning
 
