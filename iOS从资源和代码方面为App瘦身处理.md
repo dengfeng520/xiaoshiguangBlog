@@ -183,6 +183,7 @@ if  ([TestVC respondsToSelector:aSelector])  {
 * `SnapKit、Masonry`是对`AutoLayout `的封装，
 
 当然有些功能或API是苹果没有为开发者提供的，我们就不得不使用第三方的开源代码，如
+
 * iOS 6之前苹果并没有提供`UICollectionView`，所以开发者们只能使用第三方的开源代码，
 * iOS 7之前苹果没有提供`UITableViewCell`自适应高度，所以我们只能使用`UITableView+FDTemplateLayoutCell`
 
