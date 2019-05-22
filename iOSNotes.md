@@ -1121,3 +1121,6 @@ _layerView.transform = viewTransform;
     [weakSelf.toolbarView setNeedsUpdateConstraints];
 
 ```
+
+
+####33、Xcode报错:Compiling IB documents for earlier than iOS7 is no longer supported.****
