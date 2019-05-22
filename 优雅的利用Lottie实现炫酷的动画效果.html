@@ -5,7 +5,7 @@
 
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>小时光的博客:优雅的利用Lottie实现炫酷动画效果</title>
+    <title>小时光的博客:优雅的利用Lottie实现炫酷的动画效果</title>
 
 
 <style type="text/css">
@@ -360,11 +360,14 @@ kbd {
 
 <p><img src="https://upload-images.jianshu.io/upload_images/1214383-a014d4394034a502.gif?imageMogr2/auto-orient/strip" alt="background.gif"></p>
 
-<p><strong>（1）、<code>Lottie</code>是专门为移动开发设计的一个第三方库，目前支持<code>Android、iOS  、Web、React Native</code>等平台；</strong>
-<strong>（2）、<code>Lottie</code>的使用非常简单，直接读取资源文件或者读取服务器资源链接即可；</strong>
-<strong>（3）、开发者可以轻松控制动画（播放进度、播放帧数、背景颜色等）；</strong>
-<strong>（4）、<code>Lottie</code>是设计师通过<code>After Effects</code>将动画导出JSON文件，然后由<code>Lottie</code>加载和渲染这个文件并转成相应的代码，由于是JSON文件，文件也会很小，可以减少App包的大小</strong>
-<strong>（5）、把动画制作和APP开发的工作分开，由设计师来完成动画的制作</strong></p>
+<ul>
+<li>（1）、<code>Lottie</code>是专门为移动开发设计的一个第三方库，目前支持<code>Android、iOS  、Web、React Native</code>等平台；</li>
+<li>（2）、Lottie同时支持页面切换的过场动画(UIViewController Transitions)</li>
+<li>（3）、<code>Lottie</code>的使用非常简单，直接读取资源文件或者读取服务器资源链接即可；</li>
+<li>（4）、开发者可以轻松控制动画（播放进度、播放帧数、背景颜色等）；</li>
+<li>（5）、<code>Lottie</code>是设计师通过<code>After Effects</code>将动画导出JSON文件，然后由<code>Lottie</code>加载和渲染这个文件并转成相应的代码，由于是JSON文件，文件也会很小，可以减少App包的大小</li>
+<li>（6）、把动画制作和APP开发的工作分开，由设计师来完成动画的制作</li>
+</ul>
 
 <blockquote>
 <p>2、Lottie 的实现原理</p>
@@ -372,7 +375,7 @@ kbd {
 
 <p>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;实际上，<code>Lottie</code>在iOS上的实现是：</p>
 
-<p>**  将<code>After Effects</code>编辑的动画内容，通过JSON作为媒介一一映射到iOS的 <code>LayerModel、Keyframe、ShapeItem、DashElement、Marker、Mask、Transfrom</code>这些类的属性中并保存了下来，然后 再通过<code>CoreAnimation</code>进行渲染。**</p>
+<p>**  将<code>After Effects</code>编辑的动画内容，通过JSON作为媒介一一映射到iOS的 <code>LayerModel</code>、<code>Keyframe</code>、<code>ShapeItem</code>、<code>DashElement</code>、<code>Marker</code>、<code>Mask</code>、<code>Transfrom</code>这些类的属性中并保存了下来，然后 再通过<code>CoreAnimation</code>进行渲染。**</p>
 
 <blockquote>
 <p>3、Lottie 的简单使用</p>

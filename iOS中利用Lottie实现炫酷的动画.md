@@ -30,17 +30,18 @@
 ![background.gif](https://upload-images.jianshu.io/upload_images/1214383-a014d4394034a502.gif?imageMogr2/auto-orient/strip)
 
 
-**（1）、`Lottie`是专门为移动开发设计的一个第三方库，目前支持`Android、iOS  、Web、React Native`等平台；**
-**（2）、`Lottie`的使用非常简单，直接读取资源文件或者读取服务器资源链接即可；**
-**（3）、开发者可以轻松控制动画（播放进度、播放帧数、背景颜色等）；**
-**（4）、`Lottie`是设计师通过`After Effects`将动画导出JSON文件，然后由`Lottie`加载和渲染这个文件并转成相应的代码，由于是JSON文件，文件也会很小，可以减少App包的大小**
-**（5）、把动画制作和APP开发的工作分开，由设计师来完成动画的制作**
+* （1）、`Lottie`是专门为移动开发设计的一个第三方库，目前支持`Android、iOS  、Web、React Native`等平台；
+* （2）、Lottie同时支持页面切换的过场动画(UIViewController Transitions)
+* （3）、`Lottie`的使用非常简单，直接读取资源文件或者读取服务器资源链接即可；
+* （4）、开发者可以轻松控制动画（播放进度、播放帧数、背景颜色等）；
+* （5）、`Lottie`是设计师通过`After Effects`将动画导出JSON文件，然后由`Lottie`加载和渲染这个文件并转成相应的代码，由于是JSON文件，文件也会很小，可以减少App包的大小
+* （6）、把动画制作和APP开发的工作分开，由设计师来完成动画的制作
 
 >2、Lottie 的实现原理
 
 &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;实际上，`Lottie`在iOS上的实现是：
 
-**  将`After Effects`编辑的动画内容，通过JSON作为媒介一一映射到iOS的 `LayerModel、Keyframe、ShapeItem、DashElement、Marker、Mask、Transfrom`这些类的属性中并保存了下来，然后 再通过`CoreAnimation`进行渲染。**
+**  将`After Effects`编辑的动画内容，通过JSON作为媒介一一映射到iOS的 `LayerModel`、`Keyframe`、`ShapeItem`、`DashElement`、`Marker`、`Mask`、`Transfrom`这些类的属性中并保存了下来，然后 再通过`CoreAnimation`进行渲染。**
 
 
 >3、Lottie 的简单使用
