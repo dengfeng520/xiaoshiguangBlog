@@ -1124,3 +1124,6 @@ _layerView.transform = viewTransform;
 
 
 ####33、Xcode报错:Compiling IB documents for earlier than iOS7 is no longer supported.****
+
+
+![Compiling IB](https://github.com/dengfeng520/xiaoshiguangBlog/blob/master/Compiling%20IB.png?raw=true)
