@@ -23,9 +23,9 @@
 
 &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;下面几个gif动画都是用[Lottie](http://airbnb.io/lottie/)实现的。
 
-![LaunchScreen.gif](https://github.com/dengfeng520/xiaoshiguangBlog/blob/master/LaunchScreen.gif?raw=true)
+![LaunchScreen.gif](https://github.com/dengfeng520/xiaoshiguangBlog/blob/master/Gif/LaunchScreen.gif?raw=true)
 
-![refreshAnimationView.gif](https://github.com/dengfeng520/xiaoshiguangBlog/blob/master/refreshAnimationView.gif?raw=true)
+![refreshAnimationView.gif](https://github.com/dengfeng520/xiaoshiguangBlog/blob/master/Gif/refreshAnimationView.gif?raw=true)
 
 ![background.gif](https://upload-images.jianshu.io/upload_images/1214383-a014d4394034a502.gif?imageMogr2/auto-orient/strip)
 
