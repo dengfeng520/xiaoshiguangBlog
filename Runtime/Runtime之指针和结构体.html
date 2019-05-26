@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>小时光的博客:Runtime之指针和结构体</title>
+
+
+<style type="text/css">
+body {
+  font-family: Helvetica, arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: white;
+  padding: 30px; }
+
+body > *:first-child {
+  margin-top: 0 !important; }
+body > *:last-child {
+  margin-bottom: 0 !important; }
+
+a {
+  color: #4183C4; }
+a.absent {
+  color: #cc0000; }
+a.anchor {
+  display: block;
+  padding-left: 30px;
+  margin-left: -30px;
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0; }
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 20px 0 10px;
+  padding: 0;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+  cursor: text;
+  position: relative; }
+
+h1:hover a.anchor, h2:hover a.anchor, h3:hover a.anchor, h4:hover a.anchor, h5:hover a.anchor, h6:hover a.anchor {
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA09pVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoMTMuMCAyMDEyMDMwNS5tLjQxNSAyMDEyLzAzLzA1OjIxOjAwOjAwKSAgKE1hY2ludG9zaCkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OUM2NjlDQjI4ODBGMTFFMTg1ODlEODNERDJBRjUwQTQiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OUM2NjlDQjM4ODBGMTFFMTg1ODlEODNERDJBRjUwQTQiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo5QzY2OUNCMDg4MEYxMUUxODU4OUQ4M0REMkFGNTBBNCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo5QzY2OUNCMTg4MEYxMUUxODU4OUQ4M0REMkFGNTBBNCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PsQhXeAAAABfSURBVHjaYvz//z8DJYCRUgMYQAbAMBQIAvEqkBQWXI6sHqwHiwG70TTBxGaiWwjCTGgOUgJiF1J8wMRAIUA34B4Q76HUBelAfJYSA0CuMIEaRP8wGIkGMA54bgQIMACAmkXJi0hKJQAAAABJRU5ErkJggg==) no-repeat 10px center;
+  text-decoration: none; }
+
+h1 tt, h1 code {
+  font-size: inherit; }
+
+h2 tt, h2 code {
+  font-size: inherit; }
+
+h3 tt, h3 code {
+  font-size: inherit; }
+
+h4 tt, h4 code {
+  font-size: inherit; }
+
+h5 tt, h5 code {
+  font-size: inherit; }
+
+h6 tt, h6 code {
+  font-size: inherit; }
+
+h1 {
+  font-size: 28px;
+  color: black; }
+
+h2 {
+  font-size: 24px;
+  border-bottom: 1px solid #cccccc;
+  color: black; }
+
+h3 {
+  font-size: 18px; }
+
+h4 {
+  font-size: 16px; }
+
+h5 {
+  font-size: 14px; }
+
+h6 {
+  color: #777777;
+  font-size: 14px; }
+
+p, blockquote, ul, ol, dl, li, table, pre {
+  margin: 15px 0; }
+
+hr {
+  background: transparent url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAECAYAAACtBE5DAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBNYWNpbnRvc2giIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OENDRjNBN0E2NTZBMTFFMEI3QjRBODM4NzJDMjlGNDgiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OENDRjNBN0I2NTZBMTFFMEI3QjRBODM4NzJDMjlGNDgiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo4Q0NGM0E3ODY1NkExMUUwQjdCNEE4Mzg3MkMyOUY0OCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo4Q0NGM0E3OTY1NkExMUUwQjdCNEE4Mzg3MkMyOUY0OCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PqqezsUAAAAfSURBVHjaYmRABcYwBiM2QSA4y4hNEKYDQxAEAAIMAHNGAzhkPOlYAAAAAElFTkSuQmCC) repeat-x 0 0;
+  border: 0 none;
+  color: #cccccc;
+  height: 4px;
+  padding: 0;
+}
+
+body > h2:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+body > h1:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+  body > h1:first-child + h2 {
+    margin-top: 0;
+    padding-top: 0; }
+body > h3:first-child, body > h4:first-child, body > h5:first-child, body > h6:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0; }
+
+h1 p, h2 p, h3 p, h4 p, h5 p, h6 p {
+  margin-top: 0; }
+
+li p.first {
+  display: inline-block; }
+li {
+  margin: 0; }
+ul, ol {
+  padding-left: 30px; }
+
+ul :first-child, ol :first-child {
+  margin-top: 0; }
+
+dl {
+  padding: 0; }
+  dl dt {
+    font-size: 14px;
+    font-weight: bold;
+    font-style: italic;
+    padding: 0;
+    margin: 15px 0 5px; }
+    dl dt:first-child {
+      padding: 0; }
+    dl dt > :first-child {
+      margin-top: 0; }
+    dl dt > :last-child {
+      margin-bottom: 0; }
+  dl dd {
+    margin: 0 0 15px;
+    padding: 0 15px; }
+    dl dd > :first-child {
+      margin-top: 0; }
+    dl dd > :last-child {
+      margin-bottom: 0; }
+
+blockquote {
+  border-left: 4px solid #dddddd;
+  padding: 0 15px;
+  color: #777777; }
+  blockquote > :first-child {
+    margin-top: 0; }
+  blockquote > :last-child {
+    margin-bottom: 0; }
+
+table {
+  padding: 0;border-collapse: collapse; }
+  table tr {
+    border-top: 1px solid #cccccc;
+    background-color: white;
+    margin: 0;
+    padding: 0; }
+    table tr:nth-child(2n) {
+      background-color: #f8f8f8; }
+    table tr th {
+      font-weight: bold;
+      border: 1px solid #cccccc;
+      margin: 0;
+      padding: 6px 13px; }
+    table tr td {
+      border: 1px solid #cccccc;
+      margin: 0;
+      padding: 6px 13px; }
+    table tr th :first-child, table tr td :first-child {
+      margin-top: 0; }
+    table tr th :last-child, table tr td :last-child {
+      margin-bottom: 0; }
+
+img {
+  max-width: 100%; }
+
+span.frame {
+  display: block;
+  overflow: hidden; }
+  span.frame > span {
+    border: 1px solid #dddddd;
+    display: block;
+    float: left;
+    overflow: hidden;
+    margin: 13px 0 0;
+    padding: 7px;
+    width: auto; }
+  span.frame span img {
+    display: block;
+    float: left; }
+  span.frame span span {
+    clear: both;
+    color: #333333;
+    display: block;
+    padding: 5px 0 0; }
+span.align-center {
+  display: block;
+  overflow: hidden;
+  clear: both; }
+  span.align-center > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px auto 0;
+    text-align: center; }
+  span.align-center span img {
+    margin: 0 auto;
+    text-align: center; }
+span.align-right {
+  display: block;
+  overflow: hidden;
+  clear: both; }
+  span.align-right > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px 0 0;
+    text-align: right; }
+  span.align-right span img {
+    margin: 0;
+    text-align: right; }
+span.float-left {
+  display: block;
+  margin-right: 13px;
+  overflow: hidden;
+  float: left; }
+  span.float-left span {
+    margin: 13px 0 0; }
+span.float-right {
+  display: block;
+  margin-left: 13px;
+  overflow: hidden;
+  float: right; }
+  span.float-right > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px auto 0;
+    text-align: right; }
+
+code, tt {
+  margin: 0 2px;
+  padding: 0 5px;
+  white-space: nowrap;
+  border: 1px solid #eaeaea;
+  background-color: #f8f8f8;
+  border-radius: 3px; }
+
+pre code {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  border: none;
+  background: transparent; }
+
+.highlight pre {
+  background-color: #f8f8f8;
+  border: 1px solid #cccccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px; }
+
+pre {
+  background-color: #f8f8f8;
+  border: 1px solid #cccccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px; }
+  pre code, pre tt {
+    background-color: transparent;
+    border: none; }
+
+sup {
+    font-size: 0.83em;
+    vertical-align: super;
+    line-height: 0;
+}
+
+kbd {
+  display: inline-block;
+  padding: 3px 5px;
+  font-size: 11px;
+  line-height: 10px;
+  color: #555;
+  vertical-align: middle;
+  background-color: #fcfcfc;
+  border: solid 1px #ccc;
+  border-bottom-color: #bbb;
+  border-radius: 3px;
+  box-shadow: inset 0 -1px 0 #bbb
+}
+
+* {
+	-webkit-print-color-adjust: exact;
+}
+@media screen and (min-width: 914px) {
+    body {
+        width: 854px;
+        margin:0 auto;
+    }
+}
+@media print {
+	table, pre {
+		page-break-inside: avoid;
+	}
+	pre {
+		word-wrap: break-word;
+	}
+}
+</style>
+
+
+</head>
+
+<body>
+
+<h1><center>Runtime之指针和结构体</center></h1>
+
+<h6 align='right'>小时光</h6>
+
+<h2 id="toc_0"></h2>
+
+<blockquote>
+<h3>1、C语言指针</h3>
+</blockquote>
+
+<h5 id="toc_1">（1.1）、什么是指针</h5>
+
+<p>一般的，在定义数据对象时，需要说明对象的名称和数据类型，如</p>
+
+<div><pre><code class="language-none">int test = 0;</code></pre></div>
+
+<p>申明数据类型的作用时告诉IDE要为多想分配多大的存储空间（字节），以及对象中要存储什么类型的值。</p>
+
+<p>对象名称的作用是对应分配到的内存单元，允许按照名称来访问，如我定义<code>test</code>这个变量，在程序中需要使用时，就可以通过<code>tes</code>来访问这个变量。但是在一些特殊情况下如由于作用域问题无法直接访问这个变量，那么可以通过访问这个变量的内存地址来访问这个变量。</p>
+
+<p>因此C语言中形象的将变量的内存地址称为<strong>指针</strong>，即一个对象的地址就是该对象的指针。</p>
+
+<p>举个例子：我申请的int类型的<code>test</code>的指针为40001，但并不表示地址40001指的是<code>test</code>.</p>
+
+<p>此处需要注意，<strong>40001只是这个变量的首地址</strong>，我申请的int类型的<code>test</code>在内存中占四个字节，所以40001，40002，40003，40004这四个内存地址才是<code>test</code>的内存。</p>
+
+<p>所以我们常说的，<strong>变量(对象)的指针实际上是这个变量(对象)在内存中的首地址</strong>。</p>
+
+<p>使用指针有哪些好处呢？</p>
+
+<ul>
+<li>提高存储效率</li>
+<li>间接访问由于作用域不可见的变量</li>
+<li>访问动态的内存空间</li>
+</ul>
+
+<h5 id="toc_2">（1.2）、指针和指针变量的区别</h5>
+
+<p>指针是地址值，指针变量是存储指针的变量，我们可以通过指针变量间接访问（或者存取）一个对象。</p>
+
+<h5 id="toc_3">（1.3）、指针的分类</h5>
+
+<ul>
+<li>（1.3.1）、普通的指针</li>
+</ul>
+
+<div><pre><code class="language-none">int a = 111;
+int *pa = &amp;a;
+char p = &#39;C&#39;;
+char *pb = &amp;p;</code></pre></div>
+
+<p>代码<code>int *pa = &amp;a;</code>的作用是指针赋值，那么该如何验证是否赋值成功并如何使用这个值呢？</p>
+
+<div><pre><code class="language-none">int *pdd = pa;
+printf(&quot;取值========%d,%d\n&quot;,*pa,*pdd);
+
+</code></pre></div>
+
+<p>定义一个pdd指针，然后打印指针pdd所指向的值。最终看到的结果是：</p>
+
+<div><pre><code class="language-none">取值========111,111
+</code></pre></div>
+
+<p>上面的代码已经完成了指针的赋值和取值操作。</p>
+
+<p><img src="https://github.com/dengfeng520/xiaoshiguangBlog/blob/master/RuntimeImage/C_Pointer.png?raw=true" alt="指针"></p>
+
+<p>上图演示了指针和变量在内存中的关系，111是int型，<code>C</code>是char型。<code>pa</code>是111的指针，指向111在内存中的首地址。同理pb也指向了<code>C</code>的首地址。</p>
+
+<p>实际上，在内存中一个类型表示的是这变量在内存中所占的大小，因为int类型在内存中占用了4个字节的内存大小,<code>C</code>占用了一个字节的空间。</p>
+
+<p>此时已经知道变量的类型是int类型、内存中的指针首地址以及该变量所占内存大小，就可以从首地址取四个字节的长度就代表着这个变量在内存中的值。</p>
+
+<ul>
+<li>（1.3.2）、指针的指针</li>
+</ul>
+
+<div><pre><code class="language-none">// 指针的指针 赋值
+int **ppa  = &amp;pa; 
+// 取值
+printf(&quot;\n**ppa========%d&quot;,**ppa);</code></pre></div>
+
+<p>此处<code>ppa</code>指向的是<code>pa</code>的地址，<code>pa</code>指向的是int型a的地址，所以打印出来就是a的值。</p>
+
+<p><img src="https://github.com/dengfeng520/xiaoshiguangBlog/blob/master/RuntimeImage/C_Point_Point.png?raw=true" alt="指针"></p>
+
+<p>如上图所示：<code>ppa</code>指向的存放<code>&amp;a</code>的首地址，即是<code>pa</code>,<code>ppb</code>指向存放<code>&amp;b</code>的首地址。</p>
+
+<p>既然普通的类型需要占用内存空间，那么指针也是需要占用内存空间的。
+我们通过指针的指针拿到这个指针，再通过这个指针拿到这个指针所指向的内容。</p>
+
+<ul>
+<li>（1.3.3）、数组指针</li>
+</ul>
+
+<p>指针指向的是一个对象在内存中的首地址，那么数组指针指向的是什么呢？</p>
+
+<div><pre><code class="language-none">char array[] = &quot;hello&quot;;
+char *arrayPointer = array;</code></pre></div>
+
+<p>此处定义了一个char类型数组，然后取数组指针。此处我通过数组遍历对数组中的每个元素的内存地址，然后和数组指针做一次比较：</p>
+
+<div><pre><code class="language-none">printf(&quot;\narrayPointer========%p\n&quot;,arrayPointer);
+for (int i = 0;i&lt;sizeof(array);i++) {
+    printf(&quot;\ni,everyone======%d,%p\n&quot;,i,&amp;array[i]);
+ }
+</code></pre></div>
+
+<div><pre><code class="language-none">arrayPointer========0x7ffee815584a
+
+i,everyone======0,0x7ffee815584a
+
+i,everyone======1,0x7ffee815584b
+
+i,everyone======2,0x7ffee815584c
+
+i,everyone======3,0x7ffee815584d
+
+i,everyone======4,0x7ffee815584e
+
+i,everyone======5,0x7ffee815584f</code></pre></div>
+
+<p>可以看到数组的指针和这个数组第一个元素的指针是一样的，所以可以得出结论：<strong>数组的指针并不是这个数组的指针，而是数组第一个元素的首地址指针</strong>。
+<img src="https://github.com/dengfeng520/xiaoshiguangBlog/blob/master/RuntimeImage/C_Pointer_Array.png?raw=true" alt="数组的指针"></p>
+
+<p>在获取数组元素的时候可以通过第一个元素的首地址+元素在内存中的字节长度，从而获取到第二个元素的内存地址，同理可以得到不同元素的指针.</p>
+
+<div><pre><code class="language-none">for (int i = 0;i&lt;sizeof(array);i++) {
+   printf(&quot;\neveryone======%c\n&quot;,*(array + i));
+}</code></pre></div>
+
+<div><pre><code class="language-none">everyone======h
+
+everyone======e
+
+everyone======l
+
+everyone======l
+
+everyone======o</code></pre></div>
+
+<p>那么从数组中取值就有2种方法，第一传统的下标取值，第二通过元素指针取值。</p>
+
+<ul>
+<li>（1.3.4）、函数指针</li>
+</ul>
+
+<p><img src="https://github.com/dengfeng520/xiaoshiguangBlog/blob/master/RuntimeImage/function_Pointer.png?raw=true" alt="函数的指针"></p>
+
+<p>函数的指针和函数非常类似，在函数前面加上一个指针括号，我们拿到函数的指针之后，就可以调用这个指针来执行函数。此处定义2个函数，一个返回int类型，一个返回int类型的指针,此处需要注意，函数指针和返回指针的函数是两个不同概念。</p>
+
+<div><pre><code class="language-none">int getMax(int i,int j) {
+    return i&gt;j?i:j;
+}
+
+
+int *getMin(int i,int j) {
+    int result = i&lt;j?i:j;
+    int *pointer = &amp;result;
+    return pointer;
+}
+</code></pre></div>
+
+<p>那么，该如何通过指针调用函数呢？</p>
+
+<div><pre><code class="language-none"> int (*funcOne)(int,int);
+ funcOne = getMax;
+ int result = funcOne(10001,10086);
+ printf(&quot;\nresult=============%d\n&quot;,result);
+</code></pre></div>
+
+<p>定义一个函数指针并赋值，通过调用指针来调用这个函数。</p>
+
+<div><pre><code class="language-none">int *funcTwo = getMin(10001, 10086);
+printf(&quot;funcTwo=========%d&quot;,*funcTwo);</code></pre></div>
+
+<p>调用返回指针的函数时先定义指针来接收函数的返回值。这个指针类型应为函数返回指针所指向的类型。</p>
+
+<blockquote>
+<h3>2、结构体</h3>
+</blockquote>
+
+<p>结构体是由一系列的相同或者不同的类型构成的数据集合，Swift中的元组和结构体非常类似。</p>
+
+<h5 id="toc_4">（2.1）结构体的组成</h5>
+
+<p>结构体一般由结构体名、结构体变量、结构体成员组成.</p>
+
+<div><pre><code class="language-none">// 结构体名 + 结构体成员 + 变量名
+struct personAbout {
+    char name;
+    int age;
+}person;</code></pre></div>
+
+<p>如代码所示，我定义了一个结构体，结构体名personAbout，变量名person，成员有2个，name和age; </p>
+
+<p><img src="https://github.com/dengfeng520/xiaoshiguangBlog/blob/master/RuntimeImage/Struct.png?raw=true" alt="Struct.png"></p>
+
+<p>一般情况下，结构体的名和变量名可省略其中一个，但不能全部省去不写，也就是说下面这两种写法也可以定义一个结构体。</p>
+
+<div><pre><code class="language-none">// 结构体名 + 结构体成员
+struct personFrist {
+    char name[20];
+    int *age;
+};
+// 结构体变量 + 成员
+struct {
+    char name[20];
+    int *age;
+}personSecond;
+</code></pre></div>
+
+<h5 id="toc_5">（2.2）结构体的使用</h5>
+
+<ul>
+<li>继承</li>
+</ul>
+
+<p>例如在前面我定义了一个<code>person</code>的结构体，现在我又有一个对象，也包含name和age属性，此时可以采用结构体继承的方式。结构体继承和类的继承一样，直接冒号，继承的父类。</p>
+
+<div><pre><code class="language-none">struct student: personAbout {
+    int number;
+}student;</code></pre></div>
+
+<ul>
+<li>设置别名</li>
+</ul>
+
+<p>一般情况下通过<code>typedef</code>关键字为结构体设置别名，</p>
+
+<div><pre><code class="language-none">// 结构体的别名
+typedef struct studentFrist: personAbout {
+    int number;
+    studentFrist() {
+        number = 10001;
+        age = new int(17);
+        strcpy(name, &quot;韩梅梅&quot;);
+    }
+}studentFrist;</code></pre></div>
+
+<ul>
+<li>结构体赋值 </li>
+</ul>
+
+<p>方法一：直接赋值：</p>
+
+<div><pre><code class="language-none">// 结构体赋值 方法一
+int age = 17;
+struct personAbout person = {&quot;李雷&quot;,&amp;age};</code></pre></div>
+
+<p>方法二：可通过结构体的变量名赋值：</p>
+
+<div><pre><code class="language-none">student.number = 1000;
+strcpy(student.name,&quot;李雷&quot;);
+student.age = new int(17);</code></pre></div>
+
+<p>方法三:在定义的时候就给结构体赋值:</p>
+
+<div><pre><code class="language-none">// 结构体的继承
+struct student: personAbout {
+    int number;
+    student() {
+        number = 10000;
+        age = new int(16);
+        strcpy(name, &quot;李雷&quot;);
+    }
+}student;</code></pre></div>
+
+<ul>
+<li>结构体取值</li>
+</ul>
+
+<p>1、直接取值</p>
+
+<div><pre><code class="language-none">struct studentZero stu;
+int number = stu.number;</code></pre></div>
+
+<p>2、别名取值</p>
+
+<div><pre><code class="language-none">studentFrist stuFrist;
+int stuNumber = stuFrist.number;</code></pre></div>
+
+<p>3、指针取值</p>
+
+<p>先拿到结构体的指针，然后通过-&gt;得到结构体中的某个变量值。</p>
+
+<div><pre><code class="language-none">studentFrist *stuPoiner = &amp;stuFrist;
+int studentNumber = stuPoiner-&gt;number;</code></pre></div>
+
+<ul>
+<li>结构体的位域</li>
+</ul>
+
+<p>部分属性在存储时，并不需要占用一个完整的字节， 而只需占几个或一个二进制位。为了节省存储空间，并使处理简便，Ｃ语言又提供了一种数据结构，称为<strong>位域</strong>。所谓称为<strong>位域</strong>是把一个字节中的二进位划分为几个不同的区域，并说明每个区域的位数。每个域有一个域名，允许在程序中按域名进行操作。 这样就可以把几个不同的对象用一个字节的二进制位域来表示。在结构体中8位域等于一子节。</p>
+
+<div><pre><code class="language-none">  struct teacher {
+        unsigned int a: 1;
+        unsigned int b: 2;
+        unsigned int c: 3;
+    }tc,*ptc;</code></pre></div>
+
+<p>位域的赋值不能超过该域所能表示的最大值，如:</p>
+
+<p>b只有2位，能表示的最大数为3，如超过3就会报黄点，Xcode会默认赋值为0，并显示警告:</p>
+
+<div><pre><code class="language-none">Implicit truncation from &#39;int&#39; to bit-field changes value from 4 to 0</code></pre></div>
+
+<p>所以在使用结构体位域时，我们应计算好位域的位数，避免出错。</p>
+
+<h2 id="toc_6"></h2>
+
+<p><a href="https://github.com/dengfeng520/Clangdemo.git">本文demo</a></p>
+
+
+
+
+</body>
+
+</html>

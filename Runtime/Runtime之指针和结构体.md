@@ -1,4 +1,4 @@
-<h1><center>Runtime Notes</center></h1>
+<h1><center>Runtime之指针和结构体</center></h1>
 
 <h6 align='right'>小时光</h6>
 --
@@ -70,15 +70,13 @@ printf("取值========%d,%d\n",*pa,*pdd);
 上面的代码已经完成了指针的赋值和取值操作。
 
 
-![指针](/Users/rp.wang/Desktop/Git/iOSNotes/RuntimeImage/C_Pointer.png)
+![指针](https://github.com/dengfeng520/xiaoshiguangBlog/blob/master/RuntimeImage/C_Pointer.png?raw=true)
 
 上图演示了指针和变量在内存中的关系，111是int型，`C`是char型。`pa`是111的指针，指向111在内存中的首地址。同理pb也指向了`C`的首地址。
 
 实际上，在内存中一个类型表示的是这变量在内存中所占的大小，因为int类型在内存中占用了4个字节的内存大小,`C`占用了一个字节的空间。
 
-此时已经知道变量是类型、内存中的指针首地址以及该变量所占内存大小，就可以从首地址取四个字节的长度就代表着这个变量在内存中的值。
-
-同理的`pb`的首地址再取一个字节的长度就是这个char类型`C`的内容。
+此时已经知道变量的类型是int类型、内存中的指针首地址以及该变量所占内存大小，就可以从首地址取四个字节的长度就代表着这个变量在内存中的值。
 
 * （1.3.2）、指针的指针
 
@@ -92,7 +90,7 @@ printf("\n**ppa========%d",**ppa);
 
 此处`ppa`指向的是`pa`的地址，`pa`指向的是int型a的地址，所以打印出来就是a的值。
 
-![指针](/Users/rp.wang/Desktop/Git/iOSNotes/RuntimeImage/C_Point_Point.png)
+![指针](https://github.com/dengfeng520/xiaoshiguangBlog/blob/master/RuntimeImage/C_Point_Point.png?raw=true)
 
 如上图所示：`ppa`指向的存放`&a`的首地址，即是`pa`,`ppb`指向存放`&b`的首地址。
 
@@ -136,7 +134,7 @@ i,everyone======5,0x7ffee815584f
 ```
 
 可以看到数组的指针和这个数组第一个元素的指针是一样的，所以可以得出结论：__数组的指针并不是这个数组的指针，而是数组第一个元素的首地址指针__。
-![数组的指针](/Users/rp.wang/Desktop/Git/iOSNotes/RuntimeImage/C_Pointer_Array.png)
+![数组的指针](https://github.com/dengfeng520/xiaoshiguangBlog/blob/master/RuntimeImage/C_Pointer_Array.png?raw=true)
 
 在获取数组元素的时候可以通过第一个元素的首地址+元素在内存中的字节长度，从而获取到第二个元素的内存地址，同理可以得到不同元素的指针.
 
@@ -161,7 +159,7 @@ everyone======o
 
 * （1.3.4）、函数指针
 
-![函数的指针](/Users/rp.wang/Desktop/Git/iOSNotes/RuntimeImage/function_Pointer.png)
+![函数的指针](https://github.com/dengfeng520/xiaoshiguangBlog/blob/master/RuntimeImage/function_Pointer.png?raw=true)
 
 函数的指针和函数非常类似，在函数前面加上一个指针括号，我们拿到函数的指针之后，就可以调用这个指针来执行函数。此处定义2个函数，一个返回int类型，一个返回int类型的指针,此处需要注意，函数指针和返回指针的函数是两个不同概念。
 
@@ -207,44 +205,149 @@ printf("funcTwo=========%d",*funcTwo);
 
 #####（2.1）结构体的组成
 
-结构体一般由结构体名、结构体变量、结构体成员组成
+结构体一般由结构体名、结构体变量、结构体成员组成.
 
-![Struct.png](/Users/rp.wang/Desktop/Git/iOSNotes/RuntimeImage/Struct.png
-)
+```
+// 结构体名 + 结构体成员 + 变量名
+struct personAbout {
+    char name;
+    int age;
+}person;
+```
+如代码所示，我定义了一个结构体，结构体名personAbout，变量名person，成员有2个，name和age; 
 
-> <h3>3、Runtime消息发送机制</h3>
+![Struct.png](https://github.com/dengfeng520/xiaoshiguangBlog/blob/master/RuntimeImage/Struct.png?raw=true)
 
-#####（3.1）、类方法和实例方法的区别
+一般情况下，结构体的名和变量名可省略其中一个，但不能全部省去不写，也就是说下面这两种写法也可以定义一个结构体。
 
-* 类对象只可以调用类方法
-* 实例对象只可以调用实例方法
-* 实例方法里的self,是对象的首地址
+```
+// 结构体名 + 结构体成员
+struct personFrist {
+    char name[20];
+    int *age;
+};
+// 结构体变量 + 成员
+struct {
+    char name[20];
+    int *age;
+}personSecond;
 
-#####（3.2）、objc_msgSend方法
-
-
-#####（3.3）、消息发送流程
-
-
-#####（3.4）、直接跳过消息发送流程
-
-#####（3.5）、消息转发流程
-
-#####（3.6）、类方法动态消息解析
-
-#####（3.7）、实例方法动态解析
-
-#####（3.8）、重定向
-
-#####（3.9）、转发
-
-#####（3.10）、模拟多继承
+```
 
 
-> <h3>3、Runtime之常用API</h3>
+#####（2.2）结构体的使用
 
-#####（2.1）、获取某个类objc_getClass
 
-#####（2.2）、获取某个类的类名
+* 继承
 
-#####（2.3）、获取成员变量class_copy
+例如在前面我定义了一个`person`的结构体，现在我又有一个对象，也包含name和age属性，此时可以采用结构体继承的方式。结构体继承和类的继承一样，直接冒号，继承的父类。
+
+```
+struct student: personAbout {
+    int number;
+}student;
+```
+
+* 设置别名
+
+一般情况下通过`typedef`关键字为结构体设置别名，
+
+```
+// 结构体的别名
+typedef struct studentFrist: personAbout {
+    int number;
+    studentFrist() {
+        number = 10001;
+        age = new int(17);
+        strcpy(name, "韩梅梅");
+    }
+}studentFrist;
+```
+
+* 结构体赋值 
+
+
+方法一：直接赋值：
+
+```
+// 结构体赋值 方法一
+int age = 17;
+struct personAbout person = {"李雷",&age};
+```
+
+方法二：可通过结构体的变量名赋值：
+
+```
+student.number = 1000;
+strcpy(student.name,"李雷");
+student.age = new int(17);
+```
+方法三:在定义的时候就给结构体赋值:
+
+```
+// 结构体的继承
+struct student: personAbout {
+    int number;
+    student() {
+        number = 10000;
+        age = new int(16);
+        strcpy(name, "李雷");
+    }
+}student;
+```
+
+* 结构体取值
+
+1、直接取值
+
+
+```
+struct studentZero stu;
+int number = stu.number;
+```
+
+2、别名取值
+
+```
+studentFrist stuFrist;
+int stuNumber = stuFrist.number;
+```
+3、指针取值
+
+先拿到结构体的指针，然后通过->得到结构体中的某个变量值。
+
+```
+studentFrist *stuPoiner = &stuFrist;
+int studentNumber = stuPoiner->number;
+```
+
+
+* 结构体的位域
+
+部分属性在存储时，并不需要占用一个完整的字节， 而只需占几个或一个二进制位。为了节省存储空间，并使处理简便，Ｃ语言又提供了一种数据结构，称为__位域__。所谓称为__位域__是把一个字节中的二进位划分为几个不同的区域，并说明每个区域的位数。每个域有一个域名，允许在程序中按域名进行操作。 这样就可以把几个不同的对象用一个字节的二进制位域来表示。在结构体中8位域等于一子节。
+
+```
+  struct teacher {
+        unsigned int a: 1;
+        unsigned int b: 2;
+        unsigned int c: 3;
+    }tc,*ptc;
+```
+
+位域的赋值不能超过该域所能表示的最大值，如:
+
+b只有2位，能表示的最大数为3，如超过3就会报黄点，Xcode会默认赋值为0，并显示警告:
+
+```
+Implicit truncation from 'int' to bit-field changes value from 4 to 0
+```
+所以在使用结构体位域时，我们应计算好位域的位数，避免出错。
+
+--
+
+[本文demo](https://github.com/dengfeng520/Clangdemo.git)
+
+
+
+
+
