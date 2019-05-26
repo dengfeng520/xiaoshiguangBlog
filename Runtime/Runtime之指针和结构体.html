@@ -5,7 +5,7 @@
 
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>小时光的博客:Runtime之指针和结构体</title>
+<title>Runtime之指针和结构体</title>
 
 
 <style type="text/css">
@@ -393,7 +393,7 @@ printf(&quot;取值========%d,%d\n&quot;,*pa,*pdd);
 
 <p>上面的代码已经完成了指针的赋值和取值操作。</p>
 
-<p><img src="https://github.com/dengfeng520/xiaoshiguangBlog/blob/master/RuntimeImage/C_Pointer.png?raw=true" alt="指针"></p>
+<p><img src="https://github.com/dengfeng520/xiaoshiguangBlog/blob/master/Runtime/C_Pointer.png?raw=true" alt="指针"></p>
 
 <p>上图演示了指针和变量在内存中的关系，111是int型，<code>C</code>是char型。<code>pa</code>是111的指针，指向111在内存中的首地址。同理pb也指向了<code>C</code>的首地址。</p>
 
@@ -412,7 +412,7 @@ printf(&quot;\n**ppa========%d&quot;,**ppa);</code></pre></div>
 
 <p>此处<code>ppa</code>指向的是<code>pa</code>的地址，<code>pa</code>指向的是int型a的地址，所以打印出来就是a的值。</p>
 
-<p><img src="https://github.com/dengfeng520/xiaoshiguangBlog/blob/master/RuntimeImage/C_Point_Point.png?raw=true" alt="指针"></p>
+<p><img src="https://github.com/dengfeng520/xiaoshiguangBlog/blob/master/Runtime/C_Point_Point.png?raw=true" alt="指针"></p>
 
 <p>如上图所示：<code>ppa</code>指向的存放<code>&amp;a</code>的首地址，即是<code>pa</code>,<code>ppb</code>指向存放<code>&amp;b</code>的首地址。</p>
 
@@ -451,7 +451,7 @@ i,everyone======4,0x7ffee815584e
 i,everyone======5,0x7ffee815584f</code></pre></div>
 
 <p>可以看到数组的指针和这个数组第一个元素的指针是一样的，所以可以得出结论：<strong>数组的指针并不是这个数组的指针，而是数组第一个元素的首地址指针</strong>。
-<img src="https://github.com/dengfeng520/xiaoshiguangBlog/blob/master/RuntimeImage/C_Pointer_Array.png?raw=true" alt="数组的指针"></p>
+<img src="https://github.com/dengfeng520/xiaoshiguangBlog/blob/master/Runtime/C_Pointer_Array.png?raw=true" alt="数组的指针"></p>
 
 <p>在获取数组元素的时候可以通过第一个元素的首地址+元素在内存中的字节长度，从而获取到第二个元素的内存地址，同理可以得到不同元素的指针.</p>
 
@@ -475,7 +475,7 @@ everyone======o</code></pre></div>
 <li>（1.3.4）、函数指针</li>
 </ul>
 
-<p><img src="https://github.com/dengfeng520/xiaoshiguangBlog/blob/master/RuntimeImage/function_Pointer.png?raw=true" alt="函数的指针"></p>
+<p><img src="https://github.com/dengfeng520/xiaoshiguangBlog/blob/master/Runtime/function_Pointer.png?raw=true" alt="函数的指针"></p>
 
 <p>函数的指针和函数非常类似，在函数前面加上一个指针括号，我们拿到函数的指针之后，就可以调用这个指针来执行函数。此处定义2个函数，一个返回int类型，一个返回int类型的指针,此处需要注意，函数指针和返回指针的函数是两个不同概念。</p>
 
@@ -524,7 +524,7 @@ struct personAbout {
 
 <p>如代码所示，我定义了一个结构体，结构体名personAbout，变量名person，成员有2个，name和age; </p>
 
-<p><img src="https://github.com/dengfeng520/xiaoshiguangBlog/blob/master/RuntimeImage/Struct.png?raw=true" alt="Struct.png"></p>
+<p><img src="https://github.com/dengfeng520/xiaoshiguangBlog/blob/master/Runtime/Struct.png?raw=true" alt="Struct.png"></p>
 
 <p>一般情况下，结构体的名和变量名可省略其中一个，但不能全部省去不写，也就是说下面这两种写法也可以定义一个结构体。</p>
 

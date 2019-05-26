@@ -70,7 +70,7 @@ printf("取值========%d,%d\n",*pa,*pdd);
 上面的代码已经完成了指针的赋值和取值操作。
 
 
-![指针](https://github.com/dengfeng520/xiaoshiguangBlog/blob/master/RuntimeImage/C_Pointer.png?raw=true)
+![指针](https://github.com/dengfeng520/xiaoshiguangBlog/blob/master/Runtime/C_Pointer.png?raw=true)
 
 上图演示了指针和变量在内存中的关系，111是int型，`C`是char型。`pa`是111的指针，指向111在内存中的首地址。同理pb也指向了`C`的首地址。
 
@@ -90,7 +90,7 @@ printf("\n**ppa========%d",**ppa);
 
 此处`ppa`指向的是`pa`的地址，`pa`指向的是int型a的地址，所以打印出来就是a的值。
 
-![指针](https://github.com/dengfeng520/xiaoshiguangBlog/blob/master/RuntimeImage/C_Point_Point.png?raw=true)
+![指针](https://github.com/dengfeng520/xiaoshiguangBlog/blob/master/Runtime/C_Point_Point.png?raw=true)
 
 如上图所示：`ppa`指向的存放`&a`的首地址，即是`pa`,`ppb`指向存放`&b`的首地址。
 
@@ -134,7 +134,7 @@ i,everyone======5,0x7ffee815584f
 ```
 
 可以看到数组的指针和这个数组第一个元素的指针是一样的，所以可以得出结论：__数组的指针并不是这个数组的指针，而是数组第一个元素的首地址指针__。
-![数组的指针](https://github.com/dengfeng520/xiaoshiguangBlog/blob/master/RuntimeImage/C_Pointer_Array.png?raw=true)
+![数组的指针](https://github.com/dengfeng520/xiaoshiguangBlog/blob/master/Runtime/C_Pointer_Array.png?raw=true)
 
 在获取数组元素的时候可以通过第一个元素的首地址+元素在内存中的字节长度，从而获取到第二个元素的内存地址，同理可以得到不同元素的指针.
 
@@ -159,7 +159,7 @@ everyone======o
 
 * （1.3.4）、函数指针
 
-![函数的指针](https://github.com/dengfeng520/xiaoshiguangBlog/blob/master/RuntimeImage/function_Pointer.png?raw=true)
+![函数的指针](https://github.com/dengfeng520/xiaoshiguangBlog/blob/master/Runtime/function_Pointer.png?raw=true)
 
 函数的指针和函数非常类似，在函数前面加上一个指针括号，我们拿到函数的指针之后，就可以调用这个指针来执行函数。此处定义2个函数，一个返回int类型，一个返回int类型的指针,此处需要注意，函数指针和返回指针的函数是两个不同概念。
 
@@ -216,7 +216,7 @@ struct personAbout {
 ```
 如代码所示，我定义了一个结构体，结构体名personAbout，变量名person，成员有2个，name和age; 
 
-![Struct.png](https://github.com/dengfeng520/xiaoshiguangBlog/blob/master/RuntimeImage/Struct.png?raw=true)
+![Struct.png](https://github.com/dengfeng520/xiaoshiguangBlog/blob/master/Runtime/Struct.png?raw=true)
 
 一般情况下，结构体的名和变量名可省略其中一个，但不能全部省去不写，也就是说下面这两种写法也可以定义一个结构体。
 
