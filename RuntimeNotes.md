@@ -40,9 +40,8 @@ int test = 0;
 
 #####（1.3）、指针的分类
 
-* 普通的指针
+* （1.3.1）、普通的指针
 
-```
 
 ```
 int a = 111;
@@ -50,25 +49,30 @@ int *pa = &a;
 char p = 'C';
 char *pb = &p;
 ```
+
+代码`int *pa = &a;`的作用是指针赋值，那么该如何验证是否赋值成功并如何使用这个值呢？
+
+
+```
+int *pdd = pa;
+printf("取值========%d,%d\n",*pa,*pdd);
+
+
 ```
 
-![指针](/Users/mac001/Desktop/Study学习资料/iOSNotes/RuntimeImage/C_Pointer.png)
+定义一个pdd指针，然后打印指针pdd所指向的值。最终看到的结果是：
+
+
+```
+取值========111,111
+
+```
+上面的代码已经完成了指针的赋值和取值操作。
+
+
+![指针](/Users/rp.wang/Desktop/Git/iOSNotes/RuntimeImage/C_Pointer.png)
 
 上图演示了指针和变量在内存中的关系，111是int型，`C`是char型。`pa`是111的指针，指向111在内存中的首地址。同理pb也指向了`C`的首地址。
-
-分别打印一下可以看到结果：
-
-```
-printf("a====%d,&a======%p,pa====%p\n",a,&a,pa);
-printf("\np======%c,&p======%p,pb====%p\n\n",p,&p,pb);
-```
-
-```
-a====111,&a======0x7ffeefbff52c,pa====0x7ffeefbff52c
-
-p======C,&p======0x7ffeefbff51f,pb====0x7ffeefbff51f
-```
-
 
 实际上，在内存中一个类型表示的是这变量在内存中所占的大小，因为int类型在内存中占用了4个字节的内存大小,`C`占用了一个字节的空间。
 
@@ -76,57 +80,165 @@ p======C,&p======0x7ffeefbff51f,pb====0x7ffeefbff51f
 
 同理的`pb`的首地址再取一个字节的长度就是这个char类型`C`的内容。
 
-* 指针的指针
+* （1.3.2）、指针的指针
 
-![指针](/Users/mac001/Desktop/Study学习资料/iOSNotes/RuntimeImage/C_Point_Point.png)
 
-如上图所示：`ppa`指向的存放`&a`的首地址，`ppb`指向存放`&b`的首地址。
+```
+// 指针的指针 赋值
+int **ppa  = &pa; 
+// 取值
+printf("\n**ppa========%d",**ppa);
+```
+
+此处`ppa`指向的是`pa`的地址，`pa`指向的是int型a的地址，所以打印出来就是a的值。
+
+![指针](/Users/rp.wang/Desktop/Git/iOSNotes/RuntimeImage/C_Point_Point.png)
+
+如上图所示：`ppa`指向的存放`&a`的首地址，即是`pa`,`ppb`指向存放`&b`的首地址。
 
 既然普通的类型需要占用内存空间，那么指针也是需要占用内存空间的。
 我们通过指针的指针拿到这个指针，再通过这个指针拿到这个指针所指向的内容。
 
 
-* 数组指针
+* （1.3.3）、数组指针
 
-![数组的指针](/Users/mac001/Desktop/Study学习资料/iOSNotes/RuntimeImage/C_Pointer_Array.png)
+指针指向的是一个对象在内存中的首地址，那么数组指针指向的是什么呢？
 
-如上图所示，数组的指针并不是这个数组的指针，而是数组第一个元素的首地址指针。在获取数组元素的时候可以通过第一个元素的首地址+元素在内存中的字节长度，从而获取到第二个元素的内存地址，同理可以得到不同元素的指针。
+```
+char array[] = "hello";
+char *arrayPointer = array;
+```
 
-* 函数指针
+此处定义了一个char类型数组，然后取数组指针。此处我通过数组遍历对数组中的每个元素的内存地址，然后和数组指针做一次比较：
+
+```
+printf("\narrayPointer========%p\n",arrayPointer);
+for (int i = 0;i<sizeof(array);i++) {
+    printf("\ni,everyone======%d,%p\n",i,&array[i]);
+ }
+
+```
+
+```
+arrayPointer========0x7ffee815584a
+
+i,everyone======0,0x7ffee815584a
+
+i,everyone======1,0x7ffee815584b
+
+i,everyone======2,0x7ffee815584c
+
+i,everyone======3,0x7ffee815584d
+
+i,everyone======4,0x7ffee815584e
+
+i,everyone======5,0x7ffee815584f
+```
+
+可以看到数组的指针和这个数组第一个元素的指针是一样的，所以可以得出结论：__数组的指针并不是这个数组的指针，而是数组第一个元素的首地址指针__。
+![数组的指针](/Users/rp.wang/Desktop/Git/iOSNotes/RuntimeImage/C_Pointer_Array.png)
+
+在获取数组元素的时候可以通过第一个元素的首地址+元素在内存中的字节长度，从而获取到第二个元素的内存地址，同理可以得到不同元素的指针.
+
+```
+for (int i = 0;i<sizeof(array);i++) {
+   printf("\neveryone======%c\n",*(array + i));
+}
+```
+```
+everyone======h
+
+everyone======e
+
+everyone======l
+
+everyone======l
+
+everyone======o
+```
+那么从数组中取值就有2种方法，第一传统的下标取值，第二通过元素指针取值。
 
 
-![函数的指针](/Users/mac001/Desktop/Study学习资料/iOSNotes/RuntimeImage/function_Pointer.png)
-函数的指针和函数非常类似，在函数前面加上一个指针括号，我们拿到函数的指针之后，就可以调用这个指针来执行函数。
+* （1.3.4）、函数指针
+
+![函数的指针](/Users/rp.wang/Desktop/Git/iOSNotes/RuntimeImage/function_Pointer.png)
+
+函数的指针和函数非常类似，在函数前面加上一个指针括号，我们拿到函数的指针之后，就可以调用这个指针来执行函数。此处定义2个函数，一个返回int类型，一个返回int类型的指针,此处需要注意，函数指针和返回指针的函数是两个不同概念。
 
 
+```
+int getMax(int i,int j) {
+    return i>j?i:j;
+}
 
-> <h3>2、Runtime消息发送机制</h3>
 
-#####（1.1）、类方法和实例方法的区别
+int *getMin(int i,int j) {
+    int result = i<j?i:j;
+    int *pointer = &result;
+    return pointer;
+}
+
+```
+
+那么，该如何通过指针调用函数呢？
+
+
+```
+ int (*funcOne)(int,int);
+ funcOne = getMax;
+ int result = funcOne(10001,10086);
+ printf("\nresult=============%d\n",result);
+
+```
+
+定义一个函数指针并赋值，通过调用指针来调用这个函数。
+
+
+```
+int *funcTwo = getMin(10001, 10086);
+printf("funcTwo=========%d",*funcTwo);
+```
+
+调用返回指针的函数时先定义指针来接收函数的返回值。这个指针类型应为函数返回指针所指向的类型。
+
+> <h3>2、结构体</h3>
+
+结构体是由一系列的相同或者不同的类型构成的数据集合，Swift中的元组和结构体非常类似。
+
+#####（2.1）结构体的组成
+
+结构体一般由结构体名、结构体变量、结构体成员组成
+
+![Struct.png](/Users/rp.wang/Desktop/Git/iOSNotes/RuntimeImage/Struct.png
+)
+
+> <h3>3、Runtime消息发送机制</h3>
+
+#####（3.1）、类方法和实例方法的区别
 
 * 类对象只可以调用类方法
 * 实例对象只可以调用实例方法
 * 实例方法里的self,是对象的首地址
 
-#####（1.2）、objc_msgSend方法
+#####（3.2）、objc_msgSend方法
 
 
-#####（1.3）、消息发送流程
+#####（3.3）、消息发送流程
 
 
-#####（1.4）、直接跳过消息发送流程
+#####（3.4）、直接跳过消息发送流程
 
-#####（1.5）、消息转发流程
+#####（3.5）、消息转发流程
 
-#####（1.6）、类方法动态消息解析
+#####（3.6）、类方法动态消息解析
 
-#####（1.7）、实例方法动态解析
+#####（3.7）、实例方法动态解析
 
-#####（1.8）、重定向
+#####（3.8）、重定向
 
-#####（1.9）、转发
+#####（3.9）、转发
 
-#####（1.10）、模拟多继承
+#####（3.10）、模拟多继承
 
 
 > <h3>3、Runtime之常用API</h3>
