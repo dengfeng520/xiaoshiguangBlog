@@ -410,19 +410,23 @@ kbd {
 
 <p>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;我们知道不同的设备的屏幕大小、分辨率、<code>CPU</code>、<code>GPU</code>、硬盘大小等都不相同。针对这种情况，苹果官方为开发者提供了 <code>App Thinning</code>技术，对于不同设备提供只适用当前设备的包为用户提供下载。如<code>iPhone 5C</code>只会下载适用于32位运行芯片的库和2x的图片资源的包，<code>iPhone 8P</code>则会下载适用于64位的库和3x的图片资源。</p>
 
-<p>苹果关于App Thinning的介绍请看：<a href="https://developer.apple.com/videos/play/wwdc2015/404/">App Thinning in Xcode</a></p>
+<p>苹果关于App Thinning的介绍请看：
+<a href="https://developer.apple.com/videos/play/wwdc2015/404/">App Thinning in Xcode视频</a>
+<a href="https://help.apple.com/xcode/mac/current/#/devbbdc5ce4f">App Thinning官方文档</a></p>
 
 <h6 id="toc_1">（1）、<code>App Thinning</code>有三种方式: <code>App Slicing</code>,<code>Bitcode</code>、<code>On-Demand Resources</code>。</h6>
 
 <ul>
-<li> <code>App Slicing</code>：在向<code>iTunes Connect</code>上传<code>App</code>包后，对<code>App</code>做切割处理，创建不同的变体包，这样就可以适用到不同的设备；</li>
-<li><code>Bitcode</code>:针对特定的设备进行包大小优化，优化效果不是很明细，一般优化的结果不是很理想。</li>
-<li><code>On-Demand Resources</code>:主要是为又下多关卡的情况服务的，<code>On-Demand Resources</code>会根据用户的关卡下载进度下载随后几个关卡的资源，并且已经过关的资源会被干掉，这样可以减少初始<code>App</code>包的大小。</li>
+<li> <code>App Slicing</code>：iOS9之后苹果官方出的解决方案，在向<code>iTunes Connect</code>上传<code>App</code>包后，对<code>App</code>做切割处理，创建不同的变体包，这样就可以适用到不同的设备；</li>
+<li><code>Bitcode</code>:也是iOS9之后苹果给出的解决方案，针对特定的设备进行包大小优化。</li>
+<li> <code>On-Demand Resources</code>:主要是为又下多关卡的情况服务的，<code>On-Demand Resources</code>会根据用户的关卡下载进度下载随后几个关卡的资源，并且已经过关的资源会被干掉，这样可以减少初始<code>App</code>包的大小。</li>
 </ul>
 
 <h6 id="toc_2">（2）、那么如何在项目中适用<code>App Thinning</code>呢？</h6>
 
-<p>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;在使用<code>App Thinning</code>的时候，大部分工作是由<code>Xcode</code>和<code>App Store</code>来完成的，在开发中只需要创建<code>xcassets</code>目录，然后将图片加入其中即可。在创建一个工程的时候<code>Xcode</code>会默认为开发者创建一个名为<code>Assets.xcassets</code>的目录，在开发过程中只要把图片资源加入其中即可。</p>
+<h6 id="toc_3">(2.1) 、 <code>Slicing</code>的使用</h6>
+
+<p>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;在使用<code>App Slicing</code>的时候，大部分工作是由<code>Xcode</code>和<code>App Store</code>来完成的，开发者本身不需要做任何事情。在开发中只需要创建<code>xcassets</code>目录，然后将图片加入其中即可。在创建一个工程的时候<code>Xcode</code>会默认为开发者创建一个名为<code>Assets.xcassets</code>的目录，在开发过程中只要把图片资源加入其中即可。</p>
 
 <p><img src="https://upload-images.jianshu.io/upload_images/1214383-2d55bcb91235bdd5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Asssts.xcassets"></p>
 
@@ -431,6 +435,41 @@ kbd {
 <p><img src="https://upload-images.jianshu.io/upload_images/1214383-73f6427da5db8cba.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="create xcassets "></p>
 
 <p>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp; 我们在使用<code>xcassets</code>时，添加对应的2x分辨率和3x分辨率的图片，会在上传到<code>App Store</code>后被创建成不同安装包以减少<code>App</code>安装包的大小。同时苹果会自动根据的设备不同，在创建的安装包中自动加入当前设备需要的芯片指令集架构文件。</p>
+
+<h6 id="toc_4">(2.2) 、<code>Bitcode</code>使用</h6>
+
+<p><a href="https://help.apple.com/xcode/mac/current/#/devbbdc5ce4f">Apple Bitcode官方文档</a></p>
+
+<p>什么是bitcode？
+ &ensp;&ensp;&ensp;&ensp;&ensp;&ensp; 一般情况下，在iOS9之后，新建一个工程，Xcode会默认设置，bitcode。介于源码和机器码之间，在LLVM中的IR（Intermediate Representation)这层，由编译器前端clang生成，交给LLVM优化器优化后交给后端生成CPU相应指令。</p>
+
+<p>将bitcode提供给Apple，由他们针对各种机型（包括新机型）的CPU对代码做二次优化，其本身不会增加包体积，上传的二进制文件会变大，但是不会影响用户的下载大小。</p>
+
+<p>如果开启bitcode，相应的，所有使用的pod都需要开启bitcode，bitcode必须是完整的，否则就是无效的，编译阶段就会报错。</p>
+
+<p>开启bitcode选项后，在debug模式下不会打进bitcode，只有在Archive时才会。</p>
+
+<h6 id="toc_5">(2.3) 、<code>On-Demand Resources</code>的使用</h6>
+
+<p><a href="https://developer.apple.com/library/archive/documentation/FileManagement/Conceptual/On_Demand_Resources_Guide/">On-Demand Resources官方文档</a></p>
+
+<p>将图片、音频等资源文件分离出来，开发阶段将资源按照ResourceTag区分，存放在苹果的服务器上。App按需要发起请求，由操作系统来管理下载和存储，一般用于游戏资源或者内购。</p>
+
+<p>优点：</p>
+
+<ul>
+<li>包体积更小，为设备省更多的存储控件</li>
+<li>懒加载（Game -&gt; level -&gt; download current resources）</li>
+<li>很少使用的资源可以放在服务器（Tutorial）</li>
+</ul>
+
+<p>缺点：</p>
+
+<ul>
+<li>资源需要从苹果服务器下载</li>
+<li>资源需要按tag区分，制定相应的配置策略</li>
+<li>代码中管理何时下载，何时释放，增加了资源管理的复杂度</li>
+</ul>
 
 <blockquote>
 <p>2、删除废止、无用的资源</p>
@@ -442,11 +481,6 @@ kbd {
 <li>(1)、在提审前，使用最简单的方法，通过<code>Xcode</code>的<code>Find</code>功能在代码中搜索图片资源名称，如果没有搜到，说明没有没有使用这张图片，直接删除图片资源即可。但是这样做的比较麻烦，而且效率也比较低;</li>
 <li>(2)、通过<code>Mac</code>终端<code>Find</code>命令来搜索工程中的所有图片资源，确认是无用的图片资源后删除，此处可以使用系统提供的<code>NSFileManger</code>类来删除;</li>
 <li>(3)、此处为各位推荐一个开源工具<a href="https://github.com/tinymind/LSUnusedResources.git">LSUnusedResources</a>,<code>LSUnusedResources</code>不仅拥有<code>GUI</code>，而且添加和删除操作也很简单。</li>
-</ul>
-
-<p><img src="https://github.com/dengfeng520/iOSNotes/blob/master/LSUnusedResources.gif?raw=true" alt="LSUnusedResources"></p>
-
-<ul>
 <li>(4)、删除一些其他的文件，如在我们的项目中使用了<a href="https://github.com/airbnb/lottie-ios">lottie</a>动画，所以在本地会有一些对应的<code>json</code>文件，对于废止的文件,可以通过上面的方法删除；</li>
 </ul>
 
@@ -460,7 +494,7 @@ kbd {
 
 <p>我们要的目的是为了在不损失图片质量的情况下尽可能大的对图片做压缩处理，这样就能节省一些空间，减少安装包的大小。此处推荐<code>Google</code>的方案将图片转成<a href="https://developers.google.com/speed/webp/">WebP</a>(这里需要梯子才能打开)。</p>
 
-<h6 id="toc_3">(1)、为什么要使用<code>WebP</code></h6>
+<h6 id="toc_6">(1)、为什么要使用<code>WebP</code></h6>
 
 <ul>
 <li><code>WebP</code>压缩率高，肉眼基本看不出差异，支持有损和无损两种模式，压缩之后不仅不损失图片质量，官方提出相对于我们常用的<code>PNG</code>格式能减少26%的大小。</li>
@@ -468,7 +502,7 @@ kbd {
 <li><code>WebP</code>兼容目前主流的浏览器和平台；</li>
 </ul>
 
-<h6 id="toc_4">(2)、<code>WebP</code>的安装</h6>
+<h6 id="toc_7">(2)、<code>WebP</code>的安装</h6>
 
 <p>使用<code>Homebrew</code>命令安装<code>webp</code>,在终端输入：</p>
 
@@ -482,7 +516,7 @@ kbd {
 
 <p><img src="https://upload-images.jianshu.io/upload_images/1214383-eff7a42c78adaafa.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="压缩后"></p>
 
-<h6 id="toc_5">(3)、<code>WebP</code>的使用</h6>
+<h6 id="toc_8">(3)、<code>WebP</code>的使用</h6>
 
 <p><code>WebP</code>图片的加载可参考:<a href="%5Bhttps://www.jianshu.com/p/f33422951795%5D(https://www.jianshu.com/p/f33422951795)">WebP解码支持（Objc &amp; Swift）</a></p>
 
@@ -558,7 +592,7 @@ if  ([TestVC respondsToSelector:aSelector])  {
 
 <p>所以，使用工具静态分析并不能完美的找出所有的废弃代码，在删除代码前要手动确认该方法或类是否调用了。最简单的方式就是利用Xcode自带的<code>Find</code>功能。</p>
 
-<h6 id="toc_6">（3）、删除工程中的野鸡开源代码</h6>
+<h6 id="toc_9">（3）、删除工程中的野鸡开源代码</h6>
 
 <p>有很多优秀的同行，他们分享了自己写的代码，这使得一些程序员在开发中遇到一个需求首先想到的是去<code>GitHub、CSDN、Code4App</code>上去找demo，而不是自己根据需求造轮子，找到比较相近的代码改一改就直接加到自己的代码中使用了，但是这样会产生很多不可控的问题。例如：</p>
 
@@ -589,12 +623,17 @@ if  ([TestVC respondsToSelector:aSelector])  {
 
 <p>本文主要介绍了在iOS开发中如何从图片资源和代码两方面为App瘦身的方法，如果你有更优更好的解决方法，欢迎指点。</p>
 
-<h2 id="toc_7"></h2>
+<h2 id="toc_10"></h2>
 
 <p>友情链接:</p>
 
-<p><a href="https://time.geekbang.org/column/article/88573">包大小：如何从资源和代码层面实现全方位瘦身？</a>
-<a href="https://developer.apple.com/videos/play/wwdc2015/404/">Apple Developer App Thinning in Xcode</a></p>
+<p><a href="https://help.apple.com/xcode/mac/current/#/devbbdc5ce4f">Xcode Help What is app thinning? (iOS, tvOS, watchOS)</a></p>
+
+<p><a href="https://developer.apple.com/videos/play/wwdc2015/404/">Apple Developer App Thinning in Xcode</a></p>
+
+<p><a href="https://time.geekbang.org/column/article/88573">包大小：如何从资源和代码层面实现全方位瘦身？</a></p>
+
+<p><a href="http://madmark.cc/2019/04/02/App%20Thinning/#more">iOS App瘦身</a></p>
 
 
 

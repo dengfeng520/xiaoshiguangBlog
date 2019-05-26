@@ -29,17 +29,22 @@
 
 &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;我们知道不同的设备的屏幕大小、分辨率、`CPU`、`GPU`、硬盘大小等都不相同。针对这种情况，苹果官方为开发者提供了 `App Thinning`技术，对于不同设备提供只适用当前设备的包为用户提供下载。如`iPhone 5C`只会下载适用于32位运行芯片的库和2x的图片资源的包，`iPhone 8P`则会下载适用于64位的库和3x的图片资源。
 
-苹果关于App Thinning的介绍请看：[App Thinning in Xcode](https://developer.apple.com/videos/play/wwdc2015/404/)
+苹果关于App Thinning的介绍请看：
+[App Thinning in Xcode视频](https://developer.apple.com/videos/play/wwdc2015/404/)
+[App Thinning官方文档](https://help.apple.com/xcode/mac/current/#/devbbdc5ce4f)
 
 ######（1）、`App Thinning`有三种方式: `App Slicing`,`Bitcode`、`On-Demand Resources`。
 
- *  `App Slicing`：在向`iTunes Connect`上传`App`包后，对`App`做切割处理，创建不同的变体包，这样就可以适用到不同的设备；
-* `Bitcode`:针对特定的设备进行包大小优化，优化效果不是很明细，一般优化的结果不是很理想。
-* `On-Demand Resources`:主要是为又下多关卡的情况服务的，`On-Demand Resources`会根据用户的关卡下载进度下载随后几个关卡的资源，并且已经过关的资源会被干掉，这样可以减少初始`App`包的大小。
+ *  `App Slicing`：iOS9之后苹果官方出的解决方案，在向`iTunes Connect`上传`App`包后，对`App`做切割处理，创建不同的变体包，这样就可以适用到不同的设备；
+* `Bitcode`:也是iOS9之后苹果给出的解决方案，针对特定的设备进行包大小优化。
+*  `On-Demand Resources`:主要是为又下多关卡的情况服务的，`On-Demand Resources`会根据用户的关卡下载进度下载随后几个关卡的资源，并且已经过关的资源会被干掉，这样可以减少初始`App`包的大小。
+
  
 ######（2）、那么如何在项目中适用`App Thinning`呢？
 
-&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;在使用`App Thinning`的时候，大部分工作是由`Xcode`和`App Store`来完成的，在开发中只需要创建`xcassets`目录，然后将图片加入其中即可。在创建一个工程的时候`Xcode`会默认为开发者创建一个名为`Assets.xcassets`的目录，在开发过程中只要把图片资源加入其中即可。
+###### (2.1) 、 `Slicing`的使用
+
+&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;在使用`App Slicing`的时候，大部分工作是由`Xcode`和`App Store`来完成的，开发者本身不需要做任何事情。在开发中只需要创建`xcassets`目录，然后将图片加入其中即可。在创建一个工程的时候`Xcode`会默认为开发者创建一个名为`Assets.xcassets`的目录，在开发过程中只要把图片资源加入其中即可。
 
 ![Asssts.xcassets](https://upload-images.jianshu.io/upload_images/1214383-2d55bcb91235bdd5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
@@ -48,6 +53,37 @@
 ![create xcassets ](https://upload-images.jianshu.io/upload_images/1214383-73f6427da5db8cba.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
  &ensp;&ensp;&ensp;&ensp;&ensp;&ensp; 我们在使用`xcassets`时，添加对应的2x分辨率和3x分辨率的图片，会在上传到`App Store`后被创建成不同安装包以减少`App`安装包的大小。同时苹果会自动根据的设备不同，在创建的安装包中自动加入当前设备需要的芯片指令集架构文件。
+ 
+###### (2.2) 、`Bitcode`使用
+
+[Apple Bitcode官方文档](https://help.apple.com/xcode/mac/current/#/devbbdc5ce4f)
+
+什么是bitcode？
+ &ensp;&ensp;&ensp;&ensp;&ensp;&ensp; 一般情况下，在iOS9之后，新建一个工程，Xcode会默认设置，bitcode。介于源码和机器码之间，在LLVM中的IR（Intermediate Representation)这层，由编译器前端clang生成，交给LLVM优化器优化后交给后端生成CPU相应指令。
+
+将bitcode提供给Apple，由他们针对各种机型（包括新机型）的CPU对代码做二次优化，其本身不会增加包体积，上传的二进制文件会变大，但是不会影响用户的下载大小。
+
+如果开启bitcode，相应的，所有使用的pod都需要开启bitcode，bitcode必须是完整的，否则就是无效的，编译阶段就会报错。
+
+开启bitcode选项后，在debug模式下不会打进bitcode，只有在Archive时才会。
+
+###### (2.3) 、`On-Demand Resources`的使用
+
+[On-Demand Resources官方文档](https://developer.apple.com/library/archive/documentation/FileManagement/Conceptual/On_Demand_Resources_Guide/)
+
+将图片、音频等资源文件分离出来，开发阶段将资源按照ResourceTag区分，存放在苹果的服务器上。App按需要发起请求，由操作系统来管理下载和存储，一般用于游戏资源或者内购。
+
+优点：
+
+* 包体积更小，为设备省更多的存储控件
+* 懒加载（Game -> level -> download current resources）
+* 很少使用的资源可以放在服务器（Tutorial）
+
+缺点：
+
+* 资源需要从苹果服务器下载
+* 资源需要按tag区分，制定相应的配置策略
+* 代码中管理何时下载，何时释放，增加了资源管理的复杂度
 
 >2、删除废止、无用的资源
 
@@ -56,9 +92,6 @@
 * (1)、在提审前，使用最简单的方法，通过`Xcode`的`Find`功能在代码中搜索图片资源名称，如果没有搜到，说明没有没有使用这张图片，直接删除图片资源即可。但是这样做的比较麻烦，而且效率也比较低;
 * (2)、通过`Mac`终端`Find`命令来搜索工程中的所有图片资源，确认是无用的图片资源后删除，此处可以使用系统提供的`NSFileManger`类来删除;
 * (3)、此处为各位推荐一个开源工具[LSUnusedResources](https://github.com/tinymind/LSUnusedResources.git),`LSUnusedResources`不仅拥有`GUI`，而且添加和删除操作也很简单。
-
-![LSUnusedResources](https://github.com/dengfeng520/iOSNotes/blob/master/LSUnusedResources.gif?raw=true)
-
 * (4)、删除一些其他的文件，如在我们的项目中使用了[lottie](https://github.com/airbnb/lottie-ios)动画，所以在本地会有一些对应的`json`文件，对于废止的文件,可以通过上面的方法删除；
 
 
@@ -197,5 +230,10 @@ if  ([TestVC respondsToSelector:aSelector])  {
 --
 友情链接:
 
-[包大小：如何从资源和代码层面实现全方位瘦身？](https://time.geekbang.org/column/article/88573)
+[Xcode Help What is app thinning? (iOS, tvOS, watchOS)](https://help.apple.com/xcode/mac/current/#/devbbdc5ce4f)
+
 [Apple Developer App Thinning in Xcode](https://developer.apple.com/videos/play/wwdc2015/404/)
+
+[包大小：如何从资源和代码层面实现全方位瘦身？](https://time.geekbang.org/column/article/88573)
+
+[iOS App瘦身](http://madmark.cc/2019/04/02/App%20Thinning/#more)
