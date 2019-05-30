@@ -760,7 +760,7 @@ _testView.backgroundColor = [UIColor redColor];
 ```
 运行效果：
 
-![loopAnimation](https://github.com/dengfeng520/iOSNotes/blob/master/loopAnimation.gif?raw=true)
+![loopAnimation](https://github.com/dengfeng520/iOSNotes/blob/master/Gif/loopAnimation.gif?raw=true)
 
 ####29、屏幕截屏相关
 
@@ -949,7 +949,7 @@ _layerView.transform = CGAffineTransformMakeRotation(M_PI_4);
 ```
 效果图:
 
-![testdemo1](https://github.com/dengfeng520/iOSNotes/blob/master/testdemo1.png?raw=true)
+![testdemo1](https://github.com/dengfeng520/iOSNotes/blob/master/Animation/testdemo1.png?raw=true)
 
 >轴偏移量 Y轴偏移量
 
@@ -959,7 +959,7 @@ _layerView.transform = CGAffineTransformMakeScale(-100, -50);
 
 ```
 效果图:
-![testdemo2](https://github.com/dengfeng520/iOSNotes/blob/master/testdemo2.png?raw=true)
+![testdemo2](https://github.com/dengfeng520/iOSNotes/blob/master/Animation/testdemo2.png?raw=true)
 
 >缩放处理 
 
@@ -970,7 +970,7 @@ _layerView.transform = CGAffineTransformMakeScale(2.5,1.5);
 
 效果图:
 
-![testdemo4](https://github.com/dengfeng520/iOSNotes/blob/master/testdemo4.png?raw=true)
+![testdemo4](https://github.com/dengfeng520/iOSNotes/blob/master/Animation/testdemo4.png?raw=true)
 
 >组合仿射一:  组合的同时，偏移X、Y轴坐标
 
@@ -982,7 +982,7 @@ _layerView.transform = viewTransform;
 ```
 效果图:
 
-![testdemo3](https://github.com/dengfeng520/iOSNotes/blob/master/testdemo3.png?raw=true)
+![testdemo3](https://github.com/dengfeng520/iOSNotes/blob/master/Animation/testdemo3.png?raw=true)
 
 >组合仿射二:
 
@@ -1005,7 +1005,7 @@ _layerView.transform = viewTransform;
  
  **9、3D仿射变换**
  
- ![iPhone上的X轴 Y轴 Z轴示意图](https://zsisme.gitbooks.io/ios-/content/chapter5/5.7.jpeg)
+ ![iPhone上的X轴 Y轴 Z轴示意图](https://zsisme.gitbooks.io/ios-/content/Animation/chapter5/5.7.jpeg)
  
  >3D 旋转
  
@@ -1126,4 +1126,35 @@ _layerView.transform = viewTransform;
 ####33、Xcode报错:Compiling IB documents for earlier than iOS7 is no longer supported.****
 
 
-![Compiling IB](https://github.com/dengfeng520/xiaoshiguangBlog/blob/master/Compiling%20IB.png?raw=true)
+![Compiling IB](https://github.com/dengfeng520/xiaoshiguangBlog/blob/master/Gif/Compiling%20IB.png?raw=true)
+
+
+####34 、Swift 加载Gif图片
+
+```
+func loadGifImageWithPath(path: String,gifImage: UIImageView) {
+guard let data = NSData(contentsOfFile: path) else { return }
+guard let imageSource = CGImageSourceCreateWithData(data, nil) else { return }
+let imageCount = CGImageSourceGetCount(imageSource)
+var images = [UIImage]()
+var totalDuration : TimeInterval = 0
+for i in 0..<imageCount {
+guard let cgImage = CGImageSourceCreateImageAtIndex(imageSource, i, nil) else { continue }
+let image = UIImage(cgImage: cgImage)
+if i == 0 {
+gifImage.image = image
+}
+images.append(image)
+guard let properties = CGImageSourceCopyPropertiesAtIndex(imageSource, i, nil) else { continue }
+guard let gifDict = (properties as NSDictionary)[kCGImagePropertyGIFDictionary] as? NSDictionary else { continue }
+guard let frameDuration = gifDict[kCGImagePropertyGIFDelayTime] as? NSNumber else { continue }
+totalDuration += frameDuration.doubleValue
+}
+gifImage.animationImages = images
+gifImage.animationDuration = totalDuration
+gifImage.animationRepeatCount = 0
+gifImage.contentMode = .scaleAspectFit
+gifImage.startAnimating()
+gifImage.backgroundColor = UIColor.white
+}
+```

@@ -5,4 +5,5 @@
 
 
 
-[machoview](https://sourceforge.net/projects/machoview/)
+[MachoView Download](https://sourceforge.net/projects/machoview/)
+[MachoVIew GitHub](https://github.com/gdbinit/MachOView.git)

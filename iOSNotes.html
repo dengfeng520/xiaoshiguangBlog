@@ -5,7 +5,7 @@
 
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>README</title>
+<title>iOSNotes</title>
 
 
 <style type="text/css">
@@ -328,7 +328,7 @@ kbd {
 
 <body>
 
-<p><a href="https://dengfeng520.github.io/xiaoshiguangBlog/iOSNotes.html"><center>一、iOS Notes</center></a></p>
+<p><a href="https://dengfeng520.github.io/iOSNotes/iOSNotes.html"><center>iOS Notes</center></a></p>
 
 <h1><center>iOS Notes</center></h1>
 
@@ -1175,7 +1175,7 @@ _testView.backgroundColor = [UIColor redColor];</code></pre></div>
 
 <p>运行效果：</p>
 
-<p><img src="https://github.com/dengfeng520/iOSNotes/blob/master/loopAnimation.gif?raw=true" alt="loopAnimation"></p>
+<p><img src="https://github.com/dengfeng520/iOSNotes/blob/master/Gif/loopAnimation.gif?raw=true" alt="loopAnimation"></p>
 
 <h4 id="toc_46">29、屏幕截屏相关</h4>
 
@@ -1354,7 +1354,7 @@ _layerView.transform = CGAffineTransformMakeRotation(M_PI_4);
 效果图:</p>
 </blockquote>
 
-<p><img src="https://github.com/dengfeng520/iOSNotes/blob/master/testdemo1.png?raw=true" alt="testdemo1"></p>
+<p><img src="https://github.com/dengfeng520/iOSNotes/blob/master/Animation/testdemo1.png?raw=true" alt="testdemo1"></p>
 
 <blockquote>
 <p>轴偏移量 Y轴偏移量</p>
@@ -1365,7 +1365,7 @@ _layerView.transform = CGAffineTransformMakeScale(-100, -50);
 </code></pre></div>
 
 <p>效果图:
-<img src="https://github.com/dengfeng520/iOSNotes/blob/master/testdemo2.png?raw=true" alt="testdemo2"></p>
+<img src="https://github.com/dengfeng520/iOSNotes/blob/master/Animation/testdemo2.png?raw=true" alt="testdemo2"></p>
 
 <blockquote>
 <p>缩放处理 </p>
@@ -1376,7 +1376,7 @@ _layerView.transform = CGAffineTransformMakeScale(2.5,1.5);</code></pre></div>
 
 <p>效果图:</p>
 
-<p><img src="https://github.com/dengfeng520/iOSNotes/blob/master/testdemo4.png?raw=true" alt="testdemo4"></p>
+<p><img src="https://github.com/dengfeng520/iOSNotes/blob/master/Animation/testdemo4.png?raw=true" alt="testdemo4"></p>
 
 <blockquote>
 <p>组合仿射一:  组合的同时，偏移X、Y轴坐标</p>
@@ -1389,7 +1389,7 @@ _layerView.transform = viewTransform;
 
 <p>效果图:</p>
 
-<p><img src="https://github.com/dengfeng520/iOSNotes/blob/master/testdemo3.png?raw=true" alt="testdemo3"></p>
+<p><img src="https://github.com/dengfeng520/iOSNotes/blob/master/Animation/testdemo3.png?raw=true" alt="testdemo3"></p>
 
 <blockquote>
 <p>组合仿射二:</p>
@@ -1413,7 +1413,7 @@ _layerView.transform = viewTransform;
 
 <p><strong>9、3D仿射变换</strong></p>
 
-<p><img src="https://zsisme.gitbooks.io/ios-/content/chapter5/5.7.jpeg" alt="iPhone上的X轴 Y轴 Z轴示意图"></p>
+<p><img src="https://zsisme.gitbooks.io/ios-/content/Animation/chapter5/5.7.jpeg" alt="iPhone上的X轴 Y轴 Z轴示意图"></p>
 
 <blockquote>
 <p>3D 旋转</p>
@@ -1527,6 +1527,38 @@ _layerView.transform = viewTransform;
     [weakSelf.toolbarView updateConstraintsIfNeeded];
     [weakSelf.toolbarView setNeedsUpdateConstraints];
 </code></pre></div>
+
+<h4 id="toc_51">33、Xcode报错:Compiling IB documents for earlier than iOS7 is no longer supported.****</h4>
+
+<p><img src="https://github.com/dengfeng520/xiaoshiguangBlog/blob/master/Gif/Compiling%20IB.png?raw=true" alt="Compiling IB"></p>
+
+<h4 id="toc_52">34 、Swift 加载Gif图片</h4>
+
+<div><pre><code class="language-none">func loadGifImageWithPath(path: String,gifImage: UIImageView) {
+guard let data = NSData(contentsOfFile: path) else { return }
+guard let imageSource = CGImageSourceCreateWithData(data, nil) else { return }
+let imageCount = CGImageSourceGetCount(imageSource)
+var images = [UIImage]()
+var totalDuration : TimeInterval = 0
+for i in 0..&lt;imageCount {
+guard let cgImage = CGImageSourceCreateImageAtIndex(imageSource, i, nil) else { continue }
+let image = UIImage(cgImage: cgImage)
+if i == 0 {
+gifImage.image = image
+}
+images.append(image)
+guard let properties = CGImageSourceCopyPropertiesAtIndex(imageSource, i, nil) else { continue }
+guard let gifDict = (properties as NSDictionary)[kCGImagePropertyGIFDictionary] as? NSDictionary else { continue }
+guard let frameDuration = gifDict[kCGImagePropertyGIFDelayTime] as? NSNumber else { continue }
+totalDuration += frameDuration.doubleValue
+}
+gifImage.animationImages = images
+gifImage.animationDuration = totalDuration
+gifImage.animationRepeatCount = 0
+gifImage.contentMode = .scaleAspectFit
+gifImage.startAnimating()
+gifImage.backgroundColor = UIColor.white
+}</code></pre></div>
 
 
 
