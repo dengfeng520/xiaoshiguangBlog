@@ -1001,7 +1001,7 @@ _layerView.transform = viewTransform;
  ```
  效果图:
  
- ![testdemo5](https://github.com/dengfeng520/iOSNotes/blob/master/testdemo5.png?raw=true)
+ ![testdemo5](https://github.com/dengfeng520/iOSNotes/blob/master/Animation/testdemo5.png?raw=true)
  
  **9、3D仿射变换**
  
@@ -1016,7 +1016,7 @@ _layerView.transform = viewTransform;
  ```
  效果图:
   
-  ![testdemo6](https://github.com/dengfeng520/iOSNotes/blob/master/testdemo6.png?raw=true)
+  ![testdemo6](https://github.com/dengfeng520/iOSNotes/blob/master/Animation/testdemo6.png?raw=true)
   
   >3D X轴 Y轴 Z轴缩放比例
   
@@ -1027,7 +1027,7 @@ _layerView.transform = viewTransform;
   
   效果图:
   
-   ![testdemo7](https://github.com/dengfeng520/iOSNotes/blob/master/testdemo7.png?raw=true)
+   ![testdemo7](https://github.com/dengfeng520/iOSNotes/blob/master/Animation/testdemo7.png?raw=true)
 
 >3D 透视旋转
 
@@ -1132,29 +1132,29 @@ _layerView.transform = viewTransform;
 ####34 、Swift 加载Gif图片
 
 ```
-func loadGifImageWithPath(path: String,gifImage: UIImageView) {
-guard let data = NSData(contentsOfFile: path) else { return }
-guard let imageSource = CGImageSourceCreateWithData(data, nil) else { return }
-let imageCount = CGImageSourceGetCount(imageSource)
-var images = [UIImage]()
-var totalDuration : TimeInterval = 0
-for i in 0..<imageCount {
-guard let cgImage = CGImageSourceCreateImageAtIndex(imageSource, i, nil) else { continue }
-let image = UIImage(cgImage: cgImage)
-if i == 0 {
-gifImage.image = image
-}
-images.append(image)
-guard let properties = CGImageSourceCopyPropertiesAtIndex(imageSource, i, nil) else { continue }
-guard let gifDict = (properties as NSDictionary)[kCGImagePropertyGIFDictionary] as? NSDictionary else { continue }
-guard let frameDuration = gifDict[kCGImagePropertyGIFDelayTime] as? NSNumber else { continue }
-totalDuration += frameDuration.doubleValue
-}
-gifImage.animationImages = images
-gifImage.animationDuration = totalDuration
-gifImage.animationRepeatCount = 0
-gifImage.contentMode = .scaleAspectFit
-gifImage.startAnimating()
-gifImage.backgroundColor = UIColor.white
-}
+ func loadGifImageWithPath(path: String,gifImage: UIImageView) {
+        guard let data = NSData(contentsOfFile: path) else { return }
+        guard let imageSource = CGImageSourceCreateWithData(data, nil) else { return }
+        let imageCount = CGImageSourceGetCount(imageSource)
+        var images = [UIImage]()
+        var totalDuration : TimeInterval = 0
+        for i in 0..<imageCount {
+            guard let cgImage = CGImageSourceCreateImageAtIndex(imageSource, i, nil) else { continue }
+            let image = UIImage(cgImage: cgImage)
+            if i == 0 {
+                gifImage.image = image
+            }
+            images.append(image)
+            guard let properties = CGImageSourceCopyPropertiesAtIndex(imageSource, i, nil) else { continue }
+            guard let gifDict = (properties as NSDictionary)[kCGImagePropertyGIFDictionary] as? NSDictionary else { continue }
+            guard let frameDuration = gifDict[kCGImagePropertyGIFDelayTime] as? NSNumber else { continue }
+            totalDuration += frameDuration.doubleValue
+        }
+        gifImage.animationImages = images
+        gifImage.animationDuration = totalDuration
+        gifImage.animationRepeatCount = 0
+        gifImage.contentMode = .scaleAspectFit
+        gifImage.startAnimating()
+        gifImage.backgroundColor = UIColor.white
+    }
 ```
