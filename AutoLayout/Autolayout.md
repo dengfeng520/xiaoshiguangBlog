@@ -173,6 +173,11 @@ Auto Layout是由苹果公司UIKit框架提供的一个用于动态计算UIView�
 
 * 1、在使用NSLayoutAnchor为视图添加约束时一定要先把`translatesAutoresizingMaskIntoConstraints`设置`false`
 
+```
+ centerView.translatesAutoresizingMaskIntoConstraints = false
+
+```
+
 * 2、在使用safeAreaLayoutGuide适配iPhone X 等机型时要对iOS 11之前的系统做兼容
 
 ```
@@ -183,6 +188,49 @@ if #available(iOS 11.0, *) {
  }
 ```
 
+* 3、设置约束后要将其激活，即设置`isActive`为true
+
+```
+let centerX: NSLayoutConstraint = centerView.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0)
+centerX.isActive = true
+```
+
+* 4、如何刷新某个约束
+
+如我要修改一个view的宽度：
+通过代码添加约束，可把view的宽度设置类属性，然后在需要的地方修改constant的参数，然后在刷新约束即可，代码如下：
+
+```
+ var centerView: UIView! = nil
+ var centerWidth: NSLayoutConstraint! = nil
+
+```
+
+```
+
+self.centerView = UIView.init()
+view.addSubview(self.centerView)
+self.centerView.backgroundColor = UIColor.red
+self.centerView.translatesAutoresizingMaskIntoConstraints = false
+self.centerView.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0).isActive = true
+self.centerView.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0).isActive = true
+self.centerView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 0).isActive = true
+self.centerWidth = self.centerView.widthAnchor.constraint(equalToConstant: 120)
+self.centerWidth.isActive = true
+self.centerView.heightAnchor.constraint(equalToConstant: 120).isActive = true
+```
+
+```
+self.centerWidth.constant = 250
+weak var weakSelf = self
+UIView.animate(withDuration: 0.35, animations: {
+   weakSelf?.centerView.superview?.layoutIfNeeded()
+}) { (finished) in
+            
+}
+```
+效果如下：
+![layoutDemo5.gif](/Users/mac001/Desktop/Study学习资料/iOSNotes/AutoLayout/layoutDemo5.gif)
 
 > 7、Auto Layout自适应UITableViewCell高度使用
 
@@ -191,12 +239,16 @@ if #available(iOS 11.0, *) {
 
 如上图所示：这两个界面都是用Auto Layout + 自适应高度完成，下面我将一步步剖析如何利用 Auto Layout 和 estimatedRowHeight来完成一个简单的UITableView界面。
 
+本demo中的图片加载使用了猫神写的框架[Kingfisher]()
+
 
 > 8、 Compression Resistance Priority 和 Hugging Priority使用
 
  Compression Resistance Priority 和 Hugging Priority
 
 > 9、小结
+
+
 
 如果UI比较简单或者单一的强烈建议使用`AutoLayout`，如果UI比较复杂，建议`frame`+手动计算高度的方法。
 
@@ -211,6 +263,6 @@ if #available(iOS 11.0, *) {
 
 [Apple Developer High Performance Auto Layout](https://developer.apple.com/videos/play/wwdc2018/220)
 
-[Apple Develope NSLayoutConstraint](https://developer.apple.com/documentation/uikit/nslayoutconstraint)
-
 [WWDC 2018 What's New in Cocoa Touch](https://developer.apple.com/videos/play/wwdc2018/202/)
+
+[Apple Developer NSLayoutanchor](https://developer.apple.com/documentation/uikit/nslayoutanchor)
