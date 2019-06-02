@@ -17,7 +17,7 @@ Auto Layout是由苹果公司UIKit框架提供的一个用于动态计算UIView�
 在苹果[WWDC 2018 High Performance Auto Layout](https://developer.apple.com/videos/play/wwdc2018/220)中苹果工程师说: iOS 12将大幅度提升Auto Layout性能，使滑动屏幕时达到满帧。
 在[WWDC 2018 What's New in Cocoa Touch](https://developer.apple.com/videos/play/wwdc2018/202/)苹果的工程师说了iOS 12对Auto Layout优化后的表现。
 
-![AutoLayoutdemo4](/Users/mac001/Desktop/Study学习资料/iOSNotes/AutoLayout/AutoLayoutdemo4.png)
+![AutoLayoutdemo4](https://github.com/dengfeng520/xiaoshiguangBlog/blob/master/AutoLayout/AutoLayoutdemo4.png?raw=true)
 
 从图上可以看出，iOS 11中视图嵌套的数量的性能快成指数级别增长了，在iOS 12中已经基本和手写frame布局的性能类似了。
 
@@ -30,7 +30,7 @@ Auto Layout是由苹果公司UIKit框架提供的一个用于动态计算UIView�
 
 如我要设置一个宽高为120,居中显示的View，效果如下图：
 
-![AutoLayoutdemo3](/Users/mac001/Desktop/Study学习资料/iOSNotes/AutoLayout/AutoLayoutdemo3.png)
+![AutoLayoutdemo3](https://github.com/dengfeng520/xiaoshiguangBlog/blob/master/AutoLayout/AutoLayoutdemo3.png?raw=true)
 
 
 ###### 1、用frame手写布局
@@ -261,11 +261,11 @@ UIView.animate(withDuration: 0.35, animations: {
 }
 ```
 效果如下：
-![layoutDemo5.gif](/Users/mac001/Desktop/Study学习资料/iOSNotes/AutoLayout/layoutDemo5.gif)
+![layoutDemo5.gif](https://github.com/dengfeng520/xiaoshiguangBlog/blob/master/AutoLayout/layoutDemo5.gif?raw=true)
 
 如果你使用的是xib或者storyboard，那么就更简单了，直接摁住键盘control键，拖到对应的类里，然后在需要的地方修改约束并刷新即可。操作如下：
 
-![AutoLayoutdemo6](/Users/mac001/Desktop/Study学习资料/iOSNotes/AutoLayout/AutoLayoutdemo6.gif)
+![AutoLayoutdemo6](https://github.com/dengfeng520/xiaoshiguangBlog/blob/master/AutoLayout/AutoLayoutdemo6.gif?raw=true)
 
 * 6、设置宽高比
 
@@ -276,7 +276,7 @@ UIView.animate(withDuration: 0.35, animations: {
  centerView.widthAnchor.constraint(equalTo: centerView.heightAnchor, multiplier: 16 / 9).isActive = true
 ```
 
-![layoutDemo7.png](/Users/mac001/Desktop/Study学习资料/iOSNotes/AutoLayout/layoutDemo7.png)
+![layoutDemo7.png](https://github.com/dengfeng520/xiaoshiguangBlog/blob/master/AutoLayout/layoutDemo7.png?raw=true)
 
 > 7、Auto Layout自适应UITableViewCell高度使用
 
@@ -316,7 +316,8 @@ UItableView继承自UIScrollView,UIScrollView的滚动需要设置其contentSize
 ```
 
 
-![Autolayoutdemo2](/Users/mac001/Desktop/Study学习资料/iOSNotes/AutoLayout/Autolayoutdemo2.png)
+![Autolayoutdemo2](https://github.com/dengfeng520/xiaoshiguangBlog/blob/master/AutoLayout/Autolayoutdemo2.png?raw=true)
+
 如上图所示：这个界面就是用Auto Layout + estimatedRowHeight完成自适应高度的，在添加约束时要保证顶部和底部的视图相对UITableViewCell都设置相对位置，同时要计算UITableViewCell内部所有控件的高度。那么问题来了，用户发布的内容详情和图片在没有得到数据之前时没办法算出其高度的，此处可以先给内容文字Label设置一个默认高度，然后让其根据内容填充自动计算高度，
 
 ```
@@ -345,7 +346,7 @@ if idx == imageArray.count - 1 {
 }
 ```
 
-![Autolayoutdemo8.png](/Users/mac001/Desktop/Study学习资料/iOSNotes/AutoLayout/layoutDemo8.png)
+![Autolayoutdemo8.png](https://github.com/dengfeng520/xiaoshiguangBlog/blob/master/AutoLayout/layoutDemo8.png?raw=true)
 
 实现思路如上图所示，具体实现的请看[代码](https://github.com/dengfeng520/One-Swift)
 
