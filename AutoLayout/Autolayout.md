@@ -353,11 +353,11 @@ if idx == imageArray.count - 1 {
 
 > 8、 Compression Resistance Priority 和 Hugging Priority使用
 
-`Compression Resistance Priority` 和 `Hugging Priority` 在实际使用中往往配合使用，分别处理在同义水平线上多个view之间内容过少和内容过多而造成的互相压挤的情况。
+Compression Resistance Priority 和Hugging Priority 在实际使用中往往配合使用，分别处理在同义水平线上多个view之间内容过少和内容过多而造成的互相压挤的情况。
 
-` Hugging Priority`的意思就是自包裹的优先级，优先级越高，则优先将尺寸按照控件的内容进行填充。
+Hugging Priority的意思就是自包裹的优先级，优先级越高，则优先将尺寸按照控件的内容进行填充。
 
-` Compression Resistance Priority`，意思是说当不够显示内容时，根据这个优先级进行切割。优先级越低，越容易被切掉。
+Compression Resistance Priority，意思是说当不够显示内容时，根据这个优先级进行切割。优先级越低，越容易被切掉。
 
 | ContentHuggingPriority  | 表示当前的view的内容不想被拉伸  | 
 | :-------------:|:-------------:| 
@@ -366,8 +366,10 @@ if idx == imageArray.count - 1 {
 
 
 如设置2个UILabel的拉伸优先级可使用代码：
+
 ```        
 fristLab.setContentHuggingPriority(UILayoutPriority(rawValue: 251), for: .horizontal)
+
 secondLab.setContentCompressionResistancePriority(UILayoutPriority(rawValue: 750), for: .horizontal)
 ```
 

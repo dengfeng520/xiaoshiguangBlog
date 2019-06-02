@@ -659,11 +659,11 @@ if idx == imageArray.count - 1 {
 <p>8、 Compression Resistance Priority 和 Hugging Priority使用</p>
 </blockquote>
 
-<p><code>Compression Resistance Priority</code> 和 <code>Hugging Priority</code> 在实际使用中往往配合使用，分别处理在同义水平线上多个view之间内容过少和内容过多而造成的互相压挤的情况。</p>
+<p>Compression Resistance Priority 和Hugging Priority 在实际使用中往往配合使用，分别处理在同义水平线上多个view之间内容过少和内容过多而造成的互相压挤的情况。</p>
 
-<p><code>Hugging Priority</code>的意思就是自包裹的优先级，优先级越高，则优先将尺寸按照控件的内容进行填充。</p>
+<p>Hugging Priority的意思就是自包裹的优先级，优先级越高，则优先将尺寸按照控件的内容进行填充。</p>
 
-<p><code>Compression Resistance Priority</code>，意思是说当不够显示内容时，根据这个优先级进行切割。优先级越低，越容易被切掉。</p>
+<p>Compression Resistance Priority，意思是说当不够显示内容时，根据这个优先级进行切割。优先级越低，越容易被切掉。</p>
 
 <table>
 <thead>
@@ -685,11 +685,11 @@ if idx == imageArray.count - 1 {
 </tbody>
 </table>
 
-<p>如设置2个UILabel的拉伸优先级可使用代码：
-<code>
-fristLab.setContentHuggingPriority(UILayoutPriority(rawValue: 251), for: .horizontal)
-secondLab.setContentCompressionResistancePriority(UILayoutPriority(rawValue: 750), for: .horizontal)
-</code></p>
+<p>如设置2个UILabel的拉伸优先级可使用代码：</p>
+
+<div><pre><code class="language-none">fristLab.setContentHuggingPriority(UILayoutPriority(rawValue: 251), for: .horizontal)
+
+secondLab.setContentCompressionResistancePriority(UILayoutPriority(rawValue: 750), for: .horizontal)</code></pre></div>
 
 <blockquote>
 <p>9、小结</p>
