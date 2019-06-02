@@ -151,10 +151,23 @@ Auto Layout是由苹果公司UIKit框架提供的一个用于动态计算UIView�
 
 > 4、NSLayoutAnchor常用API
 
+```
+leadingAnchor
+trailingAnchor
+leftAnchor
+rightAnchor
+topAnchor
+bottomAnchor
+widthAnchor
+heightAnchor
+centerXAnchor
+centerYAnchor
+firstBaselineAnchor
+lastBaselineAnchor
+```
+同时对于NSLayoutAnchor的一些常用属性，通过其命名就能看出来其作用，这里不做赘述，如果想了解更多请查阅[Apple Developer NSLayoutAnchor](https://developer.apple.com/documentation/uikit/nslayoutanchor#//apple_ref/occ/instm/NSLayoutAnchor/constraintEqualToAnchor:constant:)。
 
-
-更多使用方法请查阅[Apple Developer NSLayoutAnchor](https://developer.apple.com/documentation/uikit/nslayoutanchor#//apple_ref/occ/instm/NSLayoutAnchor/constraintEqualToAnchor:constant:)
-
+ 
 > 5、Auto Layout关于更新的几个方法的区别
 
 * [setNeedsLayout()](https://developer.apple.com/documentation/uikit/uiview/1622601-setneedslayout): 告知页面需要更新，但是不会立刻开始更新。执行后会立刻调用layoutSubviews。
@@ -178,7 +191,7 @@ Auto Layout是由苹果公司UIKit框架提供的一个用于动态计算UIView�
 
 ```
 
-* 2、在使用safeAreaLayoutGuide适配iPhone X 等机型时要对iOS 11之前的系统做兼容
+* 2、在使用safeAreaLayoutGuide适配iPhone X 等机型时要对iOS 11之前的系统做兼容，否则会导致低版本系统上程序Crash
 
 ```
 if #available(iOS 11.0, *) {
@@ -195,7 +208,25 @@ let centerX: NSLayoutConstraint = centerView.centerXAnchor.constraint(equalTo: v
 centerX.isActive = true
 ```
 
-* 4、如何刷新某个约束
+* 4、leadingAnchor 不要和 leftAnchor混用
+
+```
+centerView.leadingAnchor.constraint(equalTo: view.leftAnchor, constant: 0).isActive = true
+```
+
+```
+centerView.leftAnchor.constraint(equalTo: view.leadingAnchor, constant: 0).isActive = true
+```
+以上2种写法，在编译时不会出现任何问题，但是在运行时就会报错，并会导致程序Crash,官方的说法是：
+
+```
+While the NSLayoutAnchor class provides additional type checking, it is still possible to create invalid constraints. For example, the compiler allows you to constrain one view’s leadingAnchor with another view’s leftAnchor, since they are both NSLayoutXAxisAnchor instances. However, Auto Layout does not allow constraints that mix leading and trailing attributes with left or right attributes. As a result, this constraint crashes at runtime.
+```
+
+同理，trailingAnchor和rightAnchor也不能混用。
+
+
+* 5、如何刷新某个约束
 
 如我要修改一个view的宽度：
 通过代码添加约束，可把view的宽度设置类属性，然后在需要的地方修改constant的参数，然后在刷新约束即可，代码如下：
@@ -232,25 +263,121 @@ UIView.animate(withDuration: 0.35, animations: {
 效果如下：
 ![layoutDemo5.gif](/Users/mac001/Desktop/Study学习资料/iOSNotes/AutoLayout/layoutDemo5.gif)
 
+如果你使用的是xib或者storyboard，那么就更简单了，直接摁住键盘control键，拖到对应的类里，然后在需要的地方修改约束并刷新即可。操作如下：
+
+![AutoLayoutdemo6](/Users/mac001/Desktop/Study学习资料/iOSNotes/AutoLayout/AutoLayoutdemo6.gif)
+
+* 6、设置宽高比
+
+在开发中，我们会遇到一些需求要求根据view的宽高比来设置约束，如一般情况下显示视频的宽高比是16:9，通过代码设置宽高比如下：
+
+```
+ centerView.heightAnchor.constraint(equalToConstant: 90).isActive = true
+ centerView.widthAnchor.constraint(equalTo: centerView.heightAnchor, multiplier: 16 / 9).isActive = true
+```
+
+![layoutDemo7.png](/Users/mac001/Desktop/Study学习资料/iOSNotes/AutoLayout/layoutDemo7.png)
+
 > 7、Auto Layout自适应UITableViewCell高度使用
 
-![Autolayoutdemo1](/Users/mac001/Desktop/Study学习资料/iOSNotes/AutoLayout/Autolayoutdemo1.png)
+* 使用rowHeight设置高度
+
+一般情况下，如果UITableView的每个Cell高度是固定的我们可以直接指定一个值即可，如果没有设置UITableView的高度，系统会默认设置rowHeight高度是44。
+
+
+```
+tableview.rowHeight = 44;
+```
+
+也可以通过UITableViewDelegate的代理来设置UItableView的高度。
+```
+ func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 50
+ }
+```
+
+如果通过手动计算每个UItableViewCell的高度，也在这个代理中实现，通过计算返回每个UItableViewCell的高度。
+
+* 使用estimatedRowHeight设置高度
+
+UItableView继承自UIScrollView,UIScrollView的滚动需要设置其contentSize后，然后根据自身的bounds、contentInset、contentOffset等属性来计算出可滚动的长度。而UITableView在初始化时并不知道这些参数，只有在设置了delegate和dataSource之后，根据创建的UITableViewCell的个数和加载的UITableViewCell的高度之后才能算出可滚动的长度。
+
+在使用Auto Layout自适应UITableViewCell高度时应提前设置一个估算值，当然这个估算值越接近真实值越好。
+
+```
+ tableView.rowHeight = UITableView.automaticDimension
+ tableView.estimatedRowHeight = 200
+```
+
+```
+ func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+    return 200    
+ }
+```
+
+
 ![Autolayoutdemo2](/Users/mac001/Desktop/Study学习资料/iOSNotes/AutoLayout/Autolayoutdemo2.png)
+如上图所示：这个界面就是用Auto Layout + estimatedRowHeight完成自适应高度的，在添加约束时要保证顶部和底部的视图相对UITableViewCell都设置相对位置，同时要计算UITableViewCell内部所有控件的高度。那么问题来了，用户发布的内容详情和图片在没有得到数据之前时没办法算出其高度的，此处可以先给内容文字Label设置一个默认高度，然后让其根据内容填充自动计算高度，
 
-如上图所示：这两个界面都是用Auto Layout + 自适应高度完成，下面我将一步步剖析如何利用 Auto Layout 和 estimatedRowHeight来完成一个简单的UITableView界面。
+```
+ detailsLab.heightAnchor.constraint(greaterThanOrEqualToConstant: 20).isActive = true;
+ detailsLab.font = UIFont.init(name: "Montserrat-SemiBold", size: 12)
+detailsLab.numberOfLines = 0
+```
 
-本demo中的图片加载使用了猫神写的框架[Kingfisher]()
+如果用户发布内容没有图片，直接设置发布内容UILabel距离UITableView距离底部的约束距离即可；
+
+```              
+ detailsLab.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -8).isActive = true
+
+```
+
+
+如果用户发布的内容有图片，那么在计算出每张图片的位置和大小之后，一定要给最后一张图片设置距离UItableViewCell底部(bottom)的约束距离。
+
+```
+for(idx, obj) in imageArray.enumerated() {
+//.....计算图片的大小和位置
+if idx == imageArray.count - 1 {
+   //设置最后一张图片距离底部的约束
+   photo.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -8).isActive = true
+ }
+}
+```
+
+![Autolayoutdemo8.png](/Users/mac001/Desktop/Study学习资料/iOSNotes/AutoLayout/layoutDemo8.png)
+
+实现思路如上图所示，具体实现的请看[代码](https://github.com/dengfeng520/One-Swift)
 
 
 > 8、 Compression Resistance Priority 和 Hugging Priority使用
 
- Compression Resistance Priority 和 Hugging Priority
+`Compression Resistance Priority` 和 `Hugging Priority` 在实际使用中往往配合使用，分别处理在同义水平线上多个view之间内容过少和内容过多而造成的互相压挤的情况。
+
+` Hugging Priority`的意思就是自包裹的优先级，优先级越高，则优先将尺寸按照控件的内容进行填充。
+
+` Compression Resistance Priority`，意思是说当不够显示内容时，根据这个优先级进行切割。优先级越低，越容易被切掉。
+
+| ContentHuggingPriority  | 表示当前的view的内容不想被拉伸  | 
+| :-------------:|:-------------:| 
+| ContentCompressionResistancePriority | 表示当前的view的内容不想被收缩|
+|默认情况下: HuggingPriority = 250|默认情况下: CompressionResistancePriority = 750|
+
+
+如设置2个UILabel的拉伸优先级可使用代码：
+```        
+fristLab.setContentHuggingPriority(UILayoutPriority(rawValue: 251), for: .horizontal)
+secondLab.setContentCompressionResistancePriority(UILayoutPriority(rawValue: 750), for: .horizontal)
+```
+
+
 
 > 9、小结
 
 
+本文主要分享了苹果Auto Layout的几种实现方法和注意事项，对于Auto Layout在实际开发中的使用是采用纯代码、还是xib + 代码，还是storyboard + 代码，还是xib + storyboard + 代码的方式实现，主要由团队的要求、个人的习惯，以及App的繁琐程度来决定的。
 
-如果UI比较简单或者单一的强烈建议使用`AutoLayout`，如果UI比较复杂，建议`frame`+手动计算高度的方法。
+对于Auto Layout在视图上的使用，个人建议如果UI比较简单或者单一的界面可使用Auto Layout，如果UI的操作或刷新很复杂的界面，建议还是frame + 手动布局的方式。
 
 --
 [本文demo](https://github.com/dengfeng520/One-Swift)
