@@ -5,7 +5,7 @@
 
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>小时光的博客:RPToastView自定义轻量级Toast</title>
+<title>RPToastView</title>
 
 
 <style type="text/css">
@@ -328,13 +328,22 @@ kbd {
 
 <body>
 
-<h1><center>RPToastView</center></h1>
-
 <p><a href="https://github.com/dengfeng520/RPToastView">RPToastView</a></p>
 
-<h3>Adding RPToastView to your project</h3>
+<h2>RPToastView</h2>
 
-<p><strong>CocoaPods</strong></p>
+<ul>
+<li><p>iOS 9+</p></li>
+<li><p>Swift 4.2+</p></li>
+<li><p>pod V1.7.0+</p></li>
+<li><p>license MIT</p></li>
+</ul>
+
+<h2>Requirements</h2>
+
+<p><strong>RPToastView works on iOS 9+ and requires Swift 4.2 to build.</strong></p>
+
+<h2>Adding RPToastView to your project</h2>
 
 <p><strong>CocoaPods is the recommended way to add RPToastView to your project.</strong></p>
 
@@ -355,29 +364,59 @@ kbd {
 
 <div><pre><code class="language-none">import RPToastView</code></pre></div>
 
-<p><strong>Usage</strong></p>
+<h2>Usage</h2>
 
 <blockquote>
 <p>onlyTextMode</p>
 </blockquote>
 
-<div><pre><code class="language-none">RPToastView.show(onlyText(isText: &quot;Loading....&quot;, isView: self.view, isTime: 1.5))</code></pre></div>
+<div><pre><code class="language-none">RPToastView.show(mode: .onlyTextMode, isView:self.view, text: &quot;Loading....&quot;)</code></pre></div>
+
+<p>or</p>
+
+<div><pre><code class="language-none">RPToastView.show(mode: .onlyTextMode, text: &quot;Loading....&quot;)
+</code></pre></div>
 
 <blockquote>
 <p>indeterminateMode</p>
 </blockquote>
 
-<div><pre><code class="language-none">RPToastView.show(withMode(text: nil, isMode: .indeterminateMode, addView: self.view!))</code></pre></div>
+<div><pre><code class="language-none">RPToastView.show(mode: .indeterminateMode, isView:self.view)</code></pre></div>
 
 <p>or</p>
 
-<div><pre><code class="language-none">RPToastView.show(withActivityMode(addView: self.view))</code></pre></div>
+<div><pre><code class="language-none">RPToastView.show(mode: .indeterminateMode)</code></pre></div>
 
 <blockquote>
 <p>mixedMode</p>
 </blockquote>
 
-<div><pre><code class="language-none"> RPToastView.show(withMode(text: &quot;Loading...&quot;, isMode: .mixedMode, addView: self.view!))
+<div><pre><code class="language-none"> RPToastView.show(mode: .mixedMode, isView:self.view, text: &quot;Loading....&quot;)</code></pre></div>
+
+<p>or </p>
+
+<div><pre><code class="language-none">RPToastView.show(mode: .mixedMode, text: &quot;Loading....&quot;)</code></pre></div>
+
+<blockquote>
+<p>loopMode</p>
+</blockquote>
+
+<div><pre><code class="language-none">RPToastView.show(mode: .loopMode, isView:self.view)</code></pre></div>
+
+<p>or</p>
+
+<div><pre><code class="language-none">RPToastView.show(mode: .loopMode)</code></pre></div>
+
+<blockquote>
+<p>loopAndTextMode</p>
+</blockquote>
+
+<div><pre><code class="language-none">RPToastView.show(mode: .loopAndTextMode, isView:self.view, text: &quot;Loading....&quot;)
+</code></pre></div>
+
+<p>or </p>
+
+<div><pre><code class="language-none">RPToastView.show(mode: .loopAndTextMode, text: &quot;Loading....&quot;)
 </code></pre></div>
 
 <blockquote>
@@ -386,9 +425,11 @@ kbd {
 
 <div><pre><code class="language-none">RPToastView.hidden(animation: true)</code></pre></div>
 
-<p><img src="https://github.com/dengfeng520/RPToastView/blob/master/demo1.png?raw=true" alt="demo1.png">
-<img src="https://github.com/dengfeng520/RPToastView/blob/master/demo2.png?raw=true" alt="demo2.png">
-<img src="https://github.com/dengfeng520/RPToastView/blob/master/demo3.png?raw=true" alt="demo3.png"></p>
+<p><img src="https://github.com/dengfeng520/RPToastView/blob/master/demo1.png?raw=true" alt="demo1">
+<img src="https://github.com/dengfeng520/RPToastView/blob/master/demo2.png?raw=true" alt="demo2">
+<img src="https://github.com/dengfeng520/RPToastView/blob/master/demo3.png?raw=true" alt="demo3">
+<img src="https://github.com/dengfeng520/RPToastView/blob/master/demo4.png?raw=true" alt="demo4">
+<img src="https://github.com/dengfeng520/RPToastView/blob/master/demo5.png?raw=true" alt="demo5"></p>
 
 
 
