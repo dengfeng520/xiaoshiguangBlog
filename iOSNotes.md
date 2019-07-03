@@ -1158,3 +1158,28 @@ _layerView.transform = viewTransform;
         gifImage.backgroundColor = UIColor.white
     }
 ```
+
+####35 、CABasicAnimation动画keyPath属性
+
+| 属性  |  说明   | 
+| :----------------:|:--------------------:| 
+|**transform.scale**|比例转换|
+|**transform.rotation**|旋转|
+|**transform.rotation.x**|X轴旋转|
+|**transform.rotation.y**|Y轴旋转|
+|**opacity**|透明度|
+|**margin**|边距|
+|**position**|位移|
+|**backgroundColor**|背景颜色|
+|**cornerRadius**|圆角|
+|**borderWidth**|边框宽度|
+|**bounds**|位置，体积|
+|**contents**|内容|
+|**contentsRect**|面积|
+|**frame**|位置体积|
+|**hidden**|是否隐藏|
+|**shadowColor**|阴影颜色|
+|**shadowOffset**|阴影偏移|
+|**shadowOpacity**|阴影透明|
+|**shadowRadius**|阴影半径|
+
