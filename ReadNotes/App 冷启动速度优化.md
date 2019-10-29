@@ -1,18 +1,19 @@
 <h1>App 冷启动速度优化</h1>
 
-
+App的启动分为
 
 > <h3>为什么要做优化</h3>
 
-为什么要做优化
+&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;
 
-> <h3>App启动过程</h3>
 
-App启动过程
+> <h3>App启动都做了什么</h3>
+
+
 
 > <h3>从那些方面优化</h3>
 
-从那些方面优化
+**1、减少在**
 
 
 -- 
@@ -28,7 +29,7 @@ App启动过程
 
 [杨萧玉--优化App的启动时间](http://yulingtianxia.com/blog/2016/10/30/Optimizing-App-Startup-Time/)
 
-[字节跳动--今日头条iOS客户端启动速度优化](https://techblog.toutiao.com/2017/01/17/iosspeed/)
+[字节跳动--今日头条iOS客户端启动速度优化](https://www.jianshu.com/p/7096478ccbe7)
 
 **友情链接**
 

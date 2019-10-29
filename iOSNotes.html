@@ -1560,6 +1560,128 @@ _layerView.transform = viewTransform;
         gifImage.backgroundColor = UIColor.white
     }</code></pre></div>
 
+<h4 id="toc_53">35 、CABasicAnimation动画keyPath属性</h4>
+
+<table>
+<thead>
+<tr>
+<th style="text-align: center">属性</th>
+<th style="text-align: center">说明</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td style="text-align: center"><strong>transform.scale</strong></td>
+<td style="text-align: center">比例转换</td>
+</tr>
+<tr>
+<td style="text-align: center"><strong>transform.rotation</strong></td>
+<td style="text-align: center">旋转</td>
+</tr>
+<tr>
+<td style="text-align: center"><strong>transform.rotation.x</strong></td>
+<td style="text-align: center">X轴旋转</td>
+</tr>
+<tr>
+<td style="text-align: center"><strong>transform.rotation.y</strong></td>
+<td style="text-align: center">Y轴旋转</td>
+</tr>
+<tr>
+<td style="text-align: center"><strong>opacity</strong></td>
+<td style="text-align: center">透明度</td>
+</tr>
+<tr>
+<td style="text-align: center"><strong>margin</strong></td>
+<td style="text-align: center">边距</td>
+</tr>
+<tr>
+<td style="text-align: center"><strong>position</strong></td>
+<td style="text-align: center">位移</td>
+</tr>
+<tr>
+<td style="text-align: center"><strong>backgroundColor</strong></td>
+<td style="text-align: center">背景颜色</td>
+</tr>
+<tr>
+<td style="text-align: center"><strong>cornerRadius</strong></td>
+<td style="text-align: center">圆角</td>
+</tr>
+<tr>
+<td style="text-align: center"><strong>borderWidth</strong></td>
+<td style="text-align: center">边框宽度</td>
+</tr>
+<tr>
+<td style="text-align: center"><strong>bounds</strong></td>
+<td style="text-align: center">位置，体积</td>
+</tr>
+<tr>
+<td style="text-align: center"><strong>contents</strong></td>
+<td style="text-align: center">内容</td>
+</tr>
+<tr>
+<td style="text-align: center"><strong>contentsRect</strong></td>
+<td style="text-align: center">面积</td>
+</tr>
+<tr>
+<td style="text-align: center"><strong>frame</strong></td>
+<td style="text-align: center">位置体积</td>
+</tr>
+<tr>
+<td style="text-align: center"><strong>hidden</strong></td>
+<td style="text-align: center">是否隐藏</td>
+</tr>
+<tr>
+<td style="text-align: center"><strong>shadowColor</strong></td>
+<td style="text-align: center">阴影颜色</td>
+</tr>
+<tr>
+<td style="text-align: center"><strong>shadowOffset</strong></td>
+<td style="text-align: center">阴影偏移</td>
+</tr>
+<tr>
+<td style="text-align: center"><strong>shadowOpacity</strong></td>
+<td style="text-align: center">阴影透明</td>
+</tr>
+<tr>
+<td style="text-align: center"><strong>shadowRadius</strong></td>
+<td style="text-align: center">阴影半径</td>
+</tr>
+</tbody>
+</table>
+
+<h4 id="toc_54">36、ijkplayer编译报错</h4>
+
+<div><pre><code class="language-none">./libavutil/arm/asm.S:50:9: error: unknown directive
+        .arch armv7-a
+        ^
+make: *** [libavcodec/arm/aacpsdsp_neon.o] Error 1</code></pre></div>
+
+<p>报错原因是因为xcode对32位的支持弱化了，可以在compile-ffmpeg.sh里面删除armv7；</p>
+
+<h4 id="toc_55">37、DarkMode</h4>
+
+<div><pre><code class="language-none">if (@available(iOS 13.0, *)) {
+            myselfTxt.textColor = [UIColor colorWithDynamicProvider:^UIColor * _Nonnull(UITraitCollection * _Nonnull traitCollection) {
+                if (traitCollection.userInterfaceStyle == UIUserInterfaceStyleDark) {
+                    return UIColor.whiteColor;
+                } else {
+                    return UIColor.blackColor;
+                }
+            }];
+        }</code></pre></div>
+
+<div><pre><code class="language-none"> NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithData:[webStr dataUsingEncoding:NSUnicodeStringEncoding] options:@{ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType } documentAttributes:nil error:nil];
+        if (@available(iOS 13.0, *)) {
+            [attributedString addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithDynamicProvider:^UIColor * _Nonnull(UITraitCollection * _Nonnull traitCollection) {
+                if (traitCollection.userInterfaceStyle == UIUserInterfaceStyleDark) {
+                    return UIColor.whiteColor;
+                } else {
+                    return UIColor.blackColor;
+                }
+            }] range:NSMakeRange(0, attributedString.string.length)];
+        }</code></pre></div>
+
 
 
 

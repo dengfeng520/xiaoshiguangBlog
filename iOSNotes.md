@@ -1183,3 +1183,40 @@ _layerView.transform = viewTransform;
 |**shadowOpacity**|阴影透明|
 |**shadowRadius**|阴影半径|
 
+####36、ijkplayer编译报错
+
+```
+./libavutil/arm/asm.S:50:9: error: unknown directive
+        .arch armv7-a
+        ^
+make: *** [libavcodec/arm/aacpsdsp_neon.o] Error 1
+```
+
+报错原因是因为xcode对32位的支持弱化了，可以在compile-ffmpeg.sh里面删除armv7；
+
+####37、DarkMode
+
+```
+if (@available(iOS 13.0, *)) {
+            myselfTxt.textColor = [UIColor colorWithDynamicProvider:^UIColor * _Nonnull(UITraitCollection * _Nonnull traitCollection) {
+                if (traitCollection.userInterfaceStyle == UIUserInterfaceStyleDark) {
+                    return UIColor.whiteColor;
+                } else {
+                    return UIColor.blackColor;
+                }
+            }];
+        }
+```
+
+```
+ NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithData:[webStr dataUsingEncoding:NSUnicodeStringEncoding] options:@{ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType } documentAttributes:nil error:nil];
+        if (@available(iOS 13.0, *)) {
+            [attributedString addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithDynamicProvider:^UIColor * _Nonnull(UITraitCollection * _Nonnull traitCollection) {
+                if (traitCollection.userInterfaceStyle == UIUserInterfaceStyleDark) {
+                    return UIColor.whiteColor;
+                } else {
+                    return UIColor.blackColor;
+                }
+            }] range:NSMakeRange(0, attributedString.string.length)];
+        }
+```
