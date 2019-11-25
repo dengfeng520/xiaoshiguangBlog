@@ -1682,6 +1682,50 @@ make: *** [libavcodec/arm/aacpsdsp_neon.o] Error 1</code></pre></div>
             }] range:NSMakeRange(0, attributedString.string.length)];
         }</code></pre></div>
 
+<h4 id="toc_56">38、RXSwift</h4>
+
+<ul>
+<li>UIButton </li>
+</ul>
+
+<div><pre><code class="language-SWift">let disposeBag = DisposeBag()
+
+//---------------------- UIButton
+Btn.rx.tap.subscribe(onNext:{
+      
+}).disposed(by: disposeBag)
+</code></pre></div>
+
+<ul>
+<li>UITextView</li>
+</ul>
+
+<div><pre><code class="language-none">//---------------------- UITextView
+ // 内容发生改变时
+ self.inputReasonTxt.rx.didChange.subscribe(onNext: {
+     if &quot;\($0)&quot; == &quot;请输入申诉理由&quot; {
+          weakSelf!.inputReasonTxt.textColor = UIColor.lightGray
+     } else {
+          weakSelf!.inputReasonTxt.textColor = UIColor.configDarkModeTxtColor()
+     }
+}).disposed(by: disposeBag)
+ // 开始编辑时
+self.inputReasonTxt.rx.didBeginEditing.subscribe(onNext: {
+     print(&quot;您输入的是=========：\($0)&quot;)
+     if weakSelf!.inputReasonTxt.text == &quot;请输入申诉理由&quot; {
+         weakSelf!.inputReasonTxt.text = &quot;&quot;
+     }
+}).disposed(by: disposeBag)
+// 结束编辑响应
+self.inputReasonTxt.rx.didEndEditing.subscribe(onNext: {
+     print(&quot;结束编辑============&quot;)
+     if weakSelf!.inputReasonTxt.text == &quot;&quot; {
+        weakSelf!.inputReasonTxt.text = &quot;请输入申诉理由&quot;
+        weakSelf!.inputReasonTxt.textColor = UIColor.lightGray
+     }
+}).disposed(by: disposeBag)
+</code></pre></div>
+
 
 
 

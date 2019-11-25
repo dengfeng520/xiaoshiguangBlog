@@ -1220,3 +1220,45 @@ if (@available(iOS 13.0, *)) {
             }] range:NSMakeRange(0, attributedString.string.length)];
         }
 ```
+####38、RXSwift
+
+* UIButton 
+
+```SWift 
+let disposeBag = DisposeBag()
+
+//---------------------- UIButton
+Btn.rx.tap.subscribe(onNext:{
+      
+}).disposed(by: disposeBag)
+
+```
+* UITextView
+
+```
+//---------------------- UITextView
+ // 内容发生改变时
+ self.inputReasonTxt.rx.didChange.subscribe(onNext: {
+     if "\($0)" == "请输入申诉理由" {
+          weakSelf!.inputReasonTxt.textColor = UIColor.lightGray
+     } else {
+          weakSelf!.inputReasonTxt.textColor = UIColor.configDarkModeTxtColor()
+     }
+}).disposed(by: disposeBag)
+ // 开始编辑时
+self.inputReasonTxt.rx.didBeginEditing.subscribe(onNext: {
+     print("您输入的是=========：\($0)")
+     if weakSelf!.inputReasonTxt.text == "请输入申诉理由" {
+         weakSelf!.inputReasonTxt.text = ""
+     }
+}).disposed(by: disposeBag)
+// 结束编辑响应
+self.inputReasonTxt.rx.didEndEditing.subscribe(onNext: {
+     print("结束编辑============")
+     if weakSelf!.inputReasonTxt.text == "" {
+        weakSelf!.inputReasonTxt.text = "请输入申诉理由"
+        weakSelf!.inputReasonTxt.textColor = UIColor.lightGray
+     }
+}).disposed(by: disposeBag)
+
+```
