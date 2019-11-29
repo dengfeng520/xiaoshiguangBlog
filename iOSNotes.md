@@ -1262,3 +1262,13 @@ self.inputReasonTxt.rx.didEndEditing.subscribe(onNext: {
 }).disposed(by: disposeBag)
 
 ```
+####39、kCATransitionPush
+
+```
+CATransition* ani = [CATransition animation];
+    ani.type = kCATransitionPush;
+    ani.subtype = kCATransitionFromLeft;
+    ani.duration = .35f;
+    [self.rootView.layer addAnimation:ani forKey:@"transitionAni"];
+```
+
