@@ -1272,3 +1272,4 @@ CATransition* ani = [CATransition animation];
     [self.rootView.layer addAnimation:ani forKey:@"transitionAni"];
 ```
 
+####40、kCATransitionPush
