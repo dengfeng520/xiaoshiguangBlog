@@ -1,4 +1,5 @@
-<h3><center>iOS Auto Layout Study Notes</center></h3>
+<h3><center>iOS AutoLayout 笔记</center></h3>
+
 --
 
 
@@ -167,7 +168,7 @@ lastBaselineAnchor
 ```
 同时对于NSLayoutAnchor的一些常用属性，通过其命名就能看出来其作用，这里不做赘述，如果想了解更多请查阅[Apple Developer NSLayoutAnchor](https://developer.apple.com/documentation/uikit/nslayoutanchor#//apple_ref/occ/instm/NSLayoutAnchor/constraintEqualToAnchor:constant:)。
 
- 
+
 > 5、Auto Layout关于更新的几个方法的区别
 
 * [setNeedsLayout()](https://developer.apple.com/documentation/uikit/uiview/1622601-setneedslayout): 告知页面需要更新，但是不会立刻开始更新。执行后会立刻调用layoutSubviews。
@@ -359,8 +360,8 @@ Hugging Priority的意思就是自包裹的优先级，优先级越高，则优�
 
 Compression Resistance Priority，意思是说当不够显示内容时，根据这个优先级进行切割。优先级越低，越容易被切掉。
 
-| ContentHuggingPriority  | 表示当前的view的内容不想被拉伸  | 
-| :-------------:|:-------------:| 
+| ContentHuggingPriority  | 表示当前的view的内容不想被拉伸  |
+| :-------------:|:-------------:|
 | ContentCompressionResistancePriority | 表示当前的view的内容不想被收缩|
 |默认情况下: HuggingPriority = 250|默认情况下: CompressionResistancePriority = 750|
 

@@ -1,8 +1,6 @@
 
 <h1><center>优雅的利用Lottie实现炫酷的动画效果</center></h1>
-
 <h6 align='right'>小时光</h6>
-
 
 --
 
@@ -47,7 +45,7 @@
 >3、Lottie 的简单使用
 
 ######1、 导入工程
- 
+
 &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;`Lottie`的使用非常简单，只要集成了`Lottie`框架，然后在程序中通过`Loattie`的接口控制设计通过AE生成的JSON就行了。
 &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;官方推荐`iOS`开发者使用`Pod`来管理,其他平台开发者可参考[Lottie官网](http://airbnb.io/lottie/)给出的方案。
 在`Podfile`文件中导入：
@@ -144,7 +142,6 @@ lottieAnimationView.stop()
 对于程序中比较复杂的动画用`iOS`系统为开发者提供的`API`无法实现的，建议使用`Lottie`动画，对于一些简单的动画，建议使用系统提供的`API`来实现，可以参考[iOS核心动画技巧](https://zsisme.gitbooks.io/ios-/content/index.html)。
 
 以上是我在使用`Lottie`时的一些总结，更多使用请参考[Github](http://airbnb.io/lottie/ios.html#swift-examples)。
-
 
 ---
 
