@@ -1,5 +1,4 @@
 <h1><center>Swift笔记</center></h1>
-
 <h6 align='right'>小时光</h6>
 <h6  align='right'>西安乐推网络科技有限公司</h6> 
 --
@@ -54,13 +53,13 @@ mutableAry.removeAll()
  
  })
  ```
- 
+
  ```
  for obj in data {
             
  }
  ```
- 
+
 * 2、遍历除第一个元素外的数组其余部分
 
  ```
@@ -69,13 +68,13 @@ mutableAry.removeAll()
  }
  ```
 *  3、遍历除最后一个元素外的数组其余部分
- 
+
  ```
  for obj in data.dropLast() {
             
  }
  ```
- 
+
 * 4、遍历除了最后5个元素之外数组元素
 
  ```
@@ -83,7 +82,7 @@ mutableAry.removeAll()
             
  }
  ```
- 
+
 *  5、列举数组中的元素和对应的下标
 
  ```
@@ -91,4 +90,4 @@ mutableAry.removeAll()
             
  }
  ```
- 
+
