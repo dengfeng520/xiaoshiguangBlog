@@ -34,8 +34,8 @@ vue create vuedemo
 cd Desktop/vuedemo
 nmp run serve
 ```
-![启动成功](/Users/boxinkeji/Desktop/MyBlocks/VueNotes/vue_001.png)
+![启动成功](https://raw.githubusercontent.com/dengfeng520/xiaoshiguangBlog/master/VueNotes/vue_001.png)
 
 打开浏览器，输入[http://localhost:8080/](http://localhost:8080/)
 
-![Welcome to Your Vue.js](/Users/boxinkeji/Desktop/MyBlocks/VueNotes/vue_002.png)
+![Welcome to Your Vue.js](https://github.com/dengfeng520/xiaoshiguangBlog/blob/master/VueNotes/vue_002.png)
