@@ -1,8 +1,21 @@
+<h1><center>JavaScript学习笔记</center></h1>
+
+<h6 align='right'>小时光</h6>
+<h6 align='right'>北京体适能体育科技有限公司</h6> 
+
+* <h3>JavaScript: J和S大写，其他字母小写<h3/>
+* <h3>HTML: Hyper Text Markup Language四个字母全部大写<h3>
+* <h3>CSS: Cascading Style Sheets 三个字母全部大写<h3/>
+
 #### 1、相关资料
 
-[The Modern JavaScript Tutorial](https://javascript.info/)
+**[The Modern JavaScript Tutorial](https://javascript.info/)**
 
-[Periodic Table of the HTML5 Elements](http://www.xuanfengge.com/funny/html5/element/)
+**[Periodic Table of the HTML5 Elements](http://www.xuanfengge.com/funny/html5/element/)**
+
+**[JavaScript高级程序设计（第3版）](https://book.douban.com/subject/10546125/)**
+
+**[JavaScript权威指南(第6版)](https://book.douban.com/subject/10549733/)**
 
 #### 2、HTML元素属性
 
@@ -188,7 +201,7 @@ span::after {
 <h4>(3)、比较源次序</h4>
 
  * 代码书写顺序靠后的胜出
- 
+
 <h4>(4)、应用</h4>
 
 * 自定义的样式覆盖浏览器默认的样式
@@ -202,7 +215,7 @@ span::after {
 
 * **浏览器渲染页面是一个元素一个元素一次渲染的，顺序按照页面文档的树形结构目录进行**
 
-![渲染](/Users/boxinkeji/Desktop/MyBlocks/xiaoshiguangBlog/VueNotes/RenderingOrder.png)
+![渲染](https://github.com/dengfeng520/xiaoshiguangBlog/blob/master/VueNotes/RenderingOrder.png?raw=true)
 
 * **渲染每个元素的前提条件：该元素的所有CSS属性必须有值**
 
@@ -213,8 +226,9 @@ span::after {
      * 比较源次序
   * **（3）、使用继承：**对仍然没有值的属性，若可以继承，则继承父元素的值
   * **（3）、适用默认值:**对仍然没有值的属性，使用默认值
+  
 
-  ![vue003](/Users/boxinkeji/Desktop/MyBlocks/xiaoshiguangBlog/VueNotes/vue_003.png)
+  ![vue003](https://github.com/dengfeng520/xiaoshiguangBlog/blob/master/VueNotes/vue_003.png?raw=true)
   
 #### 11、CSS盒模型
 
@@ -227,10 +241,10 @@ span::after {
    ```
    display: inline;
    ```
-   
+  
    * 2、块盒: 在页面中独占一行
-   
+  
    	```
    	display: block; 
    	```
-   
+  
