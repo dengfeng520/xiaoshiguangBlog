@@ -316,6 +316,8 @@ span::after {
     ```
     overflow-y: scroll;
     ```
+    
+   ![vue_006](/Users/boxinkeji/Desktop/MyBlocks/xiaoshiguangBlog/VueNotes/vue_006.gif)
         
    * 4、断词规则
     
