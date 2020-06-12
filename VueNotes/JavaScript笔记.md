@@ -303,17 +303,25 @@ span::after {
 
 * **盒子类型:** 此处区别于HTML中的行标签和块标签
 
-  * 1、行盒: 在页面中不换行
+  * 1、行内元素(inline)：可以多个标签存在一行，对宽高属性值不生效，完全靠内容撑开宽高。
   
     ```JavaScript
     display: inline;
     ```
     
-   * 2、块盒: 在页面中独占一行
-  
+   * 2、块级元素(block)：独占一行，对宽高的属性值生效；如果不给宽度，块级元素就默认为浏览器的宽度，即就是100%宽。
+   
        ```
        display: block; 
        ```
+   
+   * 3、行内块元素(inline-block)：结合的行内和块级的优点，既可以设置长宽，可以让padding和margin生效，又可以和其他行内元素并排。
+   
+   	```
+   	display: inline-block;
+   	```
+  
+      
 * **盒子的组成部分:** 无论是行盒还是块盒，都由以下几个部分组成，从内到外分别是：
 
   * 1、内容 content
@@ -437,3 +445,135 @@ span::after {
  ```
  display: inline-block;
  ```
+ 
+  * 6、行块盒
+    
+    ```
+    <div class="pager">
+    <a href="" class="selected">1</a>
+    <a href="">2</a>
+    <a href="">3</a>
+    <a href="">4</a>
+    <a href="">5</a>
+    <a href="">6</a>
+    <a href="">7</a>
+    <a href="">8</a>
+    <a href="">9</a>
+    <a href="">10</a>
+    </div>
+    ```
+    
+    ```
+    .pager {
+    margin-top: 10px;
+    text-align: center;
+}
+.pager a {
+    margin-top: 8px;
+    border: 1px solid #e1e2e3;
+    color: #3388ff;
+    width: 34px;
+    height: 34px;
+    display: inline-block;
+    line-height: 34px;
+}
+.pager a:hover {
+    border-color: 1px solid #38f;
+    background-color: #f2f8ff;
+ }
+.pager a.selected {
+    border: none;
+    color: black;
+    background-color: initial;
+}
+    ```
+     ![vue_009.gif](https://upload-images.jianshu.io/upload_images/1214383-a24869e8a9574dd7.gif?imageMogr2/auto-orient/strip)
+    
+  * 7、可替换元素和非可替换元素
+
+    大部分元素，页面上显示的结果，取决于元素的内容，称为非可替换元素
+    少部分元素，页面上显示的结果，取决于元素属性，称为可替换元素
+    
+    可替换元素: img、video、audio
+    绝大部分可替换元素均为行盒。 
+    可替换元素类似于行块盒，盒模型中所有尺寸都有效。
+    
+   ```
+   <img class="grilsImg" src=""/>
+
+   ```   
+    
+    ```
+    .grilsImg {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    margin-top: 10px;
+}
+    ```
+* **浮动盒子:**
+      
+    * 左浮动的盒子向上向左排列
+    * 右浮动的盒子向上向右排列
+    * 浮动盒子的顶部不得高于上一个盒子的顶部
+    * 若剩余空间无法放下浮动的盒子，则该盒子向下移动，直到具备足够的空间能够容纳盒子，然后再向左或者向右移动
+    * 浮动盒子的顶边不得高于上一个盒子的顶边
+
+#### 12、盒子相关
+
+* 盒子隐藏
+
+```
+display: none; 不生成盒子
+visibility: hidden; 生成盒子，只是从视觉上移除盒子，盒子仍然占据空间
+```
+
+* 背景图
+
+ ```
+ background-image: url("");
+```
+  * 	默认情况下，图片会在横坐标和纵坐标重复
+  
+  ```
+   background-position: 0px 0px; /* 从雪碧图中取出一部分 */
+   background-attachment: fixed; /* 背景图不滚动，始终在最下层 */
+  ```
+* input
+  
+  ```
+  type="search"
+  type="text"
+  type="date"
+  type="checkbox"
+  type="radio"
+  type="number"
+  ```
+ 
+* 多个行盒垂直方向上的对齐
+  
+  ```
+  vertical-align: middle;
+  ```
+  
+* 图片的底部白边
+  
+  图片的父元素是一个块盒，块盒高度自动，图片底部和父元素底部之间往往会出现空白。
+   
+     * 1、设置父元素的字体大小为0
+     * 2、将图片设置为块盒
+     
+        ```
+         img {
+           display: block;
+         }
+        ```
+   
+  
+```
+margin: style                  /*单值语法  所有边缘 */  举例： margin: 1em; 
+margin: vertical horizontal    /*二值语法  纵向 横向 */  举例： margin: 5% auto; 
+margin: top horizontal bottom  /*三值语法 上 横向 下*/  举例： margin: 1em auto 2em; 
+margin: top right bottom left  /*四值语法 上 右 下 左*/  举例： margin: 2px 1em 0 auto; 
+
+```
