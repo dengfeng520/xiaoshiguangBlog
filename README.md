@@ -18,3 +18,5 @@
 [(5)、iOS Auto Layout Study Notes](https://dengfeng520.github.io/xiaoshiguangBlog/AutoLayout/iOSAutolayoutNotes.html)
 
 [(6)、JavaScript笔记](https://dengfeng520.github.io/xiaoshiguangBlog/VueNotes/JavaScript笔记.html)
+
+[(7)、基于MVVM构建聊天App（一）从新建工程开始](https://dengfeng520.github.io/xiaoshiguangBlog/RPChat/%E5%9F%BA%E4%BA%8EMVVM%E6%9E%84%E5%BB%BA%E8%81%8A%E5%A4%A9App(%E4%B8%80)%E4%BB%8E....html)
