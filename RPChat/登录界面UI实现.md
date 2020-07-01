@@ -55,10 +55,14 @@ int main(int argc, char * argv[]) {
 
 在前面我们工程的结构：**RPChat_iOS**文件夹下是UI显示以及交互相关的代码，所以在**RPChat_iOS**中新建一个**SignIn文件夹**该目录下为登录相关的UI代码：
 
+
+![SignIn](https://user-gold-cdn.xitu.io/2020/7/1/173095ed9d6b11e0?w=202&h=386&f=png&s=121214)
+
+
 新建登陆界面`Controller`命名为`SignInViewController`
 
 
-在**AppDelegate**`didFinishLaunchingWithOptions launchOptions`回调方法中添加代码：
+在**AppDelegate**`didFinishLaunchingWithOptions launchOptions`回调方法中添加代码，设置SignInViewController为默认启动控制器：
 
 ```
 if #available(iOS 13, *) {
@@ -92,24 +96,24 @@ window?.makeKeyAndVisible()
 
 ![light Mode](https://user-gold-cdn.xitu.io/2020/7/1/1730924e872c0e71?w=1242&h=2688&f=png&s=130841)
 
-> 1、`Auto Layout`
+* 1、`Auto Layout`
 
 至于UI，考虑到版本兼容和后期维护我采用了系统`NSLayoutAnchor`适配，
 
 `NSLayoutAnchor`常用属性
 
-* leadingAnchor
-* trailingAnchor
-* leftAnchor
-* rightAnchor
-* topAnchor
-* bottomAnchor
-* widthAnchor
-* heightAnchor
-* centerXAnchor
-* centerYAnchor
-* firstBaselineAnchor
-* lastBaselineAnchor
+   * leadingAnchor
+   * trailingAnchor
+   * leftAnchor
+   * rightAnchor
+   * topAnchor
+   * bottomAnchor
+   * widthAnchor
+   * heightAnchor
+   * centerXAnchor
+   * centerYAnchor
+   * firstBaselineAnchor
+   * lastBaselineAnchor
 
 关于`Auto Layout`其他更多使用细节请参考官方文档:
 
@@ -121,9 +125,11 @@ window?.makeKeyAndVisible()
 
 [WWDC 2018 What's New in Cocoa Touch](https://developer.apple.com/videos/play/wwdc2018/202/)
 
-> 2、UI实现
+* 2、UI实现
 
-新建一个`View`命名`SignInRootView`作为登录界面的主`View`：
+新建一个`View`命名`SignInRootView`作为登录界面的主`View`，采用懒加载的方式初始化视图
+
+最顶部的`Logo`图片实现代码：
 
 ```
 lazy var logoImg: UIImageView = {
@@ -138,8 +144,126 @@ lazy var logoImg: UIImageView = {
     }(UIImageView())
 ```
 
+用户名输入框实现代码：
 
-> 3、Drak Mode适配
+```
+ lazy var accountNumberView: UIView = {
+        self.addSubview($0)
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        let top = $0.topAnchor.constraint(equalTo: logoImg.bottomAnchor, constant: 20)
+        let left = $0.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 40)
+        let right = $0.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -40)
+        let height = $0.heightAnchor.constraint(equalToConstant: 50)
+        NSLayoutConstraint.activate([top, left, right, height])
+        $0.layer.cornerRadius = 25
+        return $0
+    }(UIView())
+ 
+    
+    lazy var accountNumberLab: UITextField = {
+        accountNumberView.addSubview($0)
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.topAnchor.constraint(equalTo: accountNumberView.topAnchor, constant: 0).isActive = true
+        $0.leftAnchor.constraint(equalTo: accountNumberView.leftAnchor, constant: 16).isActive = true
+        $0.rightAnchor.constraint(equalTo: accountNumberView.rightAnchor, constant: -16).isActive = true
+        $0.bottomAnchor.constraint(equalTo: accountNumberView.bottomAnchor, constant: 0).isActive = true
+        $0.font = UIFont.init(name: "PingFangTC-Semibold", size: 19)
+        return $0
+    }(UITextField())
+```
+
+密码输入框实现代码：
+
+```
+lazy var inputPasswordView: UIView = {
+           self.addSubview($0)
+           $0.translatesAutoresizingMaskIntoConstraints = false
+           let top = $0.topAnchor.constraint(equalTo: accountNumberView.bottomAnchor, constant: 20)
+           let left = $0.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 40)
+           let right = $0.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -40)
+           let height = $0.heightAnchor.constraint(equalToConstant: 50)
+           NSLayoutConstraint.activate([top, left, right, height])
+           $0.layer.cornerRadius = 25
+           return $0
+       }(UIView())
+    
+       
+    lazy var inputPasswordTxt: UITextField = {
+           inputPasswordView.addSubview($0)
+           $0.translatesAutoresizingMaskIntoConstraints = false
+           $0.topAnchor.constraint(equalTo: inputPasswordView.topAnchor, constant: 0).isActive = true
+           $0.leftAnchor.constraint(equalTo: inputPasswordView.leftAnchor, constant: 16).isActive = true
+           $0.rightAnchor.constraint(equalTo: inputPasswordView.rightAnchor, constant: -16).isActive = true
+           $0.bottomAnchor.constraint(equalTo: inputPasswordView.bottomAnchor, constant: 0).isActive = true
+           $0.font = UIFont.init(name: "PingFangTC-Semibold", size: 19)
+           return $0
+       }(UITextField())
+```
+
+登录按钮实现代码： 
+
+```
+lazy var signInBtn: UIButton = {
+        self.addSubview($0)
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        let top = $0.topAnchor.constraint(equalTo: inputPasswordView.bottomAnchor, constant: 20)
+        let left = $0.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 40)
+        let right = $0.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -40)
+        let height = $0.heightAnchor.constraint(equalToConstant: 50)
+        NSLayoutConstraint.activate([top, left, right, height])
+        $0.layer.cornerRadius = 25
+        $0.titleLabel?.font = UIFont.init(name: "PingFangTC-Semibold", size: 20)
+        $0.setTitle(NSLocalizedString("Sign In", comment: ""), for: .normal)
+        return $0
+   }(UIButton())
+```
+
+此处代码较多，具体实现请看代码： [gitub RPChat](https://github.com/dengfeng520/RPChat)
+
+* 3、设置背景颜色
+
+由于设计师给出的颜色一般为16进制，此处需要做一个转码处理：
+
+```
+open class func hexStringToColor(hexadecimal: String) -> UIColor {
+        var cstr = hexadecimal.trimmingCharacters(in:  CharacterSet.whitespacesAndNewlines).uppercased() as NSString;
+        if(cstr.length < 6){
+            return UIColor.clear;
+        }
+        if(cstr.hasPrefix("0X")){
+            cstr = cstr.substring(from: 2) as NSString
+        }
+        if(cstr.hasPrefix("#")){
+            cstr = cstr.substring(from: 1) as NSString
+        }
+        if(cstr.length != 6){
+            return UIColor.clear;
+        }
+        var range = NSRange.init()
+        range.location = 0
+        range.length = 2
+        let rStr = cstr.substring(with: range);
+        range.location = 2;
+        let gStr = cstr.substring(with: range)
+        range.location = 4;
+        let bStr = cstr.substring(with: range)
+        var r :UInt32 = 0x0;
+        var g :UInt32 = 0x0;
+        var b :UInt32 = 0x0;
+        Scanner.init(string: rStr).scanHexInt32(&r);
+        Scanner.init(string: gStr).scanHexInt32(&g);
+        Scanner.init(string: bStr).scanHexInt32(&b);
+        return UIColor.init(red: CGFloat(r)/255.0, green: CGFloat(g)/255.0, blue: CGFloat(b)/255.0, alpha: 1)
+    }
+```
+
+然后就可以用设计师给的16进制设置背景颜色：
+
+```
+signInBtn.backgroundColor = UIColor.hexStringToColor(hexadecimal: "0xF5BE62")
+```
+
+* 4、Drak Mode适配
 
 由于`iOS 13`之后苹果处理`Drak Mode`,作为开发者也应该做相应的兼容处理。现在我在代码中并没有此时调整模拟器为暗模式，运行工程可以看到在暗模式下，用户名和密码输入框背景色不见了。此时就应该做暗模式的兼容处理。
 
@@ -186,6 +310,15 @@ open class func configDarkModeViewColor() -> UIColor {
 view.backgroundColor = UIColor.configDarkModeViewColorWithdDfaultColor(dfaultColor: UIColor.groupTableViewBackground)
 ```
 
-再次运行项目，可以看到界面已经完美兼容了暗模式
+再次运行项目，可以看到界面已经兼容了暗模式：
 
 ![drak Mode](https://user-gold-cdn.xitu.io/2020/7/1/17309250eeaae02b?w=1242&h=2688&f=png&s=132283)
+
+本文主要写了： 
+
+* 不通过storyboard启动App
+* 登录UI的实现
+* Drak Mode的适配
+
+
+[本文demo: Github RPChat](https://github.com/dengfeng520/RPChat)
