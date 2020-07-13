@@ -287,7 +287,7 @@ open class func configDarkModeViewColor() -> UIColor {
         return retColor
     }
     
-  open class func configDarkModeViewColorWithdDfaultColor(dfaultColor: UIColor) -> UIColor {
+  open class func configDarkModeViewColorWithdDfaultColor(_ dfaultColor: UIColor) -> UIColor {
         let retColor: UIColor!
         if #available(iOS 13.0, *) {
             retColor = UIColor { (collection) -> UIColor in
@@ -307,7 +307,7 @@ open class func configDarkModeViewColor() -> UIColor {
 只需要在设置颜色时调用即可：
 
 ```
-view.backgroundColor = UIColor.configDarkModeViewColorWithdDfaultColor(dfaultColor: UIColor.groupTableViewBackground)
+view.backgroundColor = UIColor.configDarkModeViewColorWithdDfaultColor(.groupTableViewBackground)
 ```
 
 再次运行项目，可以看到界面已经兼容了暗模式：
