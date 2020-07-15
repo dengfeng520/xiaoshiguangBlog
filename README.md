@@ -19,6 +19,8 @@
 
 [(6)、JavaScript笔记](https://dengfeng520.github.io/xiaoshiguangBlog/VueNotes/JavaScript笔记.html)
 
-[(7)、基于MVVM构建聊天App（一）从新建工程开始](https://dengfeng520.github.io/xiaoshiguangBlog/RPChat/%E5%9F%BA%E4%BA%8EMVVM%E6%9E%84%E5%BB%BA%E8%81%8A%E5%A4%A9App(%E4%B8%80)%E4%BB%8E....html)
+[(7)、Inherit from a Swift class in Objective-C (OC继承Swift类)](https://dengfeng520.github.io/xiaoshiguangBlog/ReadNotes/OC%E7%BB%A7%E6%89%BFSwift%E7%B1%BB.html)
 
-[(8)、基于MVVM构建聊天App（二）登录UI实现](https://dengfeng520.github.io/xiaoshiguangBlog/RPChat/%E7%99%BB%E5%BD%95%E7%95%8C%E9%9D%A2UI%E5%AE%9E%E7%8E%B0.html)
+[(8)、基于MVVM构建聊天App（一）从新建工程开始](https://dengfeng520.github.io/xiaoshiguangBlog/RPChat/%E5%9F%BA%E4%BA%8EMVVM%E6%9E%84%E5%BB%BA%E8%81%8A%E5%A4%A9App(%E4%B8%80)%E4%BB%8E....html)
+
+[(9)、基于MVVM构建聊天App（二）登录UI实现](https://dengfeng520.github.io/xiaoshiguangBlog/RPChat/%E7%99%BB%E5%BD%95%E7%95%8C%E9%9D%A2UI%E5%AE%9E%E7%8E%B0.html)
