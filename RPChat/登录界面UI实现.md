@@ -225,7 +225,7 @@ lazy var signInBtn: UIButton = {
 由于设计师给出的颜色一般为16进制，此处需要做一个转码处理：
 
 ```
-open class func hexStringToColor(hexadecimal: String) -> UIColor {
+public class func hexStringToColor(_ hexadecimal: String) -> UIColor {
         var cstr = hexadecimal.trimmingCharacters(in:  CharacterSet.whitespacesAndNewlines).uppercased() as NSString;
         if(cstr.length < 6){
             return UIColor.clear;
@@ -260,7 +260,7 @@ open class func hexStringToColor(hexadecimal: String) -> UIColor {
 然后就可以用设计师给的16进制设置背景颜色：
 
 ```
-signInBtn.backgroundColor = UIColor.hexStringToColor(hexadecimal: "0xF5BE62")
+signInBtn.backgroundColor = UIColor.hexStringToColor("0xF5BE62")
 ```
 
 * 4、Drak Mode适配
@@ -272,43 +272,130 @@ signInBtn.backgroundColor = UIColor.hexStringToColor(hexadecimal: "0xF5BE62")
 此处我的做法也很简单，对`UIColor`做`extension`处理，然后再扩展方法中分别对`Drak Mode`和`Light Mode`两种模式做对应的处理，代码如下： 
 
 ```
-open class func configDarkModeViewColor() -> UIColor {
-        let retColor: UIColor!
+extension UIColor {
+   /// 当前是否是暗模式
+    public class var drakMode: Bool {
         if #available(iOS 13.0, *) {
-            retColor = UIColor { (collection) -> UIColor in
-                if (collection.userInterfaceStyle == .dark) {
-                    return UIColor.init(red: 100/255, green: 100/255, blue: 100/255, alpha: 1)
-                }
-                return UIColor.white
+            let currentMode = UITraitCollection.current.userInterfaceStyle
+            if currentMode == .dark {
+                return true
             }
-        } else {
-            return UIColor.white
         }
-        return retColor
+        return false
+    }
+    public class func isDrakMode() -> Bool {
+        if #available(iOS 13.0, *) {
+            let currentMode = UITraitCollection.current.userInterfaceStyle
+            if currentMode == .dark {
+                return true
+            }
+        }
+        return false
     }
     
-  open class func configDarkModeViewColorWithdDfaultColor(_ dfaultColor: UIColor) -> UIColor {
-        let retColor: UIColor!
+    /// UIView背景颜色
+    public class var darkModeViewColor: UIColor {
         if #available(iOS 13.0, *) {
-            retColor = UIColor { (collection) -> UIColor in
-                if (collection.userInterfaceStyle == .dark) {
-                    return UIColor.init(red: 100/255, green: 100/255, blue: 100/255, alpha: 1)
-                }
-                return dfaultColor
+            return .systemBackground
+        } else {
+            return .white
+        }
+    }
+    public class func configDarkModeViewColor() -> UIColor {
+        if #available(iOS 13.0, *) {
+            return .systemBackground
+        } else {
+            return .white
+        }
+    }
+    /// 文字颜色
+    public class var darkModeTextColor: UIColor {
+        if #available(iOS 13.0, *) {
+            if drakMode == true {
+                return .white
+            } else {
+                return .black
             }
         } else {
-            return dfaultColor
+            return .black
         }
-        return retColor
+    }
+    public class func configDarkModeTxtColor() -> UIColor {
+        if #available(iOS 13.0, *) {
+            if drakMode == true {
+                return .white
+            } else {
+                return .black
+            }
+        } else {
+            return .black
+        }
+    }
+    /// 子UIView背景颜色
+    public class var subDarkModeViewColor: UIColor {
+        if #available(iOS 13.0, *) {
+            if drakMode == true {
+                return UIColor(red: 100/255, green: 100/255, blue: 100/255, alpha: 1)
+            } else {
+                return .groupTableViewBackground
+            }
+        } else {
+            return .groupTableViewBackground
+        }
+    }
+    public class func configSubDarkModeViewColor() -> UIColor {
+        if #available(iOS 13.0, *) {
+            if drakMode == true {
+                return UIColor(red: 100/255, green: 100/255, blue: 100/255, alpha: 1)
+            } else {
+                return .groupTableViewBackground
+            }
+        } else {
+            return .groupTableViewBackground
+        }
     }
     
+    /// 设置Placeholder文字颜色
+    public class var placeholderColor: UIColor {
+        if #available(iOS 13.0, *) {
+            if drakMode == true {
+                return UIColor(red: 255, green: 255, blue: 255, alpha: 0.25)
+            } else {
+                return UIColor(red: 0, green: 0, blue: 0, alpha: 0.25)
+            }
+        } else {
+            return UIColor(red: 0, green: 0, blue: 0, alpha: 0.25)
+        }
+    }
+    public class func configPlaceholderColor() -> UIColor {
+        if #available(iOS 13.0, *) {
+            if drakMode == true {
+                return UIColor(red: 255, green: 255, blue: 255, alpha: 0.25)
+            } else {
+                return UIColor(red: 0, green: 0, blue: 0, alpha: 0.25)
+            }
+        } else {
+            return UIColor(red: 0, green: 0, blue: 0, alpha: 0.25)
+        }
+    }
+}
 ```
 
-只需要在设置颜色时调用即可：
+
+只需要在设置颜色时通过方法或者属性设置即可：
 
 ```
-view.backgroundColor = UIColor.configDarkModeViewColorWithdDfaultColor(.groupTableViewBackground)
+accountNumberView.backgroundColor = .subDarkModeViewColor
+inputPasswordView.backgroundColor = .subDarkModeViewColor
 ```
+```
+accountNumberView.backgroundColor = UIColor.configSubDarkModeViewColor()
+inputPasswordView.backgroundColor = UIColor.configSubDarkModeViewColor()
+```
+
+从结果上来说，这两种方式没有任何区别。一般用属性的话在设置或计算时看起来更自然一些，例如我用 `a = 0`会比`a = getData()` 看起来更直观自然一些。
+《Clearn Code》一书中强调，对方法或函数的命名尽量使用动词或动词短语，所以在使用一个方法时，通常的代码表示要做一些事情。此处我只是修改`UIView`的背景颜色，所以我个人觉得使用属性设置更直观一些。
+
 
 再次运行项目，可以看到界面已经兼容了暗模式：
 
