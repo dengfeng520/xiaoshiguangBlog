@@ -265,6 +265,8 @@ signInBtn.backgroundColor = UIColor.hexStringToColor("0xF5BE62")
 
 * 4、Drak Mode适配
 
+(1)、文本和UIView背景颜色适配
+
 由于`iOS 13`之后苹果处理`Drak Mode`,作为开发者也应该做相应的兼容处理。现在我在代码中并没有此时调整模拟器为暗模式，运行工程可以看到在暗模式下，用户名和密码输入框背景色不见了。此时就应该做暗模式的兼容处理。
 
 ![drak mode](https://user-gold-cdn.xitu.io/2020/7/1/1730940682f94d7e?w=1242&h=2688&f=png&s=128055)
@@ -395,6 +397,60 @@ inputPasswordView.backgroundColor = UIColor.configSubDarkModeViewColor()
 
 从结果上来说，这两种方式没有任何区别。一般用属性的话在设置或计算时看起来更自然一些，例如我用 `a = 0`会比`a = getData()` 看起来更直观自然一些。
 《Clearn Code》一书中强调，对方法或函数的命名尽量使用动词或动词短语，所以在使用一个方法时，通常的代码表示要做一些事情。此处我只是修改`UIView`的背景颜色，所以我个人觉得使用属性设置更直观一些。
+
+(2)、图片DrakMode适配
+
+在Xcode中修改图片为Any,Dark，Xcode会自动生成一组新的暗模式下的填充图片，把图片拖入即可。
+![DrakMode](https://upload-images.jianshu.io/upload_images/1214383-e124e54aec36e840.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+![drak Mode](https://upload-images.jianshu.io/upload_images/1214383-f43ddf384b598988.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+(3)、监听**traitCollection**的变化
+
+在一些特殊的地方需要根据当前系统是否处于暗模式分别作出处理，如一般情况下隐私协议用WKWebView加载,在正常情况下为白色背景黑色文字，在暗模式下为黑色背景白色文字，此时上面的代码已经不能满足我的需求了。此时就需要对当前系统是否是暗模式做监听处理。
+
+我的做法是定一个DrakModeProtocol协议，在需要监听的Controller中，遵循这个协议即可。
+
+```
+/// 协议
+public protocol DrakModeProtocol : NSObjectProtocol {
+    @available(iOS 13.0, *)
+    var traitCollection: UITraitCollection { get }
+
+    
+    @available(iOS 13.0, *)
+    func traitCollectionDidChange(_ traitCollection: UITraitCollection?)
+}
+```
+```
+/// 使用方法
+extension MineWKWebViewController: DrakModeProtocol {
+    override func traitCollectionDidChange(_ traitCollection: UITraitCollection?) {
+           if #available(iOS 13.0, *) {
+               if UITraitCollection.current.userInterfaceStyle == .dark {
+                   webView.evaluateJavaScript("document.body.style.backgroundColor=\"#000000\"") { (data, error) in
+                       
+                   }
+                   webView.evaluateJavaScript("document.body.style.webkitTextFillColor=\"#FFFFFF\"") { (data, error) in
+                       
+                   }
+               } else {
+                   webView.evaluateJavaScript("document.body.style.backgroundColor=\"#FFFFFF\"") { (data, error) in
+                       
+                   }
+                   webView.evaluateJavaScript("document.body.style.webkitTextFillColor=\"#000000\"") { (data, error) in
+                       
+                   }
+               }
+           }
+       }
+}
+
+```
+
+![隐私协议](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/45758010c13f408eb0ba42166dba5b36~tplv-k3u1fbpfcp-zoom-1.image)
+
+![隐私协议](https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ef595234a7af43879feef7cb686d0f84~tplv-k3u1fbpfcp-zoom-1.image)
 
 
 再次运行项目，可以看到界面已经兼容了暗模式：
