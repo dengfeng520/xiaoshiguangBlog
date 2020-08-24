@@ -177,6 +177,7 @@ testArray.forEach { (testChar) in
         finallyList.append(num + 30)
    }
    // [70, 83, 89, 73, 86, 84, 63, 85, 96, 100, 52, 99]
+   
    ```
    
    再看看Swift为开发者提供的**map**方法：
@@ -187,6 +188,7 @@ testArray.forEach { (testChar) in
        return $0 + 30
    }
    // [70, 83, 89, 73, 86, 84, 63, 85, 96, 100, 52, 99]
+   
    ```
    
    `map`用于把数组中的所有元素按照指定规则操作变换并返回一个新的数组，这样比使用for循环更具表现力。
@@ -208,15 +210,16 @@ testArray.forEach { (testChar) in
          return tmp
       }
    }  
-   
    ```   
+   
     举例二： 老师在算出学生成绩后要查看那些人的成绩是优秀，此时我们可以使用`filter`
     
     ```
-    let excellentArray = finallyArray.filter {
-       $0 >= 85
-    }
-    // [89, 86, 85, 96, 100, 99]
+     let excellentArray = finallyArray.filter {
+        $0 >= 85
+     }
+     // [89, 86, 85, 96, 100, 99]
+     
     ```
    **map在遍历数组的同时可以对每个参数做指定规则的操作，同时返回一个新的数组；
    filter只按指定规则遍历数组，同时返回一个新的数组**
@@ -224,15 +227,15 @@ testArray.forEach { (testChar) in
    `filter`是怎么实现的呢，我们可以根据`map`的实现方法来实现,其核心代码如下：
    
    ```
-   extension Array {
-    func myfilter(_ predicate: (Element) -> Bool) -> [Element] {
+    extension Array {
+     func myfilter(_ predicate: (Element) -> Bool) -> [Element] {
         var tmp: [Element] = []
         for value in self where predicate(value) {
             tmp.append(value)
         }
         return tmp
-    }
-}
+     }
+   }
    ```
     
    * (5)、min 、 max
