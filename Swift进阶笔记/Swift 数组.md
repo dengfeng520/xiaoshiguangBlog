@@ -178,7 +178,8 @@ testArray.forEach { (testChar) in
    }
    // [70, 83, 89, 73, 86, 84, 63, 85, 96, 100, 52, 99]
    ```
-   在看看Swift为开发者提供的**map**方法：
+   
+   再看看Swift为开发者提供的**map**方法：
    
    ```
    let fractionArray: [Int] = [40,53,59,43,56,54,33,55,66,70,22,69]
@@ -187,6 +188,7 @@ testArray.forEach { (testChar) in
    }
    // [70, 83, 89, 73, 86, 84, 63, 85, 96, 100, 52, 99]
    ```
+   
    `map`用于把数组中的所有元素按照指定规则操作变换并返回一个新的数组，这样比使用for循环更具表现力。
    
    **使用`map`来完成这类操作，大大提高了代码的可读性；
@@ -206,6 +208,7 @@ testArray.forEach { (testChar) in
          return tmp
       }
    }  
+   
    ```   
     举例二： 老师在算出学生成绩后要查看那些人的成绩是优秀，此时我们可以使用`filter`
     
@@ -274,6 +277,7 @@ mixArray.starts(with: [100], by: {
  
  如果使用C语言风格，我们首先要对成绩做一个遍历，然后累加最终得到全班成绩总和：
  
+ 
  ```
  var allNum = Int()
  for num in finallyList {
@@ -284,6 +288,7 @@ mixArray.starts(with: [100], by: {
  
  `Swift`为开发者提供了更简单有效的方法：
  
+ 
  ```
  finallyList.reduce(0, +) / (finallyList.count) // 81
  ```
@@ -291,6 +296,7 @@ mixArray.starts(with: [100], by: {
 * 按条件把数组中的元素分类
 
 例如老师要分别统计出及格和没及格的成绩,我们认为60分为及格：
+
 
 ```
 let pass = mixArray.partition(by: {

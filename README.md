@@ -27,4 +27,4 @@
 
 [(10)、王者荣耀 苹果手机通过模拟定位修改战区](https://github.com/dengfeng520/xiaoshiguangBlog/blob/master/Other/%E7%8E%8B%E8%80%85%E8%8D%A3%E8%80%80%E4%BF%AE%E6%94%B9%E6%88%98%E5%8C%BA.md)
 
-[(11)、Swift的方式来使用数组](https://github.com/dengfeng520/xiaoshiguangBlog/blob/master/Other/%E7%8E%8B%E8%80%85%E8%8D%A3%E8%80%80%E4%BF%AE%E6%94%B9%E6%88%98%E5%8C%BA.md)
+[(11)、Swift的方式来使用数组](https://github.com/dengfeng520/xiaoshiguangBlog/blob/master/Swift%E8%BF%9B%E9%98%B6%E7%AC%94%E8%AE%B0/Swift%20%E6%95%B0%E7%BB%84.md)
