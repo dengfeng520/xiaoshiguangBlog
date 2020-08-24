@@ -24,4 +24,7 @@
 [(8)、基于MVVM构建聊天App（一）从新建工程开始](https://github.com/dengfeng520/xiaoshiguangBlog/blob/master/RPChat/%E5%9F%BA%E4%BA%8EMVVM%E6%9E%84%E5%BB%BA%E8%81%8A%E5%A4%A9App(%E4%B8%80)%E4%BB%8E....md)
 
 [(9)、基于MVVM构建聊天App（二）登录UI实现](https://github.com/dengfeng520/xiaoshiguangBlog/blob/master/RPChat/%E7%99%BB%E5%BD%95%E7%95%8C%E9%9D%A2UI%E5%AE%9E%E7%8E%B0.md)
+
 [(10)、王者荣耀 苹果手机通过模拟定位修改战区](https://github.com/dengfeng520/xiaoshiguangBlog/blob/master/Other/%E7%8E%8B%E8%80%85%E8%8D%A3%E8%80%80%E4%BF%AE%E6%94%B9%E6%88%98%E5%8C%BA.md)
+
+[(11)、Swift的方式来使用数组](https://github.com/dengfeng520/xiaoshiguangBlog/blob/master/Other/%E7%8E%8B%E8%80%85%E8%8D%A3%E8%80%80%E4%BF%AE%E6%94%B9%E6%88%98%E5%8C%BA.md)
