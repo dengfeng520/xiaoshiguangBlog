@@ -1,5 +1,3 @@
-<h2><center>Swift Array</center></h2>
-
 Array是在开发中最常用的数据类型之一，[官方文档](https://developer.apple.com/documentation/swift/array)对Array的定义是：`An ordered, random-access collection.`。通常表示一个有序的集合，这里所说的有序并不是大小有序，而是指`Array`中元素的先后位置关系。
 
 ### 1、Swift的方式来操作数组
@@ -136,33 +134,33 @@ print("ondexIndex===============\(oneIndex ?? 0)")
 
     使用数组对象的`enumerated()`方法，它会返回一个`Sequence`对象，包含了每个成员的索引和值。
 
-    ```
+   ```
     let testArray = ["one","two","three","four","five","six"]
     for (index, value) in testArray.enumerated() {
        print("\(index): \(value)")
     }
-    ```
+   ```
 
-    * (3)、通过闭包`closure`遍历
-    
+ * (3)、通过闭包`closure`遍历
+  
     通过闭包`closure`，我们可以使用`Array`的`forEach`方法来遍历数组:
-
-      ```
-      let testArray = ["one","two","three","four","five","six"]
+ 
+  ```
+  let testArray = ["one","two","three","four","five","six"]
       testArray.forEach { (vaule) in
           print(vaule)
       }
-      ```
+   ```
 
-      `for in`和 `forEach`遍历的效果是一样的，但是如果使用`forEach`方法遍历数组就不能通过`break`或`continue`来退出循环，如果要退出遍历就只能使用`for in`方法。
+ `for in`和 `forEach`遍历的效果是一样的，但是如果使用`forEach`方法遍历数组就不能通过`break`或`continue`来退出循环，如果要退出遍历就只能使用`for in`方法。
 
-    ```
-testArray.forEach { (testChar) in
+   ```
+   testArray.forEach { (testChar) in
     if testChar == "three" {
-        continue // 'continue' is only allowed inside a loop
+           continue // 'continue' is only allowed inside a loop
+       }
     }
-}
-```
+  ```
 
    * (4)、map 、 filter 遍历数组
    
@@ -177,10 +175,8 @@ testArray.forEach { (testChar) in
         finallyList.append(num + 30)
    }
    // [70, 83, 89, 73, 86, 84, 63, 85, 96, 100, 52, 99]
-   
    ```
-   
-   再看看Swift为开发者提供的**map**方法：
+   在看看Swift为开发者提供的**map**方法：
    
    ```
    let fractionArray: [Int] = [40,53,59,43,56,54,33,55,66,70,22,69]
@@ -188,9 +184,7 @@ testArray.forEach { (testChar) in
        return $0 + 30
    }
    // [70, 83, 89, 73, 86, 84, 63, 85, 96, 100, 52, 99]
-   
    ```
-   
    `map`用于把数组中的所有元素按照指定规则操作变换并返回一个新的数组，这样比使用for循环更具表现力。
    
    **使用`map`来完成这类操作，大大提高了代码的可读性；
@@ -211,15 +205,13 @@ testArray.forEach { (testChar) in
       }
    }  
    ```   
-   
     举例二： 老师在算出学生成绩后要查看那些人的成绩是优秀，此时我们可以使用`filter`
     
     ```
-     let excellentArray = finallyArray.filter {
-        $0 >= 85
-     }
-     // [89, 86, 85, 96, 100, 99]
-     
+    let excellentArray = finallyArray.filter {
+       $0 >= 85
+    }
+    // [89, 86, 85, 96, 100, 99]
     ```
    **map在遍历数组的同时可以对每个参数做指定规则的操作，同时返回一个新的数组；
    filter只按指定规则遍历数组，同时返回一个新的数组**
@@ -227,15 +219,15 @@ testArray.forEach { (testChar) in
    `filter`是怎么实现的呢，我们可以根据`map`的实现方法来实现,其核心代码如下：
    
    ```
-    extension Array {
-     func myfilter(_ predicate: (Element) -> Bool) -> [Element] {
+   extension Array {
+    func myfilter(_ predicate: (Element) -> Bool) -> [Element] {
         var tmp: [Element] = []
         for value in self where predicate(value) {
             tmp.append(value)
         }
         return tmp
-     }
-   }
+    }
+}
    ```
     
    * (5)、min 、 max
@@ -280,7 +272,6 @@ mixArray.starts(with: [100], by: {
  
  如果使用C语言风格，我们首先要对成绩做一个遍历，然后累加最终得到全班成绩总和：
  
- 
  ```
  var allNum = Int()
  for num in finallyList {
@@ -291,7 +282,6 @@ mixArray.starts(with: [100], by: {
  
  `Swift`为开发者提供了更简单有效的方法：
  
- 
  ```
  finallyList.reduce(0, +) / (finallyList.count) // 81
  ```
@@ -300,16 +290,17 @@ mixArray.starts(with: [100], by: {
 
 例如老师要分别统计出及格和没及格的成绩,我们认为60分为及格：
 
-
 ```
-let pass = mixArray.partition(by: {
+ let pass = mixArray.partition(by: {
     $0 > 60
-})
-let failedArray = mixArray[0 ..< pass] // 不及格的 [52]
-let passArray = mixArray[pass ..< mixArray.endIndex] // 及格的 [63, 70, 73, 83, 84, 85, 86, 89, 96, 99, 100]
+   })
+  let failedArray = mixArray[0 ..< pass] // 不及格的 [52]
+  let passArray = mixArray[pass ..< mixArray.endIndex] // 及格的 [63, 70, 73, 83, 84, 85, 86, 89, 96, 99, 100]
 ```
 
+  
 ### 2、Array和NSArray
+
 
 * `Array` 是结构体，属于值类型, `NSArray` 是类，属于引用类型。
 
@@ -358,5 +349,3 @@ let passArray = mixArray[pass ..< mixArray.endIndex] // 及格的 [63, 70, 73, 8
   [泊学：Swift 3 Collections](https://boxueio.com/series/collection-types)
   
   [极客时间：集合类](https://time.geekbang.org/course/detail/100034001-134747?utm_campaign=guanwang&utm_source=baidu-ad&utm_medium=ppzq-pc&utm_content=title&utm_term=baidu-ad-ppzq-title)
-  
-
