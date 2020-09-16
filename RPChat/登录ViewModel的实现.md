@@ -13,7 +13,7 @@
 
 ![导入第三方开源库](https://user-gold-cdn.xitu.io/2020/7/6/17322e3a0f79754b?w=1227&h=426&f=png&s=288690)
 
- 
+#### 3、
  
 
 至此，登录界面的View Model的部分就实现完了。我在`SignInViewModel`中并没有引用`UIKit`,只引入了`import RxSwift`,也就是说它并不包含任何实际与UI相关的代码。
