@@ -162,7 +162,7 @@ print("ondexIndex===============\(oneIndex ?? 0)")
     }
   ```
 
-   * (4)、map 、 filter 遍历数组
+   * (4)、map 、 compactMap 、 filter 遍历数组
    
    事实上，Swift的设计者并不推荐开发者使用传统的C语言风格的for循环。Swift为开发者提供了更高级的方法，当我们需要循环一个数组时，可以根据自己的需求，使用Map 和 Filter来实现。
    
@@ -177,7 +177,7 @@ print("ondexIndex===============\(oneIndex ?? 0)")
    // [70, 83, 89, 73, 86, 84, 63, 85, 96, 100, 52, 99]
    ```
    
-在看看Swift为开发者提供的**map**方法：
+再看看Swift为开发者提供的**map**方法：
    
    ```
    let fractionArray: [Int] = [40,53,59,43,56,54,33,55,66,70,22,69]
@@ -207,7 +207,17 @@ print("ondexIndex===============\(oneIndex ?? 0)")
       }
    }  
    ```   
-    举例二： 老师在算出学生成绩后要查看那些人的成绩是优秀，此时我们可以使用`filter`
+   
+
+**compactMap**方法是**map**的升级版,在遍历数组的同时，去除其中的nil值。
+
+```let testList = [1,2,2,3,3,4,nil,5,6]
+let lsArray: [Int] = testList.compactMap { (num) -> Int? in
+ return num
+} // [1, 2, 2, 3, 3, 4, 5, 6]
+```
+
+举例二： 老师在算出学生成绩后要查看那些人的成绩是优秀，此时我们可以使用`filter`
     
     ```
     let excellentArray = finallyArray.filter {
