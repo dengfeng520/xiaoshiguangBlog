@@ -60,7 +60,16 @@ github "robbiehanson/CocoaAsyncSocket"
 执行更新命令： 
 
 ```
-carthage update --platform iOS
+carthage update --platform iOS --no-use-binaries
+```
+
+升级Xcode 12后，执行上面的命令可能会报错，解决方法可参考：
+[Using Carthage with Xcode 12](https://github.com/Carthage/Carthage/blob/master/Documentation/Xcode12Workaround.md)
+
+然后使用以下命令执行`carthage`更新：
+
+```
+carthage.sh bootstrap --platform iOS --cache-builds
 ```
 
 更新完成后，打开工程，选择**TARGETS** -->**Build Phases**--> **Link Binary With Libries** 点击加号，选择 **Add File** --> **Carthage** --> **Build** --> **iOS** 添加所需的`FrameWork`,
