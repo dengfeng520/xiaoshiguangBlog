@@ -37,6 +37,8 @@
 
 ### 3、使用carthage管理第三方开源库
 
+##### 1、carthage使用
+
 ```
 carthage version
 ```
@@ -47,6 +49,7 @@ cd /Users/****/Desktop/GitHub/RPChat
 ```
 touch Cartfile
 ```
+
 使用VSCode打开`Cartfile`文件，输入用到的第三方开源库：
 
 ```
@@ -62,6 +65,8 @@ github "robbiehanson/CocoaAsyncSocket"
 ```
 carthage update --platform iOS --no-use-binaries
 ```
+
+##### 2、Using Carthage with Xcode 12
 
 升级Xcode 12后，执行上面的命令可能会报错，解决方法可参考：
 [Using Carthage with Xcode 12](https://github.com/Carthage/Carthage/blob/master/Documentation/Xcode12Workaround.md)
@@ -88,6 +93,19 @@ carthage.sh bootstrap --platform iOS --cache-builds
 ![New Run Script](https://user-gold-cdn.xitu.io/2020/6/18/172c6ca5b58f4c57?w=436&h=184&f=png&s=96942)
 
 
+
+##### 3、解决`the file couldn’t be saved.`报错问题
+
+添加完后再次build可能会报错：`the file couldn’t be saved. command phasescriptexecution failed with a nonzero exit code`
+
+解决方案参考：[carthage copy-frameworks produces "The file couldn’t be saved." error #3056](https://github.com/Carthage/Carthage/issues/3056)
+
+Add to `run scripts`
+```
+rm -rf ${TMPDIR}/TemporaryItems/*carthage*
+/usr/local/bin/carthage copy-frameworks
+```
+再次build成功。
 
 在`Input Files`中引入我们要用到的库的路径:
 
@@ -157,7 +175,7 @@ extension AppDelegate {
  * 2、在工程中新建一个`String File`文件，命名为`Localizable`
 
 ![国际化2](https://user-gold-cdn.xitu.io/2020/6/18/172c678e6d9ab1eb?w=732&h=531&f=png&s=234216)
- 
+
  点击到Localizable.strings文件，点击右侧Localize...按钮添加需要国际化的语言。
 
 ![国际化3](https://user-gold-cdn.xitu.io/2020/6/18/172c67cdab6a66b1?w=954&h=299&f=png&s=201664)
@@ -200,15 +218,15 @@ testLab.text = NSLocalizedString("test", comment: "")
    CFBundleName = "CatchU";
    ```
 * (3)、在 `InfoPlist.strings(Chinese,Simplified)`中添加
-   
+  
    ```
    CFBundleName = "畅聊吧";
    ```
 * (4)、 打开`Info.Plist`设置`Bundle name`属性为`$CFBundleName`
- 
+
 
 ![Bundle name](https://user-gold-cdn.xitu.io/2020/6/19/172ca3c91ac588ce?w=423&h=28&f=png&s=7529)
-  
+
 * (5)、再次运行代码，可以看到，App的名称已经修改成功了。
 
 
