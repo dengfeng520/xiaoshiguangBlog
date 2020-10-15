@@ -14,12 +14,12 @@
 
 (1)、在工程中设置**Info.plist**中设置**Allow Arbitrary Loads**为YES，参考:[stackoverflow Transport security has blocked a cleartext HTTP](https://stackoverflow.com/questions/31254725/transport-security-has-blocked-a-cleartext-http)
 
-![https配置](https://user-gold-cdn.xitu.io/2020/6/15/172b76947e4d7a47?w=455&h=43&f=png&s=11489)
+![https配置](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/132e74cb8e7d486ea9b40fb4a045d8b1~tplv-k3u1fbpfcp-zoom-1.image?imageslim)
 
 (2)、打开`Assets.xcassets`按照指定的图片大小添加App的Logo图片。
 
 
-![Logo](https://user-gold-cdn.xitu.io/2020/6/18/172c6af3403cdaa9?w=825&h=863&f=png&s=92235)
+![Logo](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f0e3cd948a2343eaa7344b1c9ebef0f3~tplv-k3u1fbpfcp-zoom-1.image)
 
 ### 2、工程结构
 
