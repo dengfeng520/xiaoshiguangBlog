@@ -14,22 +14,22 @@
 
 (1)、在工程中设置**Info.plist**中设置**Allow Arbitrary Loads**为YES，参考:[stackoverflow Transport security has blocked a cleartext HTTP](https://stackoverflow.com/questions/31254725/transport-security-has-blocked-a-cleartext-http)
 
-![https配置](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/132e74cb8e7d486ea9b40fb4a045d8b1~tplv-k3u1fbpfcp-zoom-1.image?imageslim)
+![https配置](https://github.com/dengfeng520/xiaoshiguangBlog/blob/master/RPChat/Images/https%E9%85%8D%E7%BD%AE.png?raw=true)
 
 (2)、打开`Assets.xcassets`按照指定的图片大小添加App的Logo图片。
 
 
-![Logo](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f0e3cd948a2343eaa7344b1c9ebef0f3~tplv-k3u1fbpfcp-zoom-1.image)
+![Logo](https://github.com/dengfeng520/xiaoshiguangBlog/blob/master/RPChat/Images/Logo.png?raw=true)
 
 ### 2、工程结构
 
 添加三个`framework`分别命名为**RPChat_iOS、RPChatUIKit、RPChatDataKit**
 
-![添加framework](https://user-gold-cdn.xitu.io/2020/6/18/172c62652b12528e?w=435&h=362&f=png&s=185399)
+![添加framework](https://github.com/dengfeng520/xiaoshiguangBlog/blob/master/RPChat/Images/addframework1.png?raw=true)
 
-![添加framework](https://user-gold-cdn.xitu.io/2020/6/15/172b76d451b1df5f?w=734&h=198&f=png&s=62260)
+![添加framework](https://github.com/dengfeng520/xiaoshiguangBlog/blob/master/RPChat/Images/addframework2.png?raw=true)
 
-![工程目录](https://user-gold-cdn.xitu.io/2020/6/15/172b76dc82706398?w=437&h=466&f=png&s=222750)
+![工程目录](https://github.com/dengfeng520/xiaoshiguangBlog/blob/master/RPChat/Images/addframework3.png?raw=true)
 
 * **RPChat_iOS**是和UI的显示以及交互相关的代码
 * **RPChatUIKit**是整个项目中会用到的对UIKit的公共扩展
@@ -82,7 +82,7 @@ carthage.sh bootstrap --platform iOS --cache-builds
 
 下面的gif演示了如何添加第三方的`FrameWork`；
 
-![gif](https://user-gold-cdn.xitu.io/2020/6/18/172c6c5eb2430275?w=336&h=280&f=gif&s=4486718)
+![gif](https://github.com/dengfeng520/xiaoshiguangBlog/blob/master/RPChat/Images/addgif.gif?raw=true)
 
 接下来，点击+，选择`New Run Script Phase`，此时新建了`Run Script`,在执行命令中添加:
 
@@ -90,7 +90,7 @@ carthage.sh bootstrap --platform iOS --cache-builds
 /usr/local/bin/Carthage copy-frameworks
 ```
 
-![New Run Script](https://user-gold-cdn.xitu.io/2020/6/18/172c6ca5b58f4c57?w=436&h=184&f=png&s=96942)
+![New Run Script](https://github.com/dengfeng520/xiaoshiguangBlog/blob/master/RPChat/Images/NewRunScript.png?raw=true)
 
 
 
@@ -116,12 +116,12 @@ $(SRCROOT)/Carthage/Build/iOS/Alamofire.framework
 其作用是把`Carthage`引入的第三方库在打包的时候，拷贝到特定目录。
 
 
-![Carthage](https://user-gold-cdn.xitu.io/2020/6/18/172c6d10a7a983e9?w=859&h=446&f=png&s=73375)
+![Carthage](https://github.com/dengfeng520/xiaoshiguangBlog/blob/master/RPChat/Images/Carthage.png?raw=true)
 
 
 在上传到git仓库时，不需要传`Carthage`下的文件，所以选择忽略，在`.gitignore`文件中添加
 
-![.gitignore](https://user-gold-cdn.xitu.io/2020/6/16/172bb13386bbe6ce?w=174&h=200&f=png&s=19470)
+![.gitignore](https://github.com/dengfeng520/xiaoshiguangBlog/blob/master/RPChat/Images/gitignore.png?raw=true)
 
 
 ```
@@ -134,11 +134,11 @@ xcuserdata/
 
 修改最低支持版本为`iOS 11`
 
-![iOS 最低版本](https://user-gold-cdn.xitu.io/2020/6/18/172c61cced913265?w=434&h=209&f=png&s=44748)
+![iOS 最低版本](https://github.com/dengfeng520/xiaoshiguangBlog/blob/master/RPChat/Images/iOSVer.png?raw=true)
 
 此时发现再Build工程，发现已经有很多`Error`，这是版本兼容的问题，由于`Xcode 11`新建的工程默认为当前最高版本，Xcode新增了一个`SceneDelegate`文件，具体作用请参考官方文档：[Optimizing App Launch](https://developer.apple.com/videos/play/wwdc2019/423/)。现在要在`AppDelegate`和中`SceneDelegate`做兼容老版本处理。 方法就是对当前系统做一个判断，然后再根据不同系统版本分开处理。
 
-![版本报错](https://user-gold-cdn.xitu.io/2020/6/18/172c632c9e09bfb0?w=271&h=391&f=png&s=162462)
+![版本报错](https://github.com/dengfeng520/xiaoshiguangBlog/blob/master/RPChat/Images/vererror.png?raw=true)
 
 
 在`SceneDelegate`直接加上`@available(iOS 13.0, *)`即可,
@@ -171,14 +171,15 @@ extension AppDelegate {
 * 1、如下图所示： 创建所需国际化的语言，此处我创建了英语、繁体汉语、简体汉语：
 
 
-![](https://user-gold-cdn.xitu.io/2020/6/19/172cb4896efb8ee2?w=793&h=616&f=png&s=401343)
+![Localizable1](https://github.com/dengfeng520/xiaoshiguangBlog/blob/master/RPChat/Images/Localizable1.png?raw=true)
+
  * 2、在工程中新建一个`String File`文件，命名为`Localizable`
 
-![国际化2](https://user-gold-cdn.xitu.io/2020/6/18/172c678e6d9ab1eb?w=732&h=531&f=png&s=234216)
+![国际化2](https://github.com/dengfeng520/xiaoshiguangBlog/blob/master/RPChat/Images/Localizable2.png?raw=true)
 
  点击到Localizable.strings文件，点击右侧Localize...按钮添加需要国际化的语言。
 
-![国际化3](https://user-gold-cdn.xitu.io/2020/6/18/172c67cdab6a66b1?w=954&h=299&f=png&s=201664)
+![国际化3](https://github.com/dengfeng520/xiaoshiguangBlog/blob/master/RPChat/Images/Localizable3.png?raw=true)
 
 此时来做个测试，在`ViewController`新建一个名为`testLab`的`UILabel`;
 
@@ -195,19 +196,19 @@ extension AppDelegate {
 testLab.text = NSLocalizedString("test", comment: "")
 ```
 
-![test](https://user-gold-cdn.xitu.io/2020/6/19/172cb4687642fd68?w=499&h=88&f=png&s=54972)
+![test](https://github.com/dengfeng520/xiaoshiguangBlog/blob/master/RPChat/Images/test1.png?raw=true)
 
 
-![测试](https://user-gold-cdn.xitu.io/2020/6/19/172cb46c0144a2c9?w=588&h=87&f=png&s=46389)
+![测试](https://github.com/dengfeng520/xiaoshiguangBlog/blob/master/RPChat/Images/test2.png?raw=true)
 
 此时点击Run可以看到`testLab`显示内容为`test`;
 
-![English](https://user-gold-cdn.xitu.io/2020/6/18/172c6934448d4e82?w=306&h=196&f=png&s=8253)
+![English](https://github.com/dengfeng520/xiaoshiguangBlog/blob/master/RPChat/Images/test3.png?raw=true)
 
 修改模拟器语言为简体汉语，再次运行：
 
 
-![简体汉语](https://user-gold-cdn.xitu.io/2020/6/19/172cb4b163793ca2?w=312&h=196&f=png&s=8961)
+![简体汉语](https://github.com/dengfeng520/xiaoshiguangBlog/blob/master/RPChat/Images/test4.png?raw=true)
 
 ##### 2、App名称国际化
 
@@ -225,12 +226,12 @@ testLab.text = NSLocalizedString("test", comment: "")
 * (4)、 打开`Info.Plist`设置`Bundle name`属性为`$CFBundleName`
 
 
-![Bundle name](https://user-gold-cdn.xitu.io/2020/6/19/172ca3c91ac588ce?w=423&h=28&f=png&s=7529)
+![Bundle name](https://github.com/dengfeng520/xiaoshiguangBlog/blob/master/RPChat/Images/test5.png?raw=true)
 
 * (5)、再次运行代码，可以看到，App的名称已经修改成功了。
 
 
-![App Name](https://user-gold-cdn.xitu.io/2020/6/18/172c6afaba428b61?w=178&h=202&f=png&s=37345)
+![App Name](https://github.com/dengfeng520/xiaoshiguangBlog/blob/master/RPChat/Images/icon.png?raw=true)
 
 本篇主要讲了App的新建和相关配置，包括：
 *  新建工程，基本配置
