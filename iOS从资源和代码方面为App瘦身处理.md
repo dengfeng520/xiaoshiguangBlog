@@ -3,7 +3,7 @@
 <h1><center>从资源和代码方面为App瘦身处理</center></h1>
 <h6 align='right'>小时光</h6>
 <h6  align='right'>西安乐推网络科技有限公司</h6> 
---
+
 &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;对`App`包瘦身处理是为了减少包的大小，节约用户下载`App`流量。在`App Store`下载`App`，如果超过了150MB就必须在Wi-Fi环境下载或更新，这样如果超过了150M，可能就会间接失去了大部分用户。如果我们的`App`要兼容iOS7和iOS 8,[苹果官方规定:主二进制text段的大小不能超过60M](https://help.apple.com/app-store-connect/#/dev611e0a21f)，如果超过这个标准，就没办法向`App Strore`提交审核。
 
 &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;下面这张表格列举了当前国内外的部分常用`App`的包大小。

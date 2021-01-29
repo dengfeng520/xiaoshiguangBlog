@@ -8,9 +8,9 @@
 --
 
 ###1、Git相关
-  
-| 命令字  |  相关操作   | 
-| :-------------:|:-------------:| 
+
+| 命令字  |  相关操作   |
+| :-------------:|:-------------:|
 |```git init```|初始化Git|
 | ```git clone URL```|下载远端仓库代码|
 |```git add .``` |把代码中的所有变化都提交到缓存区域,不包括删除的文件|
@@ -185,12 +185,12 @@ _heartbtn = [UIButton buttonWithType: UIButtonTypeCustom];
 ###7、Lottie动画
 
 [Lottie动画](http://airbnb.io/lottie/ios.html#getting-started-on-ios-or-macos)
- 
+
  >1、作为开发者，不能直接编辑或者控制，只能用生成好的JSON文件
- 
+
  >2、内存问题，我在APP中使用了Lottie动画之后，CPU使用率和内存瞬间上升，尤其是全屏的动画之后，目前没有找到相关优化方案；
- 
- 
+
+
  ```
      _LoaingAnimation = [LOTAnimationView animationNamed:@"MatchWaitingLoading"];
         _LoaingAnimation.frame = CGRectMake(ScreenW / 2 - (73 / 2), ScreenH - 93, 73, 73);
@@ -200,19 +200,19 @@ _heartbtn = [UIButton buttonWithType: UIButtonTypeCustom];
                         
                     }];   
  ```
- 
+
  ```
  [_LoaingAnimation removeFromSuperview];
         _LoaingAnimation = nil;
  ```
- 
+
 >控制播放帧数
 
 ```
 [_LoaingAnimation playFromFrame:15 toFrame:0 withCompletion:^(BOOL animationFinished) {
         
     }];
-``` 
+```
 >停止播放保持最后帧数
 
 ```
@@ -231,7 +231,7 @@ _heartbtn = [UIButton buttonWithType: UIButtonTypeCustom];
  [_exploreAnimation setProgressWithFrame:[NSNumber numberWithInteger:46]];
 
 ```
- 
+
 ###8、Socket and Protocol Buffers
 
 >Protocol Buffers
@@ -265,16 +265,16 @@ message ResponseExplore {
 }
 ```
 ####3、生成Model文件:
- 
+
  ```
  protoc --proto_path=./Protobuf  --objc_out=./Protobuf   ChatIM.proto
  ```
  同理，生成Android用的Model文件可使用命令:
- 
+
  ```
  protoc --proto_path=./Protobuf  --objc_out=./Protobuf   ChatIM.proto
  ```
- 
+
 ####4、使用
 
 ```
@@ -337,7 +337,7 @@ pod CocoaAsyncSocket
         // 出栈并跳转至目标控制器(控制器和当前控制器之间的对象将全部释放)
         [thisView.navigationController popToViewController:LoginView animated:true];
 ```
- 
+
 ###11、APP内购相关问题
 
 ###12、按钮超出父控件后无法响应点击的解决方法
@@ -929,7 +929,7 @@ _blueLayer.delegate = self;
 
 
  `UIView`有三个比较重要的布局属性：`frame，bounds`和`center`，`CALayer`对应地叫做`frame`，`bounds`和`position`。为了能清楚区分，图层用了`position`，视图用了`center`，但是他们都代表同样的值。`frame`代表了图层的外部坐标（也就是在父图层上占据的空间），`bounds`是内部坐标（{0, 0}通常是图层的左上角），`center`和`position`都代表了相对于父图层`anchorPoint`所在的位置。`anchorPoint`的属性表示图层的中心点。
- 
+
  ![`frame，bounds`和`center`](https://zsisme.gitbooks.io/ios-/content/chapter3/3.1.jpeg)
 
 **7、组透明**
@@ -1000,33 +1000,33 @@ _layerView.transform = viewTransform;
     _layerView.layer.affineTransform = transform;
  ```
  效果图:
- 
+
  ![testdemo5](https://github.com/dengfeng520/iOSNotes/blob/master/Animation/testdemo5.png?raw=true)
- 
+
  **9、3D仿射变换**
- 
+
  ![iPhone上的X轴 Y轴 Z轴示意图](https://zsisme.gitbooks.io/ios-/content/Animation/chapter5/5.7.jpeg)
- 
+
  >3D 旋转
- 
+
  ```
  // 绕Y轴旋转45度
  CATransform3D transform = CATransform3DMakeRotation(M_PI_4, 0, 1, 0);
  _layerView.layer.transform = transform;
  ```
  效果图:
-  
+
   ![testdemo6](https://github.com/dengfeng520/iOSNotes/blob/master/Animation/testdemo6.png?raw=true)
-  
+
   >3D X轴 Y轴 Z轴缩放比例
-  
+
   ```
   //X轴 Y轴 Z轴 缩放比例
   CATransform3D transform = CATransform3DMakeScale(1.8, 1.35, 1);
   ```
-  
+
   效果图:
-  
+
    ![testdemo7](https://github.com/dengfeng520/iOSNotes/blob/master/Animation/testdemo7.png?raw=true)
 
 >3D 透视旋转
@@ -1045,10 +1045,10 @@ _layerView.transform = viewTransform;
 效果图:
 
  ![testdemo8](https://github.com/dengfeng520/iOSNotes/blob/master/testdemo8.png?raw=true)
- 
+
 ####30、CMSampleBufferRef  ---->  UIImage
 
- 
+
 ```
 - (UIImage *)imageConvert:(CMSampleBufferRef)sampleBuffer{
     //制作 CVImageBufferRef
@@ -1086,7 +1086,7 @@ _layerView.transform = viewTransform;
  }
 ```
 
- 
+
 ####31、
 
 >1、类对象只能调用类方法
@@ -1161,8 +1161,8 @@ _layerView.transform = viewTransform;
 
 ####35 、CABasicAnimation动画keyPath属性
 
-| 属性  |  说明   | 
-| :----------------:|:--------------------:| 
+| 属性  |  说明   |
+| :----------------:|:--------------------:|
 |**transform.scale**|比例转换|
 |**transform.rotation**|旋转|
 |**transform.rotation.x**|X轴旋转|
