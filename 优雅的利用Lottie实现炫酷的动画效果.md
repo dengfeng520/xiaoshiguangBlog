@@ -2,7 +2,7 @@
 <h1><center>优雅的利用Lottie实现炫酷的动画效果</center></h1>
 <h6 align='right'>小时光</h6>
 
---
+
 
 
 &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;`APP`中的交互动画对整个`APP`来说是十分重要的。对用户来说，使用一款`APP`可能并不是这个`APP`界面做的绚丽，动画做的美之类的原因。纵然如此，一款`APP`只有动画优美，界面上做好了，才会吸引到用户，用户才会来使用这个`APP`。

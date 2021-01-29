@@ -1,3 +1,5 @@
+<h2><center>Swift的方式来使用数组</center></h2>
+
 Array是在开发中最常用的数据类型之一，[官方文档](https://developer.apple.com/documentation/swift/array)对Array的定义是：`An ordered, random-access collection.`。通常表示一个有序的集合，这里所说的有序并不是大小有序，而是指`Array`中元素的先后位置关系。
 
 ### 1、Swift的方式来操作数组
@@ -144,13 +146,13 @@ print("ondexIndex===============\(oneIndex ?? 0)")
  * (3)、通过闭包`closure`遍历
   
     通过闭包`closure`，我们可以使用`Array`的`forEach`方法来遍历数组:
- 
+
   ```
   let testArray = ["one","two","three","four","five","six"]
       testArray.forEach { (vaule) in
           print(vaule)
       }
-   ```
+  ```
 
  `for in`和 `forEach`遍历的效果是一样的，但是如果使用`forEach`方法遍历数组就不能通过`break`或`continue`来退出循环，如果要退出遍历就只能使用`for in`方法。
 
@@ -160,14 +162,14 @@ print("ondexIndex===============\(oneIndex ?? 0)")
            continue // 'continue' is only allowed inside a loop
        }
     }
-  ```
+   ```
 
    * (4)、map 、 compactMap 、 filter 遍历数组
-   
+
    事实上，Swift的设计者并不推荐开发者使用传统的C语言风格的for循环。Swift为开发者提供了更高级的方法，当我们需要循环一个数组时，可以根据自己的需求，使用Map 和 Filter来实现。
-   
+
    举例一：老师现在已经得到了学生的试卷成绩，再为每个学生加上平时成绩30分，这样可以得出学生的最终成绩,如果使用传统的C语言循环来实现：
-   
+
    ```
    let fractionArray: [Int] = [40,53,59,43,56,54,33,55,66,70,22,69]
    var finallyList = [Int]()
@@ -176,9 +178,9 @@ print("ondexIndex===============\(oneIndex ?? 0)")
    }
    // [70, 83, 89, 73, 86, 84, 63, 85, 96, 100, 52, 99]
    ```
-   
+
 再看看Swift为开发者提供的**map**方法：
-   
+
    ```
    let fractionArray: [Int] = [40,53,59,43,56,54,33,55,66,70,22,69]
    let finallyArray: [Int] = fractionArray.map {
@@ -186,14 +188,14 @@ print("ondexIndex===============\(oneIndex ?? 0)")
    }
    // [70, 83, 89, 73, 86, 84, 63, 85, 96, 100, 52, 99]
    ```
-   
+
 `map`用于把数组中的所有元素按照指定规则操作变换并返回一个新的数组，这样比使用for循环更具表现力。
-   
+
    **使用`map`来完成这类操作，大大提高了代码的可读性；
    同时使用`map`直接返回了一个常量数组；**
-   
+
    当然`Swift`的设计者只是对`map`封装了`for`循环的代码，其核心代码如下：
-   
+
    ```
    extension Array {
     public func myselfMap<T>(_ transform: (Element) -> T) -> [T] {
@@ -206,8 +208,8 @@ print("ondexIndex===============\(oneIndex ?? 0)")
          return tmp
       }
    }  
-   ```   
-   
+   ```
+
 
 **compactMap**方法是**map**的升级版,在遍历数组的同时，去除其中的nil值。
 
@@ -227,9 +229,9 @@ let lsArray: [Int] = testList.compactMap { (num) -> Int? in
     ```
    **map在遍历数组的同时可以对每个参数做指定规则的操作，同时返回一个新的数组；
    filter只按指定规则遍历数组，同时返回一个新的数组**
-   
+
    `filter`是怎么实现的呢，我们可以根据`map`的实现方法来实现,其核心代码如下：
-   
+
    ```
    extension Array {
     func myfilter(_ predicate: (Element) -> Bool) -> [Element] {
@@ -241,11 +243,11 @@ let lsArray: [Int] = testList.compactMap { (num) -> Int? in
     }
 }
    ```
-    
+
    * (5)、min 、 max
-   
+
    同样老师如果需要计算本次考试的最高分和最低分，只要数组中的元素实现了`Equatable protocol`协议，开发者不用对数组进行任何操作，可直接调用`min 、 max`即可：
-   
+
    ```
    finallyArray.min() // 52
    finallyArray.max() // 100
@@ -281,9 +283,9 @@ mixArray.starts(with: [100], by: {
 * 计算数组中元素和
 
  例如老师要计算本次考试的总成绩，然后计算出本次考试的平均成绩：
- 
+
  如果使用C语言风格，我们首先要对成绩做一个遍历，然后累加最终得到全班成绩总和：
- 
+
  ```
  var allNum = Int()
  for num in finallyList {
@@ -291,13 +293,13 @@ mixArray.starts(with: [100], by: {
  }
  allNum / (finallyList.count)
  ```
- 
+
  `Swift`为开发者提供了更简单有效的方法：
- 
+
  ```
  finallyList.reduce(0, +) / (finallyList.count) // 81
  ```
- 
+
 * 按条件把数组中的元素分类
 
 例如老师要分别统计出及格和没及格的成绩,我们认为60分为及格：
@@ -310,7 +312,7 @@ mixArray.starts(with: [100], by: {
   let passArray = mixArray[pass ..< mixArray.endIndex] // 及格的 [63, 70, 73, 83, 84, 85, 86, 89, 96, 99, 100]
 ```
 
-  
+
 ### 2、Array和NSArray
 
 
