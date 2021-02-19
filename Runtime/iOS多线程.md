@@ -94,11 +94,9 @@ let concurrentQueue = DispatchQueue(label: "TSN.RPChat.io", attributes: .concurr
 此时运行工程，可以看到图片并不是按照先后顺序加载的，说明同一个`concurrent queue`中的所有任务在并行执行。
 ![Concurrent Queue](https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/12d73fba49ea4e6992822fc67e3279a1~tplv-k3u1fbpfcp-watermark.image)
 
-上面创建的队列我使用的GCD（Grand Central Dispatch）方式，尽管GCD对线程管理进行了封装并加入了面向对象管理模式。但是如果我要对一个队列中的任务做更多的操作，如（查看状态、取消任务，控制任务的执行顺序等）仍然不太方便。考虑到这些问题，苹果为开发这提供了一个面向对象方式的多任务执行机制[Operation](https://developer.apple.com/documentation/foundation/operation)。
-
 > <h3>7、面向对象的Cocoa Operation</h3>
 
-除了`Thread`和`GCD`之外，iOS还提供了`Operation`这种多线程实现方式，`Operation`是基于`GCD`的对象封装。
+上面创建的队列我使用的是GCD（Grand Central Dispatch）方式，尽管GCD对线程管理进行了封装并加入了面向对象管理模式。但是如果我要对一个队列中的任务做更多的操作，如（查看状态、取消任务，控制任务的执行顺序等）仍然不太方便。考虑到这些问题，苹果为开发这提供了一个面向对象方式的多任务执行机制[Operation](https://developer.apple.com/documentation/foundation/operation)。`Operation`是基于`GCD`的对象封装。
 
 (1)、**[Operation概览](https://developer.apple.com/documentation/foundation/operation)**
 
@@ -108,13 +106,13 @@ let concurrentQueue = DispatchQueue(label: "TSN.RPChat.io", attributes: .concurr
   * **[isExexuting](https://developer.apple.com/documentation/foundation/operation/1415621-isexecuting)**标记`Operation`是否正在执行中
   * **[isFinished](https://developer.apple.com/documentation/foundation/operation/1413540-isfinished)**标记`Operation`是否已经执行完成了，一般用于异步
   * **[isCancelled](https://developer.apple.com/documentation/foundation/operation#1661262)**标记`Operation`是否已经`cancel`了
-  
+
   更多状态请参考[Apple Developer: Maintaining Operation Object States](https://developer.apple.com/documentation/foundation/operation#1661262)
-  
+
  (2)、**[OperationQueue](https://developer.apple.com/documentation/foundation/operationqueue)**
 
  * **OperationQueue**可以加入多个`Operation`
- 
+
  ```
  let ope1 = Operation()
  let ope2 = Operation()
@@ -123,7 +121,7 @@ let concurrentQueue = DispatchQueue(label: "TSN.RPChat.io", attributes: .concurr
  que.addOperation(ope1)
  que.addOperation(ope2)
  ```
- 
+
  * `maxConcurrentOperationCount`可设置最大并发数当前,默认情况下，系统会根据当前情况动态确定最大并发数
 
 ```
@@ -131,7 +129,7 @@ que.maxConcurrentOperationCount = 5
 ```
 
 此处需要注意的是最大并发数并不是线程数，最大并发数表示的是当前队列最多可同时执行的的任务（或线程）数量。
- 
+
  * 可取消所有`Operation`，但当前正在执行的`Operation`不会取消
  * 所有的`Operation`执行完毕后退出销毁
 
@@ -312,16 +310,16 @@ queue.addOperation(operation2)
  * 任务被取消后，`completionBlock`依旧会执行
 
  ![取消图片下载](https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d7b15b84bc8a490396eefb6115858fdc~tplv-k3u1fbpfcp-watermark.image)
- 
+
  如图所示，当我点击`download`按钮后快速点击`cancel`按钮，可以看到图片一的下载任务被`cancel`了。
- 
+
  ```
 let cancelItem = UIBarButtonItem()
 cancelItem.title = "cancel"
 cancelItem.rx.tap.subscribe(onNext: {
     self.queue.cancelAllOperations()
 }).disposed(by: disposeBag)
-```
+ ```
 此处可以通过`Operation`的`isCancelled`属性来判断任务是否被`cancel`。当`isCancelled`返回`true`表示该任务被`cancel`了。
 
 ```
